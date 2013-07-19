@@ -4,5 +4,16 @@
     <string name="app_name">Aimant</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
-
+    <string name="app_loading">Cargando aplicacion..</string>
+    <string name="title_activity_splash">MainActivity</string>
+	
+	<!-- different messages for splash -->
+	<string name="mawape_msg">www.mawape.com</string>
+    <string name="aimant_msg">Keep Calm and Take the Phone</string>
+    
+    <!-- Hardcoded Menu List -->
+	<string name="bar_opc1">Queens</string>
+    <string name="bar_opc2">SushiHome</string>
+    <string name="bar_opc3">TakoSushi</string>
+    
 </resources>

@@ -13,9 +13,12 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        
+        <activity android:name="com.mawape.aimant.activities.SplashAimantActivity" />
+        <activity android:name="com.mawape.aimant.activities.MenuActivity" />
         <activity
-            android:name="com.mawape.aimant.MainActivity"
-            android:label="@string/app_name" >
+            android:name="com.mawape.aimant.activities.SplashMawapeActivity"
+            android:label="@string/title_activity_splash" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
