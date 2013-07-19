@@ -4,8 +4,9 @@ import android.content.Intent;
 
 import com.mawape.aimant.R;
 
-public class SplashAimantActivity  extends SplashActivity {
-	private final int DISPLAY_LENGHT = 2000;//just two seconds
+public class SplashAimantActivity extends SplashActivity {
+	private final int DISPLAY_LENGHT = 2000;// just two seconds
+
 	@Override
 	protected int getDefaultDisplayLength() {
 		return DISPLAY_LENGHT;
@@ -18,7 +19,7 @@ public class SplashAimantActivity  extends SplashActivity {
 
 	@Override
 	protected Intent createIntent() {
-		return new Intent(SplashAimantActivity.this,MenuActivity.class);
+		return new Intent(SplashAimantActivity.this, NegociosListActivity.class);
 	}
 
 }
