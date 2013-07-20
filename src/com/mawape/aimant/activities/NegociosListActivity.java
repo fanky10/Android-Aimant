@@ -10,6 +10,7 @@ import android.widget.ListView;
 import com.mawape.aimant.R;
 import com.mawape.aimant.entities.Negocio;
 import com.mawape.aimant.services.impl.NegociosManagerImpl;
+import com.mawape.aimant.widget.NegociosArrayAdapter;
 
 public class NegociosListActivity extends BaseActivity{
 	
@@ -25,10 +26,10 @@ public class NegociosListActivity extends BaseActivity{
 	private void init(){
 		final List<Negocio> opcionV = getInforme();
 		Log.d(TAG,"el retorno fue: "+opcionV);
-		final ArrayAdapter<Negocio> adaptador = new ArrayAdapter<Negocio>(this,
-				android.R.layout.simple_list_item_1, opcionV);
+//		final ArrayAdapter<Negocio> adaptador = new ArrayAdapter<Negocio>(this,
+//				android.R.layout.simple_list_item_1, opcionV);
 		ListView lstOpciones = (ListView)findViewById(R.id.lstMenu);
-		lstOpciones.setAdapter(adaptador);
+		lstOpciones.setAdapter(new NegociosArrayAdapter(getApplicationContext(), opcionV));
 	}
 
 	/**
