@@ -29,11 +29,6 @@ public class NegociosListActivity extends BaseActivity{
 				android.R.layout.simple_list_item_1, opcionV);
 		ListView lstOpciones = (ListView)findViewById(R.id.lstMenu);
 		lstOpciones.setAdapter(adaptador);
-		configureListView(lstOpciones);
-	}
-	private void configureListView(ListView lstOpciones){
-		lstOpciones.setCacheColorHint(0);
-		lstOpciones.setBackgroundResource(R.drawable.ic_launcher);
 	}
 
 	/**
