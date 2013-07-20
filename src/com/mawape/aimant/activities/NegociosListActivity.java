@@ -13,7 +13,7 @@ import com.mawape.aimant.services.impl.NegociosManagerImpl;
 
 public class NegociosListActivity extends BaseActivity{
 	
-//	private static final String TAG = "NegociosActivity";
+	private static final String TAG = "NegociosActivity";
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -24,11 +24,16 @@ public class NegociosListActivity extends BaseActivity{
 	
 	private void init(){
 		final List<Negocio> opcionV = getInforme();
-//		Log.d(TAG,"el retorno fue: "+opcionV);
+		Log.d(TAG,"el retorno fue: "+opcionV);
 		final ArrayAdapter<Negocio> adaptador = new ArrayAdapter<Negocio>(this,
 				android.R.layout.simple_list_item_1, opcionV);
 		ListView lstOpciones = (ListView)findViewById(R.id.lstMenu);
 		lstOpciones.setAdapter(adaptador);
+		configureListView(lstOpciones);
+	}
+	private void configureListView(ListView lstOpciones){
+		lstOpciones.setCacheColorHint(0);
+		lstOpciones.setBackgroundResource(R.drawable.ic_launcher);
 	}
 
 	/**

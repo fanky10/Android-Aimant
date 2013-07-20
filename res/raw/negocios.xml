@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<feed xmlns="http://www.w3.org/2005/Atom" 
+    xmlns:creativeCommons="http://backend.userland.com/creativeCommonsRssModule" >     
+
+    <negocio>
+        <nombre type="text">Queens</nombre>
+        <direccion type="text">Rioja 1791</direccion>
+    </negocio>
+    <negocio>
+        <nombre type="text">Antares</nombre>
+        <direccion type="text">Callao 216</direccion>
+    </negocio>
+    <negocio>
+        <nombre type="text">Fenicia</nombre>
+        <direccion type="text">Francia 168</direccion>
+    </negocio>
+    <negocio>
+        <nombre type="text">O'Connel's</nombre>
+        <direccion type="text">Paraguay 212</direccion>
+    </negocio>
+    <negocio>
+        <nombre type="text">Zodiaco</nombre>
+        <direccion type="text">Francia 251</direccion>
+    </negocio>
+</feed>
