@@ -7,36 +7,41 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.TextView;
 
 import com.mawape.aimant.R;
 import com.mawape.aimant.entities.Negocio;
 
 public class NegociosArrayAdapter extends ArrayAdapter<Negocio> {
-	  private final Context context;
-	private final List<Negocio> values;
+	private final List<Negocio> negocios;
 
-	  public NegociosArrayAdapter(Context context, List<Negocio> values) {
-	    super(context, R.layout.negocios_row, values);
-	    this.context = context;
-	    this.values = values;
-	  }
+	public NegociosArrayAdapter(Context context, List<Negocio> values) {
+		super(context, R.layout.negocios_row, values);
+		this.negocios = values;
+	}
 
-	  @Override
-	  public View getView(int position, View convertView, ViewGroup parent) {
-	    LayoutInflater inflater = (LayoutInflater) context
-	        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-	    View rowView = inflater.inflate(R.layout.negocios_row, parent, false);
-//	    TextView textView = (TextView) rowView.findViewById(R.id.label);
-//	    ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
-//	    textView.setText(values[position]);
-//	    // Change the icon for Windows and iPhone
-//	    String s = values[position];
-//	    if (s.startsWith("iPhone")) {
-//	      imageView.setImageResource(R.drawable.no);
-//	    } else {
-//	      imageView.setImageResource(R.drawable.ok);
-//	    }
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent) {
+		LayoutInflater inflater = (LayoutInflater) getContext()
+				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		Negocio negocioSeleccionado = getNegocios().get(position); 
+		
+		View rowView = inflater.inflate(R.layout.negocios_row, parent, false);
+		TextView textView = (TextView) rowView.findViewById(R.id.negRowNombre);
+		textView.setText(negocioSeleccionado.getNombre());
+		
+		//hardcodded image loading
+		// TODO: dinamically read from object.
+		if (position % 2 == 0) {
+			String mDrawableName = "fenicia_small";
+			int resID = getContext().getResources().getIdentifier(
+					mDrawableName, "drawable", getContext().getPackageName());
+			rowView.setBackgroundResource(resID);
+		}
+		return rowView;
+	}
 
-	    return rowView;
-	  }
-	} 
+	public List<Negocio> getNegocios() {
+		return negocios;
+	}
+}
