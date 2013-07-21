@@ -19,6 +19,7 @@
     <negocio>
         <nombre type="text">O'Connel's</nombre>
         <direccion type="text">Paraguay 212</direccion>
+        <imgPath type="text">oconnels_small</imgPath>
     </negocio>
     <negocio>
         <nombre type="text">Zodiaco</nombre>
