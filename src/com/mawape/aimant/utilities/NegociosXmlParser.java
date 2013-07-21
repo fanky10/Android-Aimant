@@ -19,6 +19,7 @@ public class NegociosXmlParser {
 	private static final String NEGOCIO_TAG = "negocio";
 	private static final String NEGOCIO_NOMBRE_TAG = "nombre";
 	private static final String NEGOCIO_DIRECCION_TAG = "direccion";
+	private static final String NEGOCIO_IMG_PATH_TAG = "imgPath";
 
 	public List<Negocio> parseContent(InputStream in)
 			throws XmlPullParserException, IOException {
@@ -62,6 +63,7 @@ public class NegociosXmlParser {
 		parser.require(XmlPullParser.START_TAG, NAMESPACE, NEGOCIO_TAG);
 		String nombre = null;
 		String direccion = null;
+		String imgPath = null;
 		while (parser.next() != XmlPullParser.END_TAG) {
 			if (parser.getEventType() != XmlPullParser.START_TAG) {
 				continue;
@@ -71,11 +73,13 @@ public class NegociosXmlParser {
 				nombre = readTag(parser, NEGOCIO_NOMBRE_TAG);
 			} else if (name.equals(NEGOCIO_DIRECCION_TAG)) {
 				direccion = readTag(parser, NEGOCIO_DIRECCION_TAG);
+			} else if (name.equals(NEGOCIO_IMG_PATH_TAG)) {
+				imgPath = readTag(parser, NEGOCIO_IMG_PATH_TAG);
 			} else {
 				skip(parser);
 			}
 		}
-		return new Negocio(nombre, direccion);
+		return new Negocio(nombre, direccion, imgPath);
 	}
 
 	// Processes title tags in the feed.

@@ -5,6 +5,7 @@
     <negocio>
         <nombre type="text">Queens</nombre>
         <direccion type="text">Rioja 1791</direccion>
+        <imgPath type="text">queens_small</imgPath>
     </negocio>
     <negocio>
         <nombre type="text">Antares</nombre>
@@ -13,6 +14,7 @@
     <negocio>
         <nombre type="text">Fenicia</nombre>
         <direccion type="text">Francia 168</direccion>
+        <imgPath type="text">fenicia_small</imgPath>
     </negocio>
     <negocio>
         <nombre type="text">O'Connel's</nombre>

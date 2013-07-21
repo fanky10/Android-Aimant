@@ -30,10 +30,8 @@ public class NegociosArrayAdapter extends ArrayAdapter<Negocio> {
 		TextView textView = (TextView) rowView.findViewById(R.id.negRowNombre);
 		textView.setText(negocioSeleccionado.getNombre());
 		
-		//hardcodded image loading
-		// TODO: dinamically read from object.
-		if (position % 2 == 0) {
-			String mDrawableName = "fenicia_small";
+		if (negocioSeleccionado.getImgPath()!=null) {
+			String mDrawableName = negocioSeleccionado.getImgPath();
 			int resID = getContext().getResources().getIdentifier(
 					mDrawableName, "drawable", getContext().getPackageName());
 			rowView.setBackgroundResource(resID);
