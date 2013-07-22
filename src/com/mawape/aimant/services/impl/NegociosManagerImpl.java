@@ -1,5 +1,7 @@
 package com.mawape.aimant.services.impl;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import android.content.Context;
@@ -11,13 +13,23 @@ import com.mawape.aimant.services.NegociosManager;
 
 public class NegociosManagerImpl implements NegociosManager {
 	private NegociosRepository negociosRepository;
+
 	public NegociosManagerImpl(Context context) {
 		this.negociosRepository = new NegociosRepositoryImpl(context);
 	}
 
 	@Override
 	public List<Negocio> getNegocios() {
-		return getNegociosRepository().getNegocios();
+		List<Negocio> negocios = getNegociosRepository().getNegocios();
+		Collections.sort(negocios, new Comparator<Negocio>() {
+
+			@Override
+			public int compare(Negocio lhs, Negocio rhs) {
+				return lhs.getNombre().compareTo(rhs.getNombre());
+			}
+
+		});
+		return negocios;
 	}
 
 	public NegociosRepository getNegociosRepository() {
