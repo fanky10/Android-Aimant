@@ -3,14 +3,6 @@
     android:layout_width="fill_parent"
     android:layout_height="150dp"
     android:orientation="horizontal" >
-
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:text="Call" />
     
     <!--
 		Use an hexadecimal background color code, 
@@ -24,7 +16,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:background="#99000000" />
-
+    
     <TextView
         android:id="@+id/negRowNombre"
         android:layout_width="wrap_content"
@@ -36,5 +28,13 @@
         android:text="Queens Re de onda"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@android:color/white" />
+    
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:text="Call" />
 
 </RelativeLayout>
