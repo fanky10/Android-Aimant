@@ -15,17 +15,19 @@
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:background="#99000000" />
+        android:background="#99000000" 
+        android:orientation="vertical">
+
+    </LinearLayout>
     
     <TextView
         android:id="@+id/negRowNombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@+id/negRowTel"
         android:layout_alignParentLeft="true"
         android:layout_alignTop="@+id/button1"
-        android:layout_toLeftOf="@+id/button1"
-        android:text="Queens Re de onda"
+        android:text="Sushi Home"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@android:color/white" />
     
@@ -36,5 +38,23 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:text="Call" />
+
+    <TextView
+        android:id="@+id/negRowDir"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:text="Moreno 75 bis"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/negRowTel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:text="Medium Text"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>
