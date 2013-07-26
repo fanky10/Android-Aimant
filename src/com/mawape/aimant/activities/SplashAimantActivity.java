@@ -19,7 +19,7 @@ public class SplashAimantActivity extends SplashActivity {
 
 	@Override
 	protected Intent createIntent() {
-		return new Intent(SplashAimantActivity.this, NegociosListActivity.class);
+		return new Intent(SplashAimantActivity.this, CategoriasAcivity.class);
 	}
 
 }

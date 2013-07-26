@@ -6,23 +6,28 @@
         <nombre type="text">Queens</nombre>
         <direccion type="text">Rioja 1791</direccion>
         <imgPath type="text">queens_small</imgPath>
+        <categoria type="text">Categ-1</categoria>
     </negocio>
     <negocio>
         <nombre type="text">Antares</nombre>
         <direccion type="text">Callao 216</direccion>
+        <categoria type="text">Categ-2</categoria>
     </negocio>
     <negocio>
         <nombre type="text">Fenicia</nombre>
         <direccion type="text">Francia 168</direccion>
         <imgPath type="text">fenicia_small</imgPath>
+        <categoria type="text">Categ-2</categoria>
     </negocio>
     <negocio>
         <nombre type="text">O'Connel's</nombre>
         <direccion type="text">Paraguay 212</direccion>
         <imgPath type="text">oconnels_small</imgPath>
+        <categoria type="text">Categ-2</categoria>
     </negocio>
     <negocio>
         <nombre type="text">Zodiaco</nombre>
         <direccion type="text">Francia 251</direccion>
+        <categoria type="text">Categ-2</categoria>
     </negocio>
 </feed>

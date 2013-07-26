@@ -51,6 +51,17 @@ public class NegociosRepositoryImpl implements NegociosRepository {
 		return result;
 	}
 
+	public List<String> getCategoriasNegocio() {
+		List<String> categorias = new ArrayList<String>();
+		for (Negocio negocio : getNegocios()) {
+			String categoria = negocio.getCategoria();
+			if (categoria != null && !categoria.contains(categoria)) {
+				categorias.add(categoria);
+			}
+		}
+		return categorias;
+	}
+
 	public Context getContext() {
 		return context;
 	}
