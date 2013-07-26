@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" 
-    android:background="@drawable/centered_mawape">
+    android:background="@drawable/home_intro_centered">
     
 
 </LinearLayout>

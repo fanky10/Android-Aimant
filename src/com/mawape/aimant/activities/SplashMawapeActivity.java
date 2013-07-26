@@ -14,7 +14,7 @@ public class SplashMawapeActivity extends SplashActivity {
 
 	@Override
 	protected void setContentView() {
-		setContentView(R.layout.splash_mawape);
+		setContentView(R.layout.splash_intro);
 	}
 
 	@Override

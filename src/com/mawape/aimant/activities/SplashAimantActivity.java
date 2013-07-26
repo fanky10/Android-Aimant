@@ -14,7 +14,7 @@ public class SplashAimantActivity extends SplashActivity {
 
 	@Override
 	protected void setContentView() {
-		setContentView(R.layout.splash_aimant);
+		setContentView(R.layout.splash_about);
 	}
 
 	@Override
