@@ -2,29 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
-    <RelativeLayout
-        android:id="@+id/relative"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.02">
-
-        <TextView 
-        	android:id="@+id/tvLoading" 
-	        android:layout_height="wrap_content" 
-	        android:text="@string/mawape_msg" 
-	        android:textAppearance="?android:attr/textAppearanceLarge" 
-	        android:gravity="center_horizontal"
-	        android:layout_width="match_parent" >
-        </TextView>
-        <ProgressBar 
-        	android:id="@+id/progressBar1" 
-        	android:layout_height="wrap_content" 
-        	android:layout_width="wrap_content" 
-			android:layout_below="@id/tvLoading"
-			android:layout_centerHorizontal="true">
-       	</ProgressBar>
-    </RelativeLayout>
+    android:orientation="vertical" 
+    android:background="@drawable/centered_mawape">
     
 
 </LinearLayout>
