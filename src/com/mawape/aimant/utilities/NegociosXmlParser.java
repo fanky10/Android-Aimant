@@ -7,14 +7,16 @@ import java.util.List;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
+import android.util.Log;
+
 import com.mawape.aimant.entities.Negocio;
 
-public class NegociosXmlParser extends AbstractXMLParser {
-	// We don't use namespaces
-	private static final String NEGOCIO_TAG = "negocio";
-	private static final String NEGOCIO_NOMBRE_TAG = "nombre";
-	private static final String NEGOCIO_DIRECCION_TAG = "direccion";
-	private static final String NEGOCIO_IMG_PATH_TAG = "imgPath";
+public class NegociosXmlParser extends AbstractXmlParser {
+	private static final String DEBUG_TAG = "fanky - "
+			+ NegociosXmlParser.class.getName();
+	private static final String ITEM_TAG = "negocio";
+	private static final String[] ATTRIBUTES_NAME = new String[] { "negocio",
+			"nombre", "direccion", "imgPath", "categoria"};
 
 	@Override
 	protected List getDataFromXML(XmlPullParser parser)
@@ -28,8 +30,16 @@ public class NegociosXmlParser extends AbstractXMLParser {
 			}
 			String name = parser.getName();
 			// Starts by looking for the entry tag
-			if (name.equals(NEGOCIO_TAG)) {
-				entries.add(readNegocio(parser));
+			if (name.equals(ITEM_TAG)) {
+				try {
+					entries.add(readNegocio(parser));
+				} catch (NoSuchFieldException e) {
+					Log.d(DEBUG_TAG,
+							"bad field naming, root cause: " + e.getMessage());
+				} catch (IllegalAccessException e) {
+					Log.d(DEBUG_TAG, "illegal accessing field, root cause: "
+							+ e.getMessage());
+				}
 			} else {
 				skip(parser);
 			}
@@ -42,27 +52,31 @@ public class NegociosXmlParser extends AbstractXMLParser {
 	// to their respective "read" methods for processing. Otherwise, skips the
 	// tag.
 	private Negocio readNegocio(XmlPullParser parser)
-			throws XmlPullParserException, IOException {
-		parser.require(XmlPullParser.START_TAG, NAMESPACE, NEGOCIO_TAG);
-		String nombre = null;
-		String direccion = null;
-		String imgPath = null;
+			throws XmlPullParserException, IOException, NoSuchFieldException,
+			IllegalAccessException {
+		parser.require(XmlPullParser.START_TAG, NAMESPACE, ITEM_TAG);
+
+		Negocio negocio = new Negocio();
 		while (parser.next() != XmlPullParser.END_TAG) {
 			if (parser.getEventType() != XmlPullParser.START_TAG) {
 				continue;
 			}
-			String name = parser.getName();
-			if (name.equals(NEGOCIO_NOMBRE_TAG)) {
-				nombre = readTag(parser, NEGOCIO_NOMBRE_TAG);
-			} else if (name.equals(NEGOCIO_DIRECCION_TAG)) {
-				direccion = readTag(parser, NEGOCIO_DIRECCION_TAG);
-			} else if (name.equals(NEGOCIO_IMG_PATH_TAG)) {
-				imgPath = readTag(parser, NEGOCIO_IMG_PATH_TAG);
-			} else {
+			String tagName = parser.getName();
+			String tagValue = null;
+			boolean found = false;
+			for (String att : ATTRIBUTES_NAME) {
+				if (tagName.equals(att)) {
+					tagValue = readTag(parser, att);
+					setData(negocio, att, tagValue);
+					found = true;
+					break;
+				}
+			}
+			if (!found) {
 				skip(parser);
 			}
-		}
-		return new Negocio(nombre, direccion, imgPath);
-	}
 
+		}
+		return negocio;
+	}
 }

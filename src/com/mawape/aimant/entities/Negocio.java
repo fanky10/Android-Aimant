@@ -4,6 +4,7 @@ public class Negocio {
 	private String nombre;
 	private String direccion;
 	private String imgPath;
+	private String categoria;
 
 	public Negocio(String nombre, String direccion, String imgPath) {
 		this.nombre = nombre;
@@ -45,5 +46,13 @@ public class Negocio {
 
 	public void setImgPath(String imgPath) {
 		this.imgPath = imgPath;
+	}
+
+	public String getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
 	}
 }

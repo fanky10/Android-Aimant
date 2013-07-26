@@ -2,6 +2,7 @@ package com.mawape.aimant.utilities;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Field;
 import java.util.List;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -9,7 +10,8 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import android.util.Xml;
 
-public abstract class AbstractXMLParser {
+public abstract class AbstractXmlParser {
+	// We don't use namespaces
 	protected static final String NAMESPACE = null;
 	protected static final String FEED_TAG = "feed";
 
@@ -65,6 +67,13 @@ public abstract class AbstractXMLParser {
 				break;
 			}
 		}
+	}
+
+	protected void setData(Object ob, String declaredField, String value)
+			throws NoSuchFieldException, IllegalAccessException {
+		Field field = ob.getClass().getDeclaredField(declaredField);
+		field.setAccessible(true);
+		field.set(ob, value);
 	}
 
 }
