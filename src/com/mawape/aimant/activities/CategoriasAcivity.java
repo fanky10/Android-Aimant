@@ -1,24 +1,32 @@
 package com.mawape.aimant.activities;
 
-import android.app.Activity;
+import java.util.List;
+
 import android.os.Bundle;
-import android.view.Menu;
+import android.widget.ListView;
 
 import com.mawape.aimant.R;
+import com.mawape.aimant.services.impl.NegociosManagerImpl;
+import com.mawape.aimant.widget.CategoriasArrayAdapter;
 
-public class CategoriasAcivity extends Activity {
+public class CategoriasAcivity extends BaseActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.categorias_list);
+		init();
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.categorias_acivity, menu);
-		return true;
+	private void init() {
+		final List<String> opcionV = getCategorias();
+		ListView lstOpciones = (ListView) findViewById(R.id.catListMenu);
+		lstOpciones.setAdapter(new CategoriasArrayAdapter(
+				getApplicationContext(), opcionV));
+	}
+
+	private List<String> getCategorias() {
+		return new NegociosManagerImpl(getApplicationContext()).getCategorias();
 	}
 
 }

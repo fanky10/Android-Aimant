@@ -17,5 +17,15 @@ public class NegociosRepositoryImpl implements NegociosRepository{
 			}
 		};
 	}
+
+	@Override
+	public List<String> getCategoriasNegocio() {
+		return new ArrayList<String>() {
+			{
+				add("Categoria 1");
+				add("Categoria 2");
+			}
+		};
+	}
 	
 }

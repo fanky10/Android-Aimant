@@ -31,6 +31,19 @@ public class NegociosManagerImpl implements NegociosManager {
 		});
 		return negocios;
 	}
+	
+	public List<String> getCategorias(){
+		List<String> categorias = getNegociosRepository().getCategoriasNegocio();
+		Collections.sort(categorias,new Comparator<String>() {
+
+			@Override
+			public int compare(String lhs, String rhs) {
+				return lhs.compareTo(rhs);
+			}
+			
+		});
+		return categorias;
+	}
 
 	public NegociosRepository getNegociosRepository() {
 		return negociosRepository;

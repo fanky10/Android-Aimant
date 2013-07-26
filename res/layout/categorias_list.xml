@@ -7,18 +7,12 @@
     tools:context=".CategoriasAcivity"
     android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/button1"
-        style="?android:attr/buttonStyleSmall"
+     <ListView
+        android:id="@+id/catListMenu"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Ir Categoria2" />
-
-    <Button
-        android:id="@+id/button1"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Ir Categoria1" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:listSelector="@layout/list_selector" >
+    </ListView>
 
 </LinearLayout>
