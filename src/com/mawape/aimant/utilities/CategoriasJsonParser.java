@@ -8,13 +8,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
-import com.mawape.aimant.entities.Negocio;
+import com.mawape.aimant.entities.Categoria;
 
-public class NegociosJsonParser {
+public class CategoriasJsonParser {
 
-	public static List<Negocio> parse(String jsonString, String key)
+	public static List<Categoria> parse(String jsonString, String key)
 			throws JSONException {
-		List<Negocio> resultList = new ArrayList<Negocio>();
+		List<Categoria> resultList = new ArrayList<Categoria>();
 		JSONObject jsonObject = (JSONObject) new JSONTokener(jsonString)
 				.nextValue();
 		JSONArray jsonArray = jsonObject.getJSONArray(key);
@@ -25,13 +25,10 @@ public class NegociosJsonParser {
 		return resultList;
 	}
 
-	private static Negocio createObject(JSONObject jsonItem)
-			throws JSONException {
+	private static Categoria createObject(JSONObject jsonItem) throws JSONException {
 		String nombre = jsonItem.getString("nombre");
-		String direccion = jsonItem.getString("direccion");
-		String imgPath = jsonItem.getString("imgPath");
-		String categoria = jsonItem.getString("categoria");
-		return new Negocio(nombre, direccion, imgPath, categoria);
+		String color = jsonItem.getString("color");
+		return new Categoria(nombre, color);
 	}
 
 }

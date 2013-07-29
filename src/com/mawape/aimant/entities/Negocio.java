@@ -7,9 +7,7 @@ public class Negocio {
 	private String categoria;
 
 	public Negocio(String nombre, String direccion, String imgPath) {
-		this.nombre = nombre;
-		this.direccion = direccion;
-		this.imgPath = imgPath;
+		this(nombre, direccion, imgPath, "");
 	}
 
 	public Negocio(String nombre, String direccion) {
@@ -18,6 +16,14 @@ public class Negocio {
 
 	public Negocio() {
 		this("", "");
+	}
+
+	public Negocio(String nombre, String direccion, String imgPath,
+			String categoria) {
+		this.nombre = nombre;
+		this.direccion = direccion;
+		this.imgPath = imgPath;
+		this.categoria = categoria;
 	}
 
 	public String toString() {
