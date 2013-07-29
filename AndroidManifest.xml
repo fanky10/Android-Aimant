@@ -17,23 +17,19 @@
         <!-- activities list -->
         <activity android:name="com.mawape.aimant.activities.MenuActivity" />
         <activity android:name="com.mawape.aimant.activities.NegociosListActivity" />
-        <activity
-            android:name="com.mawape.aimant.activities.CategoriasAcivity"
-            android:label="@string/title_activity_categorias_acivity" >
-        </activity>
+        <activity android:name="com.mawape.aimant.activities.CategoriasAcivity" />
 
         <!-- launch activity -->
-        <activity
-            android:name="com.mawape.aimant.activities.SplashMawapeActivity"
-            android:label="@string/title_activity_splash">
+        <activity android:name="com.mawape.aimant.activities.SplashMawapeActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <!-- second splash activity -->
-        <activity
-            android:name="com.mawape.aimant.activities.SplashAimantActivity"/>
+        <activity android:name="com.mawape.aimant.activities.SplashAimantActivity" />
     </application>
 
 </manifest>
