@@ -9,6 +9,10 @@ public class Categoria {
 		this.nombre = nombre;
 		this.color = color;
 	}
+	
+	public String toString(){
+		return nombre;
+	}
 
 	public String getNombre() {
 		return nombre;

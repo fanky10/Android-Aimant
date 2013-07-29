@@ -1,7 +1,13 @@
 {
 	"categorias": 
 	[ 	
-		{nombre:"Gastronomia",color:"FFFF"}, 
-		{nombre:"Pepe",color:"FFFFF"} 
+		{nombre:"Gastronomia",color:"cb353a"}, 
+		{nombre:"Promociones",color:"5796d1"},
+		{nombre:"Bebidas",color:"5c3d83"},
+		{nombre:"Eventos",color:"c92a8a"},
+		{nombre:"Salud",color:"63b084"},
+		{nombre:"Mascotas",color:"957ab3"},
+		{nombre:"Hogar",color:"85c5ce"},
+		{nombre:"Taxis y Remises",color:"e7a93e"} 
 	]
 }

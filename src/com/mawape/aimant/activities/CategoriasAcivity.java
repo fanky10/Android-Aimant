@@ -1,6 +1,5 @@
 package com.mawape.aimant.activities;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.os.Bundle;
@@ -21,7 +20,7 @@ public class CategoriasAcivity extends BaseActivity {
 	}
 
 	private void init() {
-		final List<String> opcionV = getCategorias();
+		final List<Categoria> opcionV = getCategorias();
 		final CategoriasArrayAdapter adaptador = new CategoriasArrayAdapter(
 				getApplicationContext(), opcionV);
 		ListView lstOpciones = (ListView) findViewById(R.id.catListMenu);
@@ -29,12 +28,9 @@ public class CategoriasAcivity extends BaseActivity {
 		lstOpciones.setOnItemClickListener(adaptador);
 	}
 
-	private List<String> getCategorias() {
-		List<String> strList = new ArrayList<String>();
-		for(Categoria c: new CategoriasManagerImpl(getApplicationContext()).getCategorias()){
-			strList.add(c.getNombre());
-		}
-		return strList;
+	private List<Categoria> getCategorias() {
+		return new CategoriasManagerImpl(getApplicationContext())
+				.getCategorias();
 	}
 
 }
