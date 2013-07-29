@@ -20,9 +20,11 @@ public class CategoriasAcivity extends BaseActivity {
 
 	private void init() {
 		final List<String> opcionV = getCategorias();
+		final CategoriasArrayAdapter adaptador = new CategoriasArrayAdapter(
+				getApplicationContext(), opcionV); 
 		ListView lstOpciones = (ListView) findViewById(R.id.catListMenu);
-		lstOpciones.setAdapter(new CategoriasArrayAdapter(
-				getApplicationContext(), opcionV));
+		lstOpciones.setAdapter(adaptador);
+		lstOpciones.setOnItemClickListener(adaptador);
 	}
 
 	private List<String> getCategorias() {

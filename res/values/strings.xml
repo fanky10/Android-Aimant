@@ -12,9 +12,6 @@
     <string name="aimant_msg">Keep Calm and Take the Phone</string>
 
     <!-- Hardcoded Menu List -->
-    <string name="bar_opc1">Queens</string>
-    <string name="bar_opc2">SushiHome</string>
-    <string name="bar_opc3">TakoSushi</string>
     <string name="title_activity_categorias_acivity">CategoriasAcivity</string>
 
 </resources>

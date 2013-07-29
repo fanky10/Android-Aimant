@@ -14,22 +14,19 @@
         android:label="@string/app_name"
         android:theme="@style/Theme.NoTitle" >
 
-        <!-- activities list -->
-        <activity android:name="com.mawape.aimant.activities.MenuActivity" />
-        <activity android:name="com.mawape.aimant.activities.NegociosListActivity" />
-        <activity android:name="com.mawape.aimant.activities.CategoriasAcivity" />
-
         <!-- launch activity -->
         <activity android:name="com.mawape.aimant.activities.SplashMawapeActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <!-- activities list -->
         <!-- second splash activity -->
         <activity android:name="com.mawape.aimant.activities.SplashAimantActivity" />
+        <activity android:name="com.mawape.aimant.activities.MenuActivity" />
+        <activity android:name="com.mawape.aimant.activities.NegociosListActivity" />
+        <activity android:name="com.mawape.aimant.activities.CategoriasAcivity" />
     </application>
 
 </manifest>
