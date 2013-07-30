@@ -16,7 +16,7 @@ public class NegociosXmlParser extends AbstractXmlParser {
 			+ NegociosXmlParser.class.getName();
 	private static final String ITEM_TAG = "negocio";
 	private static final String[] ATTRIBUTES_NAME = new String[] { "negocio",
-			"nombre", "direccion", "imgPath", "categoria"};
+			"nombre", "direccion", "imgPath", "categoria","telefono"};
 
 	@Override
 	protected List getDataFromXML(XmlPullParser parser)

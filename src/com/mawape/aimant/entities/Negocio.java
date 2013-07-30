@@ -5,6 +5,7 @@ public class Negocio {
 	private String direccion;
 	private String imgPath;
 	private String categoria;
+	private String telefono;
 
 	public Negocio(String nombre, String direccion, String imgPath) {
 		this(nombre, direccion, imgPath, "");
@@ -20,10 +21,16 @@ public class Negocio {
 
 	public Negocio(String nombre, String direccion, String imgPath,
 			String categoria) {
+		this(nombre,direccion,imgPath,categoria,"");
+	}
+
+	public Negocio(String nombre, String direccion, String imgPath,
+			String categoria, String telefono) {
 		this.nombre = nombre;
 		this.direccion = direccion;
 		this.imgPath = imgPath;
 		this.categoria = categoria;
+		this.telefono = telefono;
 	}
 
 	public String toString() {
@@ -60,5 +67,13 @@ public class Negocio {
 
 	public void setCategoria(String categoria) {
 		this.categoria = categoria;
+	}
+
+	public String getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
 	}
 }

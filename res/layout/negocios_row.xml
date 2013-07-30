@@ -3,7 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="150dp"
     android:orientation="horizontal" >
-    
+
     <!--
 		Use an hexadecimal background color code, 
 		wich consists of two digits for alpha and six for the color itself 
@@ -15,29 +15,18 @@
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:background="#99000000" 
-        android:orientation="vertical">
+        android:background="#99000000"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/negRowNombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sushi Home"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@android:color/white" />
 
     </LinearLayout>
-    
-    <TextView
-        android:id="@+id/negRowNombre"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/negRowTel"
-        android:layout_alignParentLeft="true"
-        android:layout_alignTop="@+id/button1"
-        android:text="Sushi Home"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@android:color/white" />
-    
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:text="Call" />
 
     <TextView
         android:id="@+id/negRowDir"
@@ -48,13 +37,12 @@
         android:text="Moreno 75 bis"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <TextView
-        android:id="@+id/negRowTel"
+    <Button
+        android:id="@+id/negRowBtnCall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:text="Medium Text"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:layout_alignParentRight="true"
+        android:text="Call" />
 
 </RelativeLayout>
