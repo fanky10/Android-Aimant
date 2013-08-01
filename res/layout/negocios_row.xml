@@ -25,7 +25,6 @@
             android:text="Sushi Home"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@android:color/white" />
-
     </LinearLayout>
 
     <TextView
@@ -38,20 +37,22 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <Button
-        android:id="@+id/negRowBtnCall"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@+id/button1"
-        android:text="Call" />
-
-    <Button
         android:id="@+id/negRowBtnMap"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/fadeFrame"
-        android:text="Map" />
+        android:text="Map"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/negRowBtnCall"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/fadeFrame"
+        android:text="Call" />
 
 </RelativeLayout>
