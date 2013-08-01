@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.mawape.aimant.R;
+import com.mawape.aimant.activities.NegocioMapActivity;
+import com.mawape.aimant.activities.NegociosListActivity;
 import com.mawape.aimant.entities.Negocio;
 
 public class NegociosArrayAdapter extends ArrayAdapter<Negocio> {
@@ -28,39 +30,52 @@ public class NegociosArrayAdapter extends ArrayAdapter<Negocio> {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		LayoutInflater inflater = (LayoutInflater) getContext()
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		final Negocio negocioSeleccionado = getNegocios().get(position); 
-		
+		final Negocio negocioSeleccionado = getNegocios().get(position);
+
 		View rowView = inflater.inflate(R.layout.negocios_row, parent, false);
 		TextView textView = (TextView) rowView.findViewById(R.id.negRowNombre);
 		textView.setText(negocioSeleccionado.getNombre());
-		
-		if (negocioSeleccionado.getImgPath()!=null) {
+
+		if (negocioSeleccionado.getImgPath() != null) {
 			String mDrawableName = negocioSeleccionado.getImgPath();
 			int resID = getContext().getResources().getIdentifier(
 					mDrawableName, "drawable", getContext().getPackageName());
 			rowView.setBackgroundResource(resID);
 		}
-		
-		Button btn = (Button) rowView.findViewById(R.id.negRowBtnCall);
-		btn.setOnClickListener(new OnClickListener() {
-			
+
+		Button btnCall = (Button) rowView.findViewById(R.id.negRowBtnCall);
+		btnCall.setOnClickListener(new OnClickListener() {
+
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				makePhoneCall(negocioSeleccionado.getTelefono());
-				
 			}
 		});
 		
+		Button btnMap = (Button) rowView.findViewById(R.id.negRowBtnMap);
+		btnMap.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				showMap();
+			}
+		});
+		
+
 		return rowView;
 	}
-	
-	private void makePhoneCall(String phoneNumber){
+
+	private void makePhoneCall(String phoneNumber) {
 		Intent intent = new Intent(Intent.ACTION_CALL);
 		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		intent.setData(Uri.parse("tel:" + phoneNumber));
 		getContext().startActivity(intent);
+	}
 
+	private void showMap() {
+		Intent intent = new Intent(getContext(), NegocioMapActivity.class);
+		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		getContext().startActivity(intent);
 	}
 
 	public List<Negocio> getNegocios() {

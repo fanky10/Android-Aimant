@@ -26,7 +26,8 @@ public class NegociosListActivity extends BaseActivity {
 
 	private void init() {
 		Bundle bundle = getIntent().getExtras();
-		String categoriaSeleccionada = (String) bundle.get(AppConstants.CATEGORIA_SELECCIONADA_KEY);
+		String categoriaSeleccionada = (String) bundle
+				.get(AppConstants.CATEGORIA_SELECCIONADA_KEY);
 		final List<Negocio> opcionV = getInforme(categoriaSeleccionada);
 		Log.d(TAG, "el retorno fue: " + opcionV);
 		ListView lstOpciones = (ListView) findViewById(R.id.lstMenu);
@@ -40,15 +41,15 @@ public class NegociosListActivity extends BaseActivity {
 	protected List<Negocio> getInforme() {
 		return new NegociosManagerImpl(getApplicationContext()).getNegocios();
 	}
-	
-	protected List<Negocio> getInforme(String currentCategoria){
+
+	protected List<Negocio> getInforme(String currentCategoria) {
 		List<Negocio> negocios = new ArrayList<Negocio>();
-		for(Negocio n: getInforme()){
-			if(n.getCategoria().equals(currentCategoria)){
+		for (Negocio n : getInforme()) {
+			if (n.getCategoria().equals(currentCategoria)) {
 				negocios.add(n);
 			}
 		}
-		
+
 		return negocios;
 	}
 }
