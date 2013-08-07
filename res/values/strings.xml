@@ -11,7 +11,9 @@
     <string name="mawape_msg">www.mawape.com</string>
     <string name="aimant_msg">Keep Calm and Take the Phone</string>
 
-    <!-- Hardcoded Menu List -->
     <string name="title_activity_categorias_acivity">CategoriasAcivity</string>
+    <!-- dialogo informacion -->
+    <string name="info_title"><![CDATA[<p align="center">Aimant</p>]]></string>
+    <string name="info_message"><![CDATA[<p>Contacto: <br/> Tel: 123456</p>]]></string>
 
 </resources>
