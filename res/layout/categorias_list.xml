@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".CategoriasAcivity" >
-
+	<!-- el bar menu -->
     <RelativeLayout
         android:id="@+id/relativeLayout1"
         android:layout_width="match_parent"
@@ -12,26 +12,25 @@
         android:layout_weight="1.15" >
 
         <TextView
-            android:id="@+id/textView1"
+            android:id="@+id/catMenuTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/commonMenuImg"
+            android:layout_alignBottom="@+id/catMenuInformation"
             android:layout_alignParentTop="true"
             android:gravity="center"
             android:text="@string/app_name"
-            android:textAppearance="?android:attr/textAppearanceLarge" 
-            />
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <ImageView
-            android:id="@+id/commonMenuImg"
+            android:id="@+id/catMenuInformation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:src="@drawable/ic_launcher"
+            android:src="@drawable/ic_informacion"
             android:textAppearance="?android:attr/textAppearanceLarge" />
     </RelativeLayout>
-    
+    <!-- end bar menu -->
     <ListView
         android:id="@+id/catListMenu"
         android:layout_width="match_parent"

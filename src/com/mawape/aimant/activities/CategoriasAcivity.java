@@ -3,6 +3,10 @@ package com.mawape.aimant.activities;
 import java.util.List;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.mawape.aimant.R;
@@ -26,6 +30,15 @@ public class CategoriasAcivity extends BaseActivity {
 		ListView lstOpciones = (ListView) findViewById(R.id.catListMenu);
 		lstOpciones.setAdapter(adaptador);
 		lstOpciones.setOnItemClickListener(adaptador);
+		ImageView infoImg = (ImageView) findViewById(R.id.catMenuInformation);
+		infoImg.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Log.d(CategoriasAcivity.class.getName(), "infoImage clicked!");
+			}
+		});
+
 	}
 
 	private List<Categoria> getCategorias() {
