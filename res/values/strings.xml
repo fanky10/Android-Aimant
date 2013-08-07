@@ -13,7 +13,7 @@
 
     <string name="title_activity_categorias_acivity">CategoriasAcivity</string>
     <!-- dialogo informacion -->
-    <string name="info_title"><![CDATA[<p align="center">Aimant</p>]]></string>
-    <string name="info_message"><![CDATA[<p>Contacto: <br/> Tel: 123456</p>]]></string>
+    <string name="info_title">@string/app_name</string>
+    <string name="info_message"><![CDATA[<p>Contacto <br/><br/> Email: laguiaimant@gmail.com <br/> Tel: (0341) 153-152-126</p>]]></string>
 
 </resources>
