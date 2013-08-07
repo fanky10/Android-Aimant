@@ -5,7 +5,7 @@ import java.util.List;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.util.Log;
+import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -28,7 +28,8 @@ public class CategoriasArrayAdapter extends ArrayAdapter<Categoria> implements
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View view = super.getView(position, convertView, parent);
-		view.setBackgroundColor(Color.parseColor("#"+categorias.get(position).getColor()));
+		view.setBackgroundColor(Color.parseColor("#"
+				+ categorias.get(position).getColor()));
 		return view;
 	}
 
@@ -39,14 +40,14 @@ public class CategoriasArrayAdapter extends ArrayAdapter<Categoria> implements
 	}
 
 	private void startIntent(int position) {
-		final String currentCategoria = categorias.get(position).getNombre();
+		final Categoria currentCategoria = categorias.get(position);
+		Bundle bundle = new Bundle();
+		bundle.putSerializable(AppConstants.CATEGORIA_SELECCIONADA_KEY,
+				currentCategoria);
 
 		Intent intent = new Intent(getContext(), NegociosListActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		intent.putExtra(AppConstants.CATEGORIA_SELECCIONADA_KEY,
-				currentCategoria);
-		Log.d(CategoriasArrayAdapter.class.getName(), "current context: "
-				+ getContext());
+		intent.putExtras(bundle);
 		getContext().startActivity(intent);
 	}
 

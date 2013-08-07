@@ -4,13 +4,16 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.mawape.aimant.R;
+import com.mawape.aimant.entities.Categoria;
 
 public abstract class BaseActivity extends Activity {
 	@Override
@@ -19,7 +22,15 @@ public abstract class BaseActivity extends Activity {
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 	}
 
-	protected void configureMenuBar() {
+	protected void configureMenuBar(Categoria categoria, boolean canGoBack) {
+		if (categoria != null) {// configure color and title
+			TextView txtTitle = (TextView) findViewById(R.id.commonMenuTitle);
+			txtTitle.setText(categoria.getNombre());
+			
+			View view = findViewById(R.id.menu_bar);
+			view.setBackgroundColor(Color.parseColor("#" + categoria.getColor()));
+		}
+
 		// handling menu info click
 		ImageView infoImg = (ImageView) findViewById(R.id.commonMenuInformation);
 		infoImg.setOnClickListener(new OnClickListener() {
@@ -29,6 +40,10 @@ public abstract class BaseActivity extends Activity {
 				showDialog();
 			}
 		});
+	}
+
+	protected void configureMenuBar() {
+		configureMenuBar(null, false);
 	}
 
 	private void showDialog() {

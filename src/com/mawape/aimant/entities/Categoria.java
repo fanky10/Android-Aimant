@@ -1,6 +1,13 @@
 package com.mawape.aimant.entities;
 
-public class Categoria {
+import java.io.Serializable;
+
+public class Categoria implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3725580950249437692L;
+	
 	private String nombre;
 	// hexadecimal
 	private String color;

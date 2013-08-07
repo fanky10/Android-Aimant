@@ -9,6 +9,7 @@ import android.widget.ListView;
 
 import com.mawape.aimant.R;
 import com.mawape.aimant.constants.AppConstants;
+import com.mawape.aimant.entities.Categoria;
 import com.mawape.aimant.entities.Negocio;
 import com.mawape.aimant.services.impl.NegociosManagerImpl;
 import com.mawape.aimant.widget.NegociosArrayAdapter;
@@ -21,19 +22,20 @@ public class NegociosListActivity extends BaseActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.negocios_list);
-		init();
-		configureMenuBar();
+		init();		
 	}
 
 	private void init() {
 		Bundle bundle = getIntent().getExtras();
-		String categoriaSeleccionada = (String) bundle
-				.get(AppConstants.CATEGORIA_SELECCIONADA_KEY);
-		final List<Negocio> opcionV = getInforme(categoriaSeleccionada);
+		Categoria categoriaSeleccionada = (Categoria) bundle.get(AppConstants.CATEGORIA_SELECCIONADA_KEY);
+		final List<Negocio> opcionV = getInforme(categoriaSeleccionada.getNombre());
 		Log.d(TAG, "el retorno fue: " + opcionV);
 		ListView lstOpciones = (ListView) findViewById(R.id.lstMenu);
 		lstOpciones.setAdapter(new NegociosArrayAdapter(
 				getApplicationContext(), opcionV));
+		
+		//configure with current selected category
+		configureMenuBar(categoriaSeleccionada,true);
 	}
 
 	/**

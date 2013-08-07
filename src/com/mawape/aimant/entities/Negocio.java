@@ -1,6 +1,13 @@
 package com.mawape.aimant.entities;
 
-public class Negocio {
+import java.io.Serializable;
+
+public class Negocio implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -94230443911200775L;
+	
 	private String nombre;
 	private String direccion;
 	private String imgPath;
