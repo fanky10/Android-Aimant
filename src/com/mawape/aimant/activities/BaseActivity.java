@@ -26,9 +26,20 @@ public abstract class BaseActivity extends Activity {
 		if (categoria != null) {// configure color and title
 			TextView txtTitle = (TextView) findViewById(R.id.commonMenuTitle);
 			txtTitle.setText(categoria.getNombre());
-			
+
 			View view = findViewById(R.id.menu_bar);
 			view.setBackgroundColor(Color.parseColor("#" + categoria.getColor()));
+		}
+		if (canGoBack) {
+			ImageView imgGoBack = (ImageView) findViewById(R.id.commonMenuBack);
+			imgGoBack.setVisibility(View.VISIBLE);
+			imgGoBack.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					onBackPressed();
+				}
+			});
 		}
 
 		// handling menu info click
@@ -66,5 +77,10 @@ public abstract class BaseActivity extends Activity {
 		// 3. Get the AlertDialog from create()
 		AlertDialog dialog = builder.create();
 		dialog.show();
+	}
+
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
 	}
 }
