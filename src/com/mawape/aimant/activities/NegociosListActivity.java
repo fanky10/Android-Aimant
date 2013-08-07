@@ -22,6 +22,7 @@ public class NegociosListActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.negocios_list);
 		init();
+		configureMenuBar();
 	}
 
 	private void init() {

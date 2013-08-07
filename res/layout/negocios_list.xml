@@ -3,11 +3,15 @@
     android:id="@+id/relativo"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
-
+	<!-- el bar menu -->
+	<include android:id="@+id/menu_bar"
+         layout="@layout/common_menubar"/>
+    <!-- end bar menu -->
     <ListView
         android:id="@+id/lstMenu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/menu_bar"
         android:orientation="vertical">
     </ListView>
 
