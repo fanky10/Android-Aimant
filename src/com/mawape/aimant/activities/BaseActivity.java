@@ -67,7 +67,7 @@ public abstract class BaseActivity extends Activity {
 		String message = getString(R.string.info_message);
 		builder.setMessage(Html.fromHtml(message))
 				.setTitle(Html.fromHtml(title))
-				.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+				.setPositiveButton(R.string.info_accept, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int id) {
 						// do nothing at all

@@ -15,5 +15,6 @@
     <!-- dialogo informacion -->
     <string name="info_title">@string/app_name</string>
     <string name="info_message"><![CDATA[<p>Contacto <br/><br/> Email: laguiaimant@gmail.com <br/> Tel: (0341) 153-152-126</p>]]></string>
+    <string name="info_accept">Aceptar</string>
 
 </resources>
