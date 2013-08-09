@@ -15,7 +15,6 @@ import android.widget.TextView;
 
 import com.mawape.aimant.R;
 import com.mawape.aimant.activities.NegocioMapActivity;
-import com.mawape.aimant.activities.NegociosListActivity;
 import com.mawape.aimant.entities.Negocio;
 
 public class NegociosArrayAdapter extends ArrayAdapter<Negocio> {

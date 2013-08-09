@@ -26,9 +26,7 @@
     <uses-feature
         android:glEsVersion="0x00020000"
         android:required="true" />
-    <meta-data
-            android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyD-k6tHlMVeJD3gxjMSIOUPPfAYKdg4MAE" />
+    
 
     <application
         android:allowBackup="true"
@@ -52,9 +50,11 @@
         <activity android:name="com.mawape.aimant.activities.MenuActivity" />
         <activity android:name="com.mawape.aimant.activities.NegociosListActivity" />
         <activity android:name="com.mawape.aimant.activities.CategoriasAcivity" />
-        <!-- 
         <activity android:name="com.mawape.aimant.activities.NegocioMapActivity" />
- 		-->
+ 		
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyD-k6tHlMVeJD3gxjMSIOUPPfAYKdg4MAE" />
         
     </application>
 
