@@ -3,18 +3,26 @@
 
     <string name="app_name">Aimant</string>
     <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
     <string name="app_loading">Cargando aplicacion..</string>
     <string name="title_activity_splash">MainActivity</string>
 
     <!-- different messages for splash -->
     <string name="mawape_msg">www.mawape.com</string>
     <string name="aimant_msg">Keep Calm and Take the Phone</string>
-
+    
+	<!-- General messages -->
+	<string name="accept">Aceptar</string>
+    <string name="cancel">Cancelar</string>
+    
+    
     <string name="title_activity_categorias_acivity">CategoriasAcivity</string>
     <!-- dialogo informacion -->
     <string name="info_title">@string/app_name</string>
     <string name="info_message"><![CDATA[<p>Contacto <br/><br/> Email: laguiaimant@gmail.com <br/> Tel: (0341) 153-152-126</p>]]></string>
-    <string name="info_accept">Aceptar</string>
-
+    <string name="info_accept">@string/accept</string>
+    
+    <!-- dialogo de location provider available -->
+	<string name="gps_network_not_enabled">Acceso a la ubicacion esta desactivado</string>
+	<string name="open_location_settings">Abrir configuracion</string>
+	
 </resources>
