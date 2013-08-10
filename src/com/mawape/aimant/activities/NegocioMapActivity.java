@@ -1,5 +1,6 @@
 package com.mawape.aimant.activities;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -10,15 +11,20 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 
+import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.LatLng;
 import com.mawape.aimant.R;
 
-public class NegocioMapActivity extends FragmentActivity implements
-		LocationListener {
+public class NegocioMapActivity extends Activity implements LocationListener {
+	private GoogleMap googleMap;
 	private LocationManager locationManager;
 	private String provider;
+	private Location location;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +34,22 @@ public class NegocioMapActivity extends FragmentActivity implements
 	}
 
 	private void init() {
+		// googleMap initialization
+		googleMap = ((MapFragment) getFragmentManager().findFragmentById(
+				R.id.map)).getMap();
+		if (googleMap == null) {
+			throw new IllegalArgumentException("googleMap not found!");
+		}
+		googleMap.setMyLocationEnabled(true);
+
+		// location initialization
+		if (isLocationManagerConfigured()) {
+			centerLocation();
+		}
+
+	}
+
+	private boolean isLocationManagerConfigured() {
 		boolean isGpsEnabled = false, isNetworkEnabled = false;
 		// Get the location manager
 		locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -48,13 +70,24 @@ public class NegocioMapActivity extends FragmentActivity implements
 		}
 		if (!isGpsEnabled && !isNetworkEnabled) {
 			showLocationSettingsDialog();
-			return;
+			return false;
 		}
 		Criteria criteria = new Criteria();
 		provider = locationManager.getBestProvider(criteria, true);
-		// Location location =
-		// locationManager.getLastKnownLocation(bestProvider);
+		location = locationManager
+				.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
 		locationManager.requestLocationUpdates(provider, 0, 0, this);
+		return true;
+	}
+
+	private void centerLocation() {
+		LatLng data = new LatLng(location.getLatitude(),
+				location.getLongitude());
+		CameraUpdate center = CameraUpdateFactory.newLatLng(data);
+		CameraUpdate zoom = CameraUpdateFactory.zoomTo(15);
+
+		googleMap.moveCamera(center);
+		googleMap.animateCamera(zoom);
 	}
 
 	private void showLocationSettingsDialog() {
@@ -145,5 +178,21 @@ public class NegocioMapActivity extends FragmentActivity implements
 
 	public void setProvider(String provider) {
 		this.provider = provider;
+	}
+
+	public GoogleMap getGoogleMap() {
+		return googleMap;
+	}
+
+	public void setGoogleMap(GoogleMap googleMap) {
+		this.googleMap = googleMap;
+	}
+
+	public Location getLocation() {
+		return location;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
 	}
 }
