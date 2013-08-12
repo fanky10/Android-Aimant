@@ -1,11 +1,11 @@
 package com.mawape.aimant.activities;
 
-
-import com.mawape.aimant.R;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+
+import com.mawape.aimant.R;
 
 public abstract class SplashActivity extends Activity implements Runnable {
 
@@ -15,12 +15,14 @@ public abstract class SplashActivity extends Activity implements Runnable {
 	@Override
 	public void onCreate(Bundle bundle) {
 		super.onCreate(bundle);
-		displayLength = getResources().getInteger(R.integer.default_splash_display_length);
+		displayLength = getResources().getInteger(
+				R.integer.default_splash_display_length);
 		setContentView();
-		postDelayed();
 	}
 
-	protected abstract void postDelayed();
+	protected void postDelayed() {
+		new Handler().postDelayed(this, getDisplayLength());
+	}
 
 	public void run() {
 		startActivity(createIntent());

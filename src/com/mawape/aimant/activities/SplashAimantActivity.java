@@ -2,7 +2,7 @@ package com.mawape.aimant.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -19,23 +19,28 @@ public class SplashAimantActivity extends SplashActivity {
 		super.onCreate(savedInstanceState);
 		displayLength = this.getResources().getInteger(
 				R.integer.aimant_display_length);
-		if (savedInstanceState != null) {
-			this.hasAutoClose = (Boolean) savedInstanceState.getBoolean(
+		Bundle extras = getIntent().getExtras();
+		if (extras != null) {
+			this.hasAutoClose = (Boolean) extras.getBoolean(
 					AppConstants.SPLASH_AIMANT_HAS_AUTOCLOSE_KEY, true);
 		}
 		init();
 	}
 
 	private void init() {
-		// handling menu info click
-		ImageView infoImg = (ImageView) findViewById(R.id.splashAboutClose);
-		infoImg.setOnClickListener(new OnClickListener() {
+		ImageView imgClose = (ImageView) findViewById(R.id.splashAboutClose);
+		if (hasAutoClose) {
+			imgClose.setVisibility(View.GONE);
+			postDelayed();
+		} else {
+			imgClose.setOnClickListener(new OnClickListener() {
 
-			@Override
-			public void onClick(View v) {
-				onBackPressed();
-			}
-		});
+				@Override
+				public void onClick(View v) {
+					onBackPressed();
+				}
+			});
+		}
 	}
 
 	@Override
@@ -49,16 +54,14 @@ public class SplashAimantActivity extends SplashActivity {
 	}
 
 	@Override
-	protected void postDelayed() {
-		// TODO Auto-generated method stub
-		if (hasAutoClose) {
-			new Handler().postDelayed(this, getDisplayLength());
-		}
+	public void onBackPressed() {
+		super.onBackPressed();
 	}
 
 	@Override
-	public void onBackPressed() {
-		super.onBackPressed();
+	protected void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		Log.d(this.getClass().getName(), "saved instance!");
 	}
 
 }
