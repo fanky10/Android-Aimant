@@ -1,33 +1,34 @@
 package com.mawape.aimant.activities;
 
+
+import com.mawape.aimant.R;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 
 public abstract class SplashActivity extends Activity implements Runnable {
-	private final int DEFAULT_DISPLAY_LENGHT = 5000;// five seconds
+
+	protected int displayLength = 1;
 
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle bundle) {
 		super.onCreate(bundle);
+		displayLength = getResources().getInteger(R.integer.default_splash_display_length);
 		setContentView();
-
-		/*
-		 * New Handler to start the Menu-Activity and close this Splash-Screen
-		 * after some seconds.
-		 */
-		new Handler().postDelayed(this, getDefaultDisplayLength());
+		postDelayed();
 	}
+
+	protected abstract void postDelayed();
 
 	public void run() {
 		startActivity(createIntent());
 		finish();
 	}
 
-	protected int getDefaultDisplayLength() {
-		return DEFAULT_DISPLAY_LENGHT;
+	protected int getDisplayLength() {
+		return displayLength;
 	}
 
 	protected abstract void setContentView();

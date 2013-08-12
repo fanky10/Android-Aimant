@@ -23,7 +23,7 @@
         android:src="@drawable/home_about_aimantcontact" />
 
     <ImageView
-        android:id="@+id/splashClose"
+        android:id="@+id/splashAboutClose"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
