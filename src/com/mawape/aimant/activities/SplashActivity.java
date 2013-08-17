@@ -18,6 +18,7 @@ public abstract class SplashActivity extends Activity implements Runnable {
 		displayLength = getResources().getInteger(
 				R.integer.default_splash_display_length);
 		setContentView();
+		postDelayed();
 	}
 
 	protected void postDelayed() {

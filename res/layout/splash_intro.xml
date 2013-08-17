@@ -10,8 +10,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:src="@drawable/home_intro" >
-
-    </ImageView>
+        android:src="@drawable/home_intro" />
 
 </RelativeLayout>

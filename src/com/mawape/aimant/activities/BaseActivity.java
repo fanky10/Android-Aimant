@@ -5,14 +5,12 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mawape.aimant.R;
-import com.mawape.aimant.constants.AppConstants;
 import com.mawape.aimant.entities.Categoria;
 
 public abstract class BaseActivity extends Activity {
@@ -58,13 +56,9 @@ public abstract class BaseActivity extends Activity {
 	}
 
 	private void showSplashAimant() {
-		Bundle bundle = new Bundle();
-		bundle.putBoolean(AppConstants.SPLASH_AIMANT_HAS_AUTOCLOSE_KEY, false);
-		Log.d(this.getClass().getName(), "bundle added: " + bundle);
 		Intent intent = new Intent(getApplicationContext(),
-				SplashAimantActivity.class);
+				InformationActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		intent.putExtras(bundle);
 		getApplicationContext().startActivity(intent);
 	}
 

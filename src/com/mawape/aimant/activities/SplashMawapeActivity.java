@@ -12,7 +12,6 @@ public class SplashMawapeActivity extends SplashActivity {
 		super.onCreate(bundle);
 		this.displayLength = this.getResources().getInteger(
 				R.integer.mawape_display_length);
-		postDelayed();
 	}
 
 	@Override
