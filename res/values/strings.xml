@@ -29,4 +29,8 @@
 	<string name="gps_network_not_enabled">Acceso a la ubicacion esta desactivado</string>
 	<string name="open_location_settings">Abrir configuracion</string>
 	
+	<!-- custom colors -->
+	<color name="white">#FFFFFF</color>
+	<color name="fade_fifteen">#15000000</color>
+	
 </resources>

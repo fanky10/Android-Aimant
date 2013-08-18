@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mawape.aimant.R;
@@ -38,10 +39,10 @@ public class NegociosArrayAdapter extends ArrayAdapter<Negocio> {
 
 		if (negocioSeleccionado.getImgPath() != null) {
 			String mDrawableName = negocioSeleccionado.getImgPath();
-			int resID = getContext().getResources().getIdentifier(
+			int imgResourceId = getContext().getResources().getIdentifier(
 					mDrawableName, "drawable", getContext().getPackageName());
-			
-			rowView.setBackgroundResource(resID);
+			ImageView imgView = (ImageView) rowView.findViewById(R.id.negRowImg);
+			imgView.setImageResource(imgResourceId);
 		}
 
 		ImageButton btnCall = (ImageButton) rowView

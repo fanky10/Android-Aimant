@@ -3,8 +3,16 @@
     android:layout_width="fill_parent"
     android:layout_height="150dp"
     android:orientation="horizontal"
-    android:padding="2dp" >
+    android:background="@drawable/neg_list_bkg">
 
+    <ImageView
+        android:id="@+id/negRowImg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/fadeFrame"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/fenicia_small" />
     <!--
 		Use an hexadecimal background color code, 
 		wich consists of two digits for alpha and six for the color itself 
@@ -16,7 +24,7 @@
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:background="#99000000"
+        android:background="@color/fade_fifteen"
         android:orientation="horizontal" >
 
         <LinearLayout
@@ -48,7 +56,7 @@
             android:layout_alignParentRight="true"
             android:text="Call"
             android:src="@drawable/ic_phone_call" 
-            android:background="#99000000"/>
+            android:background="#15000000"/>
 
         <Button
             android:id="@+id/negRowBtnMap"
