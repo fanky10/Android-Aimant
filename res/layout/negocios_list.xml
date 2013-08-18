@@ -15,12 +15,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/menu_bar"
+        android:layout_marginBottom="5dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
         android:divider="@android:color/transparent"
         android:dividerHeight="10dp"
-        android:orientation="vertical" 
-        >
+        android:orientation="vertical" >
     </ListView>
 
 </RelativeLayout>
