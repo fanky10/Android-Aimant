@@ -3,16 +3,24 @@
     android:id="@+id/negociosListLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
-	<!-- el bar menu -->
-	<include android:id="@+id/menu_bar"
-         layout="@layout/common_menubar"/>
+
+    <!-- el bar menu -->
+
+    <include
+        android:id="@+id/menu_bar"
+        layout="@layout/common_menubar" />
     <!-- end bar menu -->
+
     <ListView
         android:id="@+id/lstMenu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/menu_bar"
-        android:orientation="vertical">
+        android:divider="@android:color/transparent"
+        android:dividerHeight="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:orientation="vertical" >
     </ListView>
 
 </RelativeLayout>
