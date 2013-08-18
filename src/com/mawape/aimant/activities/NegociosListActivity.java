@@ -3,8 +3,10 @@ package com.mawape.aimant.activities;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ListView;
 
 import com.mawape.aimant.R;
@@ -28,6 +30,10 @@ public class NegociosListActivity extends BaseActivity {
 	private void init() {
 		Bundle bundle = getIntent().getExtras();
 		Categoria categoriaSeleccionada = (Categoria) bundle.get(AppConstants.CATEGORIA_SELECCIONADA_KEY);
+		//configure background.
+		View view = findViewById(R.id.negociosListLayout);
+		view.setBackgroundColor(Color.parseColor("#" + categoriaSeleccionada.getColor()));
+		
 		final List<Negocio> opcionV = getInforme(categoriaSeleccionada.getNombre());
 		Log.d(TAG, "el retorno fue: " + opcionV);
 		ListView lstOpciones = (ListView) findViewById(R.id.lstMenu);

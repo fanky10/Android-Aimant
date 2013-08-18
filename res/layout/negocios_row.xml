@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="150dp"
-    android:orientation="horizontal" >
+    android:orientation="horizontal"
+    android:padding="2dp" >
 
     <!--
 		Use an hexadecimal background color code, 
@@ -40,12 +41,14 @@
                 android:textAppearance="?android:attr/textAppearanceMedium" />
         </LinearLayout>
 
-        <Button
+        <ImageButton
             android:id="@+id/negRowBtnCall"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:text="Call" />
+            android:text="Call"
+            android:src="@drawable/ic_phone_call" 
+            android:background="#99000000"/>
 
         <Button
             android:id="@+id/negRowBtnMap"

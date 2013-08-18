@@ -11,6 +11,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.mawape.aimant.R;
@@ -39,10 +40,12 @@ public class NegociosArrayAdapter extends ArrayAdapter<Negocio> {
 			String mDrawableName = negocioSeleccionado.getImgPath();
 			int resID = getContext().getResources().getIdentifier(
 					mDrawableName, "drawable", getContext().getPackageName());
+			
 			rowView.setBackgroundResource(resID);
 		}
 
-		Button btnCall = (Button) rowView.findViewById(R.id.negRowBtnCall);
+		ImageButton btnCall = (ImageButton) rowView
+				.findViewById(R.id.negRowBtnCall);
 		btnCall.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -50,7 +53,7 @@ public class NegociosArrayAdapter extends ArrayAdapter<Negocio> {
 				makePhoneCall(negocioSeleccionado.getTelefono());
 			}
 		});
-		
+
 		Button btnMap = (Button) rowView.findViewById(R.id.negRowBtnMap);
 		btnMap.setOnClickListener(new OnClickListener() {
 
@@ -59,7 +62,6 @@ public class NegociosArrayAdapter extends ArrayAdapter<Negocio> {
 				showMap();
 			}
 		});
-		
 
 		return rowView;
 	}
