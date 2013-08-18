@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -41,7 +40,8 @@ public class NegociosArrayAdapter extends ArrayAdapter<Negocio> {
 			String mDrawableName = negocioSeleccionado.getImgPath();
 			int imgResourceId = getContext().getResources().getIdentifier(
 					mDrawableName, "drawable", getContext().getPackageName());
-			ImageView imgView = (ImageView) rowView.findViewById(R.id.negRowImg);
+			ImageView imgView = (ImageView) rowView
+					.findViewById(R.id.negRowImg);
 			imgView.setImageResource(imgResourceId);
 		}
 
@@ -55,7 +55,8 @@ public class NegociosArrayAdapter extends ArrayAdapter<Negocio> {
 			}
 		});
 
-		Button btnMap = (Button) rowView.findViewById(R.id.negRowBtnMap);
+		ImageButton btnMap = (ImageButton) rowView
+				.findViewById(R.id.negRowBtnMap);
 		btnMap.setOnClickListener(new OnClickListener() {
 
 			@Override
