@@ -62,11 +62,13 @@
         <ImageButton
             android:id="@+id/negRowBtnMap"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/linearContainer"
+            android:layout_centerVertical="true"
             android:background="#15000000"
             android:src="@drawable/ic_go_forward"
             android:text="Map" />
+
     </RelativeLayout>
 
 </RelativeLayout>
