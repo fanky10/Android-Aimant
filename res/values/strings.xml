@@ -8,29 +8,33 @@
 
     <!-- splash configuration -->
     <integer name="default_splash_display_length">5000</integer>
+
     <string name="mawape_msg">www.mawape.com</string>
+
     <integer name="mawape_display_length">1000</integer>
+
     <string name="aimant_msg">Keep Calm and Take the Phone</string>
+
     <integer name="aimant_display_length">2000</integer>
-    
-    
-	<!-- General messages -->
-	<string name="accept">Aceptar</string>
+
+    <!-- General messages -->
+    <string name="accept">Aceptar</string>
     <string name="cancel">Cancelar</string>
-    
-    
     <string name="title_activity_categorias_acivity">CategoriasAcivity</string>
     <!-- dialogo informacion -->
     <string name="info_title">@string/app_name</string>
     <string name="info_message"><![CDATA[<p>Contacto <br/><br/> Email: laguiaimant@gmail.com <br/> Tel: (0341) 153-152-126</p>]]></string>
     <string name="info_accept">@string/accept</string>
-    
+
     <!-- dialogo de location provider available -->
-	<string name="gps_network_not_enabled">Acceso a la ubicacion esta desactivado</string>
-	<string name="open_location_settings">Abrir configuracion</string>
-	
-	<!-- custom colors -->
-	<color name="white">#FFFFFF</color>
-	<color name="fade_fifteen">#15000000</color>
-	
+    <string name="gps_network_not_enabled">Acceso a la ubicacion esta desactivado</string>
+    <string name="open_location_settings">Abrir configuracion</string>
+
+    <!-- custom colors -->
+    <color name="white">#FFFFFF</color>
+    <color name="fade_fifteen">#15000000</color>
+
+    <string name="title_activity_animation">AnimationActivity</string>
+    <string name="hello_world">Hello world!</string>
+
 </resources>
