@@ -1,7 +1,5 @@
 package com.mawape.aimant.widget;
 
-import com.mawape.aimant.R;
-
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -21,6 +19,8 @@ import android.view.animation.LinearInterpolator;
 import android.view.animation.TranslateAnimation;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+
+import com.mawape.aimant.R;
 
 public class SlidePanel extends LinearLayout {
 
