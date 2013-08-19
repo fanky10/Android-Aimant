@@ -15,8 +15,6 @@ import android.graphics.drawable.shapes.OvalShape;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
-import android.widget.Button;
-import android.widget.RelativeLayout;
 
 import com.mawape.aimant.R;
 
@@ -25,25 +23,7 @@ public class AnimationActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_animation);
-		RelativeLayout container = (RelativeLayout) findViewById(R.id.animateMainLayout);
-        final MyAnimationView animView = new MyAnimationView(this);
-		container.addView(animView);
- 
-        Button starter = (Button) findViewById(R.id.animateBtnStart);
-        starter.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                animView.startAnimation();
-            }
-        });
- 
-        Button reverser = (Button) findViewById(R.id.animateBtnBackwards);
-        reverser.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                animView.reverseAnimation();
-            }
-        });
- 
+		setContentView(R.layout.animation_layout);
     }
 	
 
