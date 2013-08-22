@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+	
+    
+    <item android:id="@+id/first_image">
+        <shape xmlns:android="http://schemas.android.com/apk/res/android" >
+            <gradient
+                android:endColor="@color/fade_fifty"
+                android:startColor="@color/fade_fifty" />
+        </shape>
+    </item>
+    
+    
+	<item
+        android:id="@+id/second_image">
+        <bitmap
+            android:gravity="center"
+            android:src="@drawable/ic_search" />
+    </item>
+    
+</layer-list>

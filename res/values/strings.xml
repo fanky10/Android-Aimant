@@ -28,11 +28,15 @@
     <!-- dialogo de location provider available -->
 	<string name="gps_network_not_enabled">Acceso a la ubicacion esta desactivado</string>
 	<string name="open_location_settings">Abrir configuracion</string>
+	<!-- search field del common menu-bar -->
+	<string name="search_msg">Buscá el delivery o servicio...</string>
 	
 	<!-- custom colors -->
 	<color name="white">#FFFFFF</color>
 	<color name="fade_fifteen">#15000000</color>
+	<color name="fade_fifty">#50000000</color>
 	<color name="home_background">#313131</color>
 	<color name="info_background">@color/home_background</color>
+	<color name="menu_title">#FFF</color>
 	
 </resources>
