@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+	
+    
+    <item android:id="@+id/first_image">
+        <shape xmlns:android="http://schemas.android.com/apk/res/android" >
+            <gradient
+                android:endColor="@color/fade_fifteen"
+                android:startColor="@color/fade_fifteen" />
+
+            <corners
+                android:bottomLeftRadius="3dp"
+                android:bottomRightRadius="3dp"
+                android:topLeftRadius="3dp"
+                android:topRightRadius="3dp" />
+        </shape>
+    </item>
+    
+    
+	<item
+        android:id="@+id/second_image">
+        <bitmap
+            android:gravity="center"
+            android:src="@drawable/ic_go_back" />
+    </item>
+    
+</layer-list>
