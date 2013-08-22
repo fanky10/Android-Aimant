@@ -2,12 +2,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/home_background"
     android:orientation="vertical"
     tools:context=".CategoriasAcivity" >
-	<!-- el bar menu -->
-	<include android:id="@+id/menu_bar"
-         layout="@layout/common_menubar"/>
-    <!-- end bar menu -->
+
+    <include
+        android:id="@+id/menu_bar"
+        layout="@layout/common_menubar" />
+
     <ListView
         android:id="@+id/catListMenu"
         android:layout_width="match_parent"
