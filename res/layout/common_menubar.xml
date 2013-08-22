@@ -1,43 +1,48 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/commonMenuLayout"
     android:layout_width="match_parent"
     android:layout_height="44dp"
     android:layout_marginBottom="6dp"
     android:layout_marginLeft="6dp"
     android:layout_marginRight="6dp"
     android:layout_marginTop="6dp"
-    android:layout_weight="1.15" 
-    android:background="#313131">
+    android:layout_weight="1.15"
+    android:background="#313131" >
 
-    <TextView
-        android:id="@+id/commonMenuTitle"
+    <RelativeLayout
+        android:id="@+id/commonMenuLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/commonMenuInformation"
-        android:layout_alignParentTop="true"
-        android:gravity="center"
-        android:text="@string/app_name"
-        android:textSize="18sp"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:layout_height="match_parent" >
 
-    <ImageView
-        android:id="@+id/commonMenuInformation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:src="@drawable/ic_informacion"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        <TextView
+            android:id="@+id/commonMenuTitle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentTop="true"
+            android:gravity="center"
+            android:text="@string/app_name"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="18sp" />
 
-    <ImageView
-        android:id="@+id/commonMenuBack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        android:src="@drawable/ic_back_rounded"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:visibility="invisible" />
+        <ImageView
+            android:id="@+id/commonMenuInformation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_informacion_rounded"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <ImageView
+            android:id="@+id/commonMenuBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_go_back_rounded"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:visibility="invisible" />
+    </RelativeLayout>
 
 </RelativeLayout>
