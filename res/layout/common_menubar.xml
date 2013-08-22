@@ -70,7 +70,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/commonMenuSearchIcon"
-            android:background="@color/fade_fifty"
+            android:background="@color/fade"
             android:gravity="center"
             android:text="@string/search_msg"
             android:textColor="@color/menu_title"
