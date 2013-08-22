@@ -7,8 +7,11 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnFocusChangeListener;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mawape.aimant.R;
 import com.mawape.aimant.entities.Categoria;
@@ -49,6 +52,31 @@ public abstract class BaseActivity extends Activity {
 				showSplashAimant();
 			}
 		});
+
+		final EditText searchField = (EditText) findViewById(R.id.commonMenuSearchField);
+		searchField.setOnFocusChangeListener(new OnFocusChangeListener() {
+			@Override
+			public void onFocusChange(View v, boolean hasFocus) {
+				String currentText = searchField.getText().toString();
+				if (hasFocus) {
+					searchField.setText("");
+				} else if (!hasFocus
+						&& (currentText == null || currentText.length() == 0)) {
+					searchField.setText(R.string.search_msg);
+				}
+			}
+		});
+
+		// handling menu info click
+		ImageView searchImg = (ImageView) findViewById(R.id.commonMenuSearchIcon);
+		searchImg.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				searchField.requestFocus();
+			}
+		});
+
 	}
 
 	protected void configureMenuBar() {

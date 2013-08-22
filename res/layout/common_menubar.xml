@@ -2,7 +2,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="100dp"
-    android:background="@color/fade_fifty" >
+    android:background="@color/fade_fifty"
+    android:focusable="true"
+    android:focusableInTouchMode="true" >
 
     <RelativeLayout
         android:id="@+id/commonMenuTopLayout"
@@ -64,7 +66,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <EditText
-            android:id="@+id/commonMenuSearch"
+            android:id="@+id/commonMenuSearchField"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
