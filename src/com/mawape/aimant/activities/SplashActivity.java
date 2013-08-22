@@ -1,13 +1,12 @@
 package com.mawape.aimant.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
 import com.mawape.aimant.R;
 
-public abstract class SplashActivity extends Activity implements Runnable {
+public abstract class SplashActivity extends BaseActivity implements Runnable {
 
 	protected int displayLength = 1;
 
