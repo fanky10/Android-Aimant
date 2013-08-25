@@ -13,7 +13,7 @@
     <item android:id="@+id/second_image">
         <bitmap
             android:gravity="center"
-            android:src="@drawable/ic_go_forward" />
+            android:src="@drawable/btn_go" />
     </item>
 
 </layer-list>
