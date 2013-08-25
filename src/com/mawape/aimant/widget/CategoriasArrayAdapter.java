@@ -5,11 +5,14 @@ import java.util.List;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.ShapeDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.RelativeLayout;
 
 import com.mawape.aimant.R;
 import com.mawape.aimant.activities.NegociosListActivity;
@@ -27,10 +30,14 @@ public class CategoriasArrayAdapter extends ArrayAdapter<Categoria> implements
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		View view = super.getView(position, convertView, parent);
-		view.setBackgroundColor(Color.parseColor("#"
+		View rowView = super.getView(position, convertView, parent);
+		RelativeLayout layoutWrapper = (RelativeLayout) rowView
+				.findViewById(R.id.catRowWrapper);
+		GradientDrawable bgShape = (GradientDrawable) layoutWrapper
+				.getBackground();
+		bgShape.setColor(Color.parseColor("#"
 				+ categorias.get(position).getColor()));
-		return view;
+		return rowView;
 	}
 
 	@Override
