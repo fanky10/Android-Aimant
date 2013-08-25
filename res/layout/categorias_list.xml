@@ -13,9 +13,10 @@
     <ListView
         android:id="@+id/catListMenu"
         android:layout_width="match_parent"
-        android:layout_height="452dp"
-        android:layout_alignParentLeft="true"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/menu_bar"
+        android:background="@color/home_background"
+        android:dividerHeight="0dp"
         android:orientation="vertical" >
     </ListView>
 
