@@ -1,9 +1,12 @@
 package com.mawape.aimant.activities;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.mawape.aimant.R;
 
@@ -24,5 +27,42 @@ public class InformationActivity extends BaseActivity {
 				onBackPressed();
 			}
 		});
+		ImageView imgEmail = (ImageView) findViewById(R.id.infoEmailIcon);
+		imgEmail.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				sendEmail();
+			}
+		});
+		ImageView imgPhone = (ImageView) findViewById(R.id.infoPhoneIcon);
+		imgPhone.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				callAimant();
+			}
+		});
+	}
+	
+	private void sendEmail(){
+		String email = getString(R.string.info_email);
+		String subject = getString(R.string.info_subject);
+		String errorMessage = getString(R.string.no_email_client);
+		Intent i = new Intent(Intent.ACTION_SEND);
+		i.setType("message/rfc822");
+		i.putExtra(Intent.EXTRA_EMAIL  , new String[]{email});
+		i.putExtra(Intent.EXTRA_SUBJECT, subject);
+		i.putExtra(Intent.EXTRA_TEXT   , "");
+		try {
+		    startActivity(Intent.createChooser(i, "Send mail..."));
+		} catch (android.content.ActivityNotFoundException ex) {
+		    Toast.makeText(InformationActivity.this,errorMessage, Toast.LENGTH_SHORT).show();
+		}
+	}
+	
+	private void callAimant(){
+		String phoneNumber = getString(R.string.info_telefono);
+		Intent intent = new Intent(Intent.ACTION_CALL);
+		intent.setData(Uri.parse("tel:" + phoneNumber));
+		startActivity(intent);
 	}
 }

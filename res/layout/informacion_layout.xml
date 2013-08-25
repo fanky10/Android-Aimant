@@ -51,7 +51,6 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="6dp"
             android:src="@drawable/icon_mail_big"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -92,7 +91,6 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="6dp"
             android:src="@drawable/icon_phone_big"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 

@@ -5,43 +5,46 @@
     <string name="action_settings">Settings</string>
     <string name="app_loading">Cargando aplicacion..</string>
     <string name="title_activity_splash">MainActivity</string>
+    <string name="title_activity_categorias_acivity">CategoriasAcivity</string>
+    <string name="aimant_phone">(341) 153-152-126</string>
+    <string name="aimant_email">laguiaimant@gmail.com</string>
 
     <!-- splash configuration -->
     <integer name="default_splash_display_length">5000</integer>
-    <string name="mawape_msg">www.mawape.com</string>
     <integer name="mawape_display_length">1000</integer>
-    <string name="aimant_msg">Keep Calm and Take the Phone</string>
     <integer name="aimant_display_length">2000</integer>
-    
-    
-	<!-- General messages -->
-	<string name="accept">Aceptar</string>
+
+    <string name="mawape_msg">www.mawape.com</string>
+    <string name="aimant_msg">Keep Calm and Take the Phone</string>
+
+    <!-- General messages -->
+    <string name="accept">Aceptar</string>
     <string name="cancel">Cancelar</string>
-    
-    
-    <string name="title_activity_categorias_acivity">CategoriasAcivity</string>
+    <string name="no_email_client">No se encontraron clientes de email configurados</string>
+
     <!-- dialogo informacion -->
     <string name="info_title">@string/app_name</string>
     <string name="info_message"><![CDATA[<p>Contacto <br/><br/> Email: laguiaimant@gmail.com <br/> Tel: (0341) 153-152-126</p>]]></string>
     <string name="info_accept">@string/accept</string>
-    <string name="info_email">laguiaimant@gmail.com</string>
-    <string name="info_telefono">(341) 153-152-126</string>
-    
+    <string name="info_email">@string/aimant_email</string>
+    <string name="info_subject">Solicito información</string>
+    <string name="info_telefono">@string/aimant_phone</string>
+
     <!-- dialogo de location provider available -->
-	<string name="gps_network_not_enabled">Acceso a la ubicacion esta desactivado</string>
-	<string name="open_location_settings">Abrir configuracion</string>
-	<!-- search field del common menu-bar -->
-	<string name="search_msg">Buscá el delivery o servicio...</string>
-	
-	<!-- custom colors -->
-	<color name="white">#FFFFFF</color>
-	<color name="fade">#00000000</color>
-	<color name="fade_fifteen">#15000000</color>
-	<color name="fade_fifty">#50000000</color>
-	<color name="home_background">#313131</color>
-	<color name="info_background">@color/home_background</color>
-	<color name="info_separator">#3F3F3F</color>
-	<color name="menu_title">#FFF</color>
-	<color name="search_text">#50FFFFFF</color>
-	
+    <string name="gps_network_not_enabled">Acceso a la ubicacion esta desactivado</string>
+    <string name="open_location_settings">Abrir configuracion</string>
+    <!-- search field del common menu-bar -->
+    <string name="search_msg">Buscá el delivery o servicio...</string>
+
+    <!-- custom colors -->
+    <color name="white">#FFFFFF</color>
+    <color name="fade">#00000000</color>
+    <color name="fade_fifteen">#15000000</color>
+    <color name="fade_fifty">#50000000</color>
+    <color name="home_background">#313131</color>
+    <color name="info_background">@color/home_background</color>
+    <color name="info_separator">#3F3F3F</color>
+    <color name="menu_title">#FFF</color>
+    <color name="search_text">#50FFFFFF</color>
+
 </resources>
