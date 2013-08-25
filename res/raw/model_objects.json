@@ -5,5 +5,13 @@
 		{nombre:"Bebidas",color:"5c3d83",imgPath:"icon_bebidas.png"},
 		{nombre:"Eventos",color:"c92a8a",imgPath:"icon_eventos.png"},
 		{nombre:"Mascotas",color:"957ab3",imgPath:"icon_mascotas.png"}
+	],
+	"negocios": 
+	[ 	
+		{nombre:"Queens",direccion:"Rioja 1791",imgPath:"queens_small.png",categoria:"Gastronomia",telefono:"08004447655"}, 
+		{nombre:"Antares",direccion:"Callao 216",imgPath:null,categoria:"Gastronomia",telefono:"08004447655"},
+		{nombre:"Fenicia",direccion:"Francia 168",imgPath:"fenicia_small.png",categoria:"Gastronomia",telefono:"08004447655"},
+		{nombre:"O'Connel's",direccion:"Paraguay 212",imgPath:"oconnels_small.png",categoria:"Bebidas",telefono:"08004447655"},
+		{nombre:"Zodiaco",direccion:"Francia 251",imgPath:null,categoria:"Bebidas",telefono:"08004447655"}
 	]
 }
