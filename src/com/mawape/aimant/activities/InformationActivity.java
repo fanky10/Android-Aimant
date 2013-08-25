@@ -17,7 +17,7 @@ public class InformationActivity extends BaseActivity {
 	}
 
 	private void init() {
-		ImageView imgClose = (ImageView) findViewById(R.id.splashAboutClose);
+		ImageView imgClose = (ImageView) findViewById(R.id.infoClose);
 		imgClose.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {

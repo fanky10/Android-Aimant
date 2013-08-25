@@ -6,28 +6,21 @@
     android:orientation="vertical" >
 
     <ImageView
-        android:id="@+id/splashAboutLogo"
+        android:id="@+id/infoAimantLogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/home_about_aimantlogo" />
+        android:layout_centerVertical="true"
+        android:src="@drawable/logo_aimant" />
 
     <ImageView
-        android:id="@+id/splashAboutContact"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@id/splashAboutLogo"
-        android:layout_alignLeft="@+id/splashAboutLogo"
-        android:layout_below="@+id/splashAboutLogo"
-        android:src="@drawable/home_about_aimantcontact" />
-
-    <ImageView
-        android:id="@+id/splashAboutClose"
+        android:id="@+id/infoClose"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:src="@drawable/ic_close_splash" />
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/icon_close" />
 
 </RelativeLayout>
