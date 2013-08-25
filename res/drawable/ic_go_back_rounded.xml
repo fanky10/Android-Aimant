@@ -21,7 +21,7 @@
         android:id="@+id/second_image">
         <bitmap
             android:gravity="center"
-            android:src="@drawable/ic_go_back" />
+            android:src="@drawable/btn_back" />
     </item>
     
 </layer-list>
