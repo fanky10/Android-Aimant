@@ -1,23 +1,35 @@
 package com.mawape.aimant.activities;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.Address;
 import android.location.Criteria;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.mawape.aimant.R;
 
 public class NegocioMapActivity extends Activity implements LocationListener {
@@ -44,6 +56,7 @@ public class NegocioMapActivity extends Activity implements LocationListener {
 
 		// location initialization
 		if (isLocationManagerConfigured()) {
+			findLocation();
 			centerLocation();
 		}
 
@@ -80,12 +93,33 @@ public class NegocioMapActivity extends Activity implements LocationListener {
 		return true;
 	}
 
+	private void findLocation() {
+		try {
+			Geocoder geocoder = new Geocoder(getApplicationContext());
+			List<Address> addresses = new ArrayList<Address>();
+			addresses = geocoder.getFromLocationName(
+					"Angelome 2232 Funes Santa Fe Argentina", 1);
+			if (addresses.size() > 0) {
+				double latitude = addresses.get(0).getLatitude();
+				double longitude = addresses.get(0).getLongitude();
+				LatLng latLong = new LatLng(0, 0);
+				location.setLatitude(latitude);
+				location.setLongitude(longitude);
+			}
+		} catch (IOException ex) {
+			Log.d(getClass().getName(),
+					"ioexception geocoder:" + ex.getMessage());
+		}
+	}
+
 	private void centerLocation() {
 		LatLng data = new LatLng(location.getLatitude(),
 				location.getLongitude());
 		CameraUpdate center = CameraUpdateFactory.newLatLng(data);
 		CameraUpdate zoom = CameraUpdateFactory.zoomTo(15);
-
+		googleMap.addMarker(new MarkerOptions()
+        .position(data)
+        .title("Un nombre"));
 		googleMap.moveCamera(center);
 		googleMap.animateCamera(zoom);
 	}
