@@ -120,7 +120,7 @@ public class CategoriasArrayAdapter extends ArrayAdapter<Categoria> implements
 		this.originalValues = originalValues;
 	}
 
-	class CategoriasFilter extends Filter {
+	private class CategoriasFilter extends Filter {
 
 		@Override
 		protected FilterResults performFiltering(CharSequence constraint) {
