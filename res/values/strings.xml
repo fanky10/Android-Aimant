@@ -24,6 +24,8 @@
     <string name="info_title">@string/app_name</string>
     <string name="info_message"><![CDATA[<p>Contacto <br/><br/> Email: laguiaimant@gmail.com <br/> Tel: (0341) 153-152-126</p>]]></string>
     <string name="info_accept">@string/accept</string>
+    <string name="info_email">laguiaimant@gmail.com</string>
+    <string name="info_telefono">(341) 153-152-126</string>
     
     <!-- dialogo de location provider available -->
 	<string name="gps_network_not_enabled">Acceso a la ubicacion esta desactivado</string>

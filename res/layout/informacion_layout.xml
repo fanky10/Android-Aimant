@@ -23,4 +23,70 @@
         android:layout_marginTop="10dp"
         android:src="@drawable/icon_close" />
 
+    <RelativeLayout
+        android:id="@+id/infoEmailLayout"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_above="@+id/infoTelefonoLayout"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/fade_fifteen" >
+
+        <TextView
+            android:id="@+id/infoEmail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/infoEmailIcon"
+            android:gravity="center"
+            android:text="@string/info_email"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/menu_title"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:id="@+id/infoEmailIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="6dp"
+            android:src="@drawable/icon_mail_big"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/infoTelefonoLayout"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/fade_fifteen" >
+
+        <TextView
+            android:id="@+id/infoPhone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/infoPhoneIcon"
+            android:gravity="center"
+            android:text="@string/info_telefono"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/menu_title"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:id="@+id/infoPhoneIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="6dp"
+            android:src="@drawable/icon_phone_big"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+    </RelativeLayout>
+
 </RelativeLayout>
