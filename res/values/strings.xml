@@ -37,6 +37,10 @@
     <string name="search_msg">Buscá el delivery o servicio...</string>
 
     <!-- custom colors -->
+    <!--
+		Use an hexadecimal background color code, 
+		wich consists of two digits for alpha and six for the color itself 
+    -->
     <color name="white">#FFFFFF</color>
     <color name="fade">#00000000</color>
     <color name="fade_fifteen">#15000000</color>
@@ -46,5 +50,6 @@
     <color name="info_separator">#3F3F3F</color>
     <color name="menu_title">#FFF</color>
     <color name="search_text">#50FFFFFF</color>
+    <color name="negocio_default_img">#F0F0F0</color>
 
 </resources>
