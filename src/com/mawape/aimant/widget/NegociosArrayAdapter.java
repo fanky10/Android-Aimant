@@ -51,7 +51,7 @@ public class NegociosArrayAdapter extends ArrayAdapter<Negocio> {
 			imgView.setImageResource(imgResourceId);
 		}
 
-		ImageButton btnCall = (ImageButton) rowView
+		ImageView btnCall = (ImageView) rowView
 				.findViewById(R.id.negRowBtnCall);
 		btnCall.setOnClickListener(new OnClickListener() {
 
@@ -61,7 +61,7 @@ public class NegociosArrayAdapter extends ArrayAdapter<Negocio> {
 			}
 		});
 
-		ImageButton btnMap = (ImageButton) rowView
+		ImageView btnMap = (ImageView) rowView
 				.findViewById(R.id.negRowBtnMap);
 		btnMap.setOnClickListener(new OnClickListener() {
 
