@@ -1,9 +1,9 @@
 {
 	"categorias": 
 	[ 	
-		{nombre:"Gastronomia",color:"cb353a"}, 
-		{nombre:"Bebidas",color:"5c3d83"},
-		{nombre:"Eventos",color:"c92a8a"},
-		{nombre:"Mascotas",color:"957ab3"} 
+		{nombre:"Gastronomia",color:"cb353a",imgPath:"icon_gastronomia.png"}, 
+		{nombre:"Bebidas",color:"5c3d83",imgPath:"icon_bebidas.png"},
+		{nombre:"Eventos",color:"c92a8a",imgPath:"icon_eventos.png"},
+		{nombre:"Mascotas",color:"957ab3",imgPath:"icon_mascotas.png"}
 	]
 }

@@ -25,10 +25,12 @@ public class CategoriasJsonParser {
 		return resultList;
 	}
 
-	private static Categoria createObject(JSONObject jsonItem) throws JSONException {
+	private static Categoria createObject(JSONObject jsonItem)
+			throws JSONException {
 		String nombre = jsonItem.getString("nombre");
 		String color = jsonItem.getString("color");
-		return new Categoria(nombre, color);
+		String imgPath = jsonItem.getString("imgPath");
+		return new Categoria(nombre, color, imgPath);
 	}
 
 }

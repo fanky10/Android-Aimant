@@ -6,12 +6,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.ShapeDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.mawape.aimant.R;
@@ -31,12 +31,23 @@ public class CategoriasArrayAdapter extends ArrayAdapter<Categoria> implements
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View rowView = super.getView(position, convertView, parent);
+		Categoria categoriaSeleccionada = categorias.get(position);
 		RelativeLayout layoutWrapper = (RelativeLayout) rowView
 				.findViewById(R.id.catRowWrapper);
 		GradientDrawable bgShape = (GradientDrawable) layoutWrapper
 				.getBackground();
 		bgShape.setColor(Color.parseColor("#"
-				+ categorias.get(position).getColor()));
+				+ categoriaSeleccionada.getColor()));
+
+		String imgPath = categoriaSeleccionada.getImgPath();
+		String mDrawableName = imgPath.substring(0,imgPath.lastIndexOf("."));//no extension
+		Integer imgResourceId = getContext().getResources().getIdentifier(
+				mDrawableName, "drawable", getContext().getPackageName());
+		if (imgResourceId > 0) {
+			ImageView imgView = (ImageView) rowView
+					.findViewById(R.id.catRowIcon);
+			imgView.setImageResource(imgResourceId);
+		}
 		return rowView;
 	}
 
