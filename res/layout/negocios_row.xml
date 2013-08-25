@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="160dp"
     android:background="@drawable/neg_list_bkg"
     android:orientation="horizontal" >
 
@@ -26,49 +26,45 @@
         android:layout_width="match_parent"
         android:layout_height="44dp"
         android:layout_below="@id/negRowTopLayout"
+        android:layout_alignParentBottom="true"
         android:background="@drawable/neg_fade_bkg"
         android:orientation="horizontal" >
 
-        <LinearLayout
-            android:id="@+id/linearContainer"
+        <TextView
+            android:id="@+id/negRowNombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="Sushi Home"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@android:color/white"
+            android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/negRowNombre"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="Sushi Home"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="@android:color/white"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/negRowDir"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="Moreno 75 bis"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textSize="12sp" />
-        </LinearLayout>
+        <TextView
+            android:id="@+id/negRowDir"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/negRowNombre"
+            android:text="Moreno 75 bis"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="12sp" />
 
         <ImageView
             android:id="@+id/negRowBtnCall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/negRowBtnMap"
             android:layout_marginRight="6dp"
+            android:layout_toLeftOf="@+id/negRowBtnMap"
             android:src="@drawable/icon_phone_small_rounded" />
 
         <ImageView
             android:id="@+id/negRowBtnMap"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignRight="@+id/linearContainer"
+            android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:src="@drawable/btn_go_rounded" />
     </RelativeLayout>
