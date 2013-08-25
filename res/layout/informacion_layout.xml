@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#262626"
+    android:background="@color/info_background"
     android:orientation="vertical" >
 
     <ImageView
@@ -54,6 +54,14 @@
             android:layout_marginRight="6dp"
             android:src="@drawable/icon_mail_big"
             android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:layout_marginBottom="6dp"
+            android:layout_marginTop="6dp"
+            android:layout_toLeftOf="@+id/infoEmailIcon"
+            android:background="@color/info_separator" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -87,6 +95,14 @@
             android:layout_marginRight="6dp"
             android:src="@drawable/icon_phone_big"
             android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:layout_marginBottom="6dp"
+            android:layout_marginTop="6dp"
+            android:layout_toLeftOf="@+id/infoPhoneIcon"
+            android:background="@color/info_separator" />
     </RelativeLayout>
 
 </RelativeLayout>

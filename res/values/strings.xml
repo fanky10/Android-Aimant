@@ -40,6 +40,8 @@
 	<color name="fade_fifty">#50000000</color>
 	<color name="home_background">#313131</color>
 	<color name="info_background">@color/home_background</color>
+	<color name="info_separator">#3F3F3F</color>
 	<color name="menu_title">#FFF</color>
 	<color name="search_text">#50FFFFFF</color>
+	
 </resources>
