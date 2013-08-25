@@ -17,7 +17,6 @@ public class CategoriasAcivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.categorias_list);
 		init();
-		configureMenuBar();
 	}
 
 	private void init() {
@@ -26,7 +25,8 @@ public class CategoriasAcivity extends BaseActivity {
 				getApplicationContext(), opcionV);
 		ListView lstOpciones = (ListView) findViewById(R.id.catListMenu);
 		lstOpciones.setAdapter(adaptador);
-		lstOpciones.setOnItemClickListener(adaptador);		
+		lstOpciones.setOnItemClickListener(adaptador);	
+		configureMenuBar(null,false,adaptador);
 	}
 
 	private List<Categoria> getCategorias() {

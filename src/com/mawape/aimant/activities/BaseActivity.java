@@ -5,13 +5,15 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.mawape.aimant.R;
 import com.mawape.aimant.entities.Categoria;
@@ -24,6 +26,11 @@ public abstract class BaseActivity extends Activity {
 	}
 
 	protected void configureMenuBar(Categoria categoria, boolean canGoBack) {
+		configureMenuBar(categoria, canGoBack, null);
+	}
+
+	protected void configureMenuBar(Categoria categoria, boolean canGoBack,
+			final ArrayAdapter adapter) {
 		if (categoria != null) {// configure color and title
 			TextView txtTitle = (TextView) findViewById(R.id.commonMenuTitle);
 			txtTitle.setText(categoria.getNombre());
@@ -42,7 +49,7 @@ public abstract class BaseActivity extends Activity {
 				}
 			});
 		}
-
+		
 		// handling menu info click
 		ImageView infoImg = (ImageView) findViewById(R.id.commonMenuInformation);
 		infoImg.setOnClickListener(new OnClickListener() {
@@ -66,6 +73,31 @@ public abstract class BaseActivity extends Activity {
 				}
 			}
 		});
+
+		if(adapter!=null){
+			//configure filtering
+			searchField.addTextChangedListener(new TextWatcher() {
+				
+				@Override
+				public void onTextChanged(CharSequence s, int start, int before, int count)
+				{
+				    adapter.getFilter().filter(s); //Filter from my adapter
+				}
+				
+				@Override
+				public void beforeTextChanged(CharSequence s, int start, int count,
+						int after) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+				@Override
+				public void afterTextChanged(Editable s) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
+		}
 
 		// handling menu info click
 		ImageView searchImg = (ImageView) findViewById(R.id.commonMenuSearchIcon);
