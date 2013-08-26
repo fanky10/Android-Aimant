@@ -18,24 +18,20 @@ import android.util.Log;
 import com.mawape.aimant.R;
 import com.mawape.aimant.constants.AppConstants;
 import com.mawape.aimant.entities.Categoria;
-import com.mawape.aimant.entities.Negocio;
-import com.mawape.aimant.repository.NegociosRepository;
+import com.mawape.aimant.repository.CategoriasRepository;
 import com.mawape.aimant.services.impl.CategoriasManagerImpl;
 import com.mawape.aimant.utilities.CategoriasJsonParser;
-import com.mawape.aimant.utilities.NegociosJsonParser;
 
-public class NegociosRepositoryJSONImpl implements NegociosRepository {
-	private static final String TAG = NegociosRepositoryJSONImpl.class
-			.getName();
+public class CategoriasRepositoryJSONImpl implements CategoriasRepository{
 	private Context context;
 
-	public NegociosRepositoryJSONImpl(Context context) {
+	public CategoriasRepositoryJSONImpl(Context context) {
 		this.context = context;
 	}
 
 	@Override
-	public List<Negocio> getNegocios() {
-		List<Negocio> resultList = new ArrayList<Negocio>();
+	public List<Categoria> getCategorias() {
+		List<Categoria> resultList = new ArrayList<Categoria>();
 		try {
 			InputStream is = getContext().getResources().openRawResource(
 					R.raw.model_objects);
@@ -52,29 +48,14 @@ public class NegociosRepositoryJSONImpl implements NegociosRepository {
 				is.close();
 			}
 			String jsonString = writer.toString();
-			resultList = new NegociosJsonParser().parse(jsonString,
-					AppConstants.JSON_NEGOCIOS_KEY_LIST);
+			resultList = new CategoriasJsonParser().parse(jsonString, AppConstants.JSON_CATEGORIAS_KEY_LIST);
 		} catch (JSONException ex) {
-			Log.d(this.getClass().getName(),
+			Log.d(CategoriasManagerImpl.class.getName(),
 					"exception parsing json:" + ex.getMessage());
 		} catch (IOException ex) {
 			// TODO: handle exception
-			Log.d(this.getClass().getName(),
-					"exception reading json:" + ex.getMessage());
 		}
 		return resultList;
-	}
-
-	@Override
-	public List<String> getCategoriasNegocio() {
-		List<String> categorias = new ArrayList<String>();
-		for (Negocio negocio : getNegocios()) {
-			String categoria = negocio.getCategoria();
-			if (categoria != null && !categorias.contains(categoria)) {
-				categorias.add(categoria);
-			}
-		}
-		return categorias;
 	}
 
 	public Context getContext() {
@@ -84,5 +65,4 @@ public class NegociosRepositoryJSONImpl implements NegociosRepository {
 	public void setContext(Context context) {
 		this.context = context;
 	}
-
 }

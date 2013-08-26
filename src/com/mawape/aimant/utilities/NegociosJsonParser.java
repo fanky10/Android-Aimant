@@ -10,9 +10,9 @@ import org.json.JSONTokener;
 
 import com.mawape.aimant.entities.Negocio;
 
-public class NegociosJsonParser {
+public class NegociosJsonParser extends AbstractJsonParser<Negocio> {
 
-	public static List<Negocio> parse(String jsonString, String key)
+	public List<Negocio> parse(String jsonString, String key)
 			throws JSONException {
 		List<Negocio> resultList = new ArrayList<Negocio>();
 		JSONObject jsonObject = (JSONObject) new JSONTokener(jsonString)
@@ -25,21 +25,13 @@ public class NegociosJsonParser {
 		return resultList;
 	}
 
-	private static Negocio createObject(JSONObject jsonItem)
-			throws JSONException {
-		String nombre = getString(jsonItem,"nombre");
-		String direccion = getString(jsonItem,"direccion");
-		String imgPath = getString(jsonItem,"imgPath");
-		String categoria = getString(jsonItem,"categoria");
+	@Override
+	protected Negocio createObject(JSONObject jsonItem) throws JSONException {
+		String nombre = getString(jsonItem, "nombre");
+		String direccion = getString(jsonItem, "direccion");
+		String imgPath = getString(jsonItem, "imgPath");
+		String categoria = getString(jsonItem, "categoria");
 		return new Negocio(nombre, direccion, imgPath, categoria);
-	}
-	
-	private static String getString(JSONObject jsonItem, String key) throws JSONException{
-		if(!jsonItem.has(key) || jsonItem.isNull(key)){
-			return null;
-		}else {
-			return jsonItem.getString(key);
-		}
 	}
 
 }

@@ -10,9 +10,9 @@ import org.json.JSONTokener;
 
 import com.mawape.aimant.entities.Categoria;
 
-public class CategoriasJsonParser {
+public class CategoriasJsonParser extends AbstractJsonParser<Categoria> {
 
-	public static List<Categoria> parse(String jsonString, String key)
+	public List<Categoria> parse(String jsonString, String key)
 			throws JSONException {
 		List<Categoria> resultList = new ArrayList<Categoria>();
 		JSONObject jsonObject = (JSONObject) new JSONTokener(jsonString)
@@ -25,12 +25,12 @@ public class CategoriasJsonParser {
 		return resultList;
 	}
 
-	private static Categoria createObject(JSONObject jsonItem)
-			throws JSONException {
-		String nombre = jsonItem.getString("nombre");
-		String color = jsonItem.getString("color");
-		String imgPath = jsonItem.getString("imgPath");
+	@Override
+	protected Categoria createObject(JSONObject jsonItem) throws JSONException {
+		String nombre = getString(jsonItem,"nombre");
+		String color = getString(jsonItem,"color");
+		String imgPath = getString(jsonItem,"imgPath");
 		return new Categoria(nombre, color, imgPath);
 	}
-
+	
 }
