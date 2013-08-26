@@ -57,8 +57,7 @@ public class CategoriasArrayAdapter extends ArrayAdapter<Categoria> implements
 
 			String imgPath = categoriaSeleccionada.getImgPath();
 			String mDrawableName = imgPath.substring(0,
-					imgPath.lastIndexOf("."));// no
-												// extension
+					imgPath.lastIndexOf("."));// no-extension
 			Integer imgResourceId = getContext().getResources().getIdentifier(
 					mDrawableName, "drawable", getContext().getPackageName());
 			if (imgResourceId > 0) {

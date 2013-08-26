@@ -43,12 +43,16 @@ public class NegociosArrayAdapter extends ArrayAdapter<Negocio> {
 		textView.setText(negocioSeleccionado.getNombre());
 
 		if (negocioSeleccionado.getImgPath() != null) {
-			String mDrawableName = negocioSeleccionado.getImgPath();
-			int imgResourceId = getContext().getResources().getIdentifier(
+			String imgPath = negocioSeleccionado.getImgPath();
+			String mDrawableName = imgPath.substring(0,
+					imgPath.lastIndexOf("."));// no-extension
+			Integer imgResourceId = getContext().getResources().getIdentifier(
 					mDrawableName, "drawable", getContext().getPackageName());
-			ImageView imgView = (ImageView) rowView
-					.findViewById(R.id.negRowImg);
-			imgView.setImageResource(imgResourceId);
+			if (imgResourceId > 0) {
+				ImageView imgView = (ImageView) rowView
+						.findViewById(R.id.negRowImg);
+				imgView.setImageResource(imgResourceId);
+			}
 		}
 
 		ImageView btnCall = (ImageView) rowView
@@ -61,8 +65,7 @@ public class NegociosArrayAdapter extends ArrayAdapter<Negocio> {
 			}
 		});
 
-		ImageView btnMap = (ImageView) rowView
-				.findViewById(R.id.negRowBtnMap);
+		ImageView btnMap = (ImageView) rowView.findViewById(R.id.negRowBtnMap);
 		btnMap.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -96,7 +99,7 @@ public class NegociosArrayAdapter extends ArrayAdapter<Negocio> {
 	}
 
 	public Filter getFilter() {
-		if(filter==null){
+		if (filter == null) {
 			filter = new NegociosFilter();
 		}
 		return filter;

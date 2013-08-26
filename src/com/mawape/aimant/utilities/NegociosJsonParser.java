@@ -27,11 +27,19 @@ public class NegociosJsonParser {
 
 	private static Negocio createObject(JSONObject jsonItem)
 			throws JSONException {
-		String nombre = jsonItem.getString("nombre");
-		String direccion = jsonItem.getString("direccion");
-		String imgPath = jsonItem.getString("imgPath");
-		String categoria = jsonItem.getString("categoria");
+		String nombre = getString(jsonItem,"nombre");
+		String direccion = getString(jsonItem,"direccion");
+		String imgPath = getString(jsonItem,"imgPath");
+		String categoria = getString(jsonItem,"categoria");
 		return new Negocio(nombre, direccion, imgPath, categoria);
+	}
+	
+	private static String getString(JSONObject jsonItem, String key) throws JSONException{
+		if(!jsonItem.has(key) || jsonItem.isNull(key)){
+			return null;
+		}else {
+			return jsonItem.getString(key);
+		}
 	}
 
 }
