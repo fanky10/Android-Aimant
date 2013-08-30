@@ -2,7 +2,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="160dp"
-    android:background="@drawable/neg_list_bkg"
     android:orientation="horizontal" >
 
     <RelativeLayout
@@ -18,16 +17,16 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/image_default" />
+            android:src="@drawable/image_default"/>
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/fadeFrame"
         android:layout_width="match_parent"
         android:layout_height="44dp"
-        android:layout_below="@id/negRowTopLayout"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/neg_fade_bkg"
+        android:layout_below="@id/negRowTopLayout"
+        android:background="@drawable/negocios_row_bot_rounded"
         android:orientation="horizontal" >
 
         <TextView
