@@ -30,8 +30,10 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.mawape.aimant.R;
 import com.mawape.aimant.constants.AppConstants;
 import com.mawape.aimant.entities.Categoria;
+import com.mawape.aimant.entities.Negocio;
 
-public class NegocioMapActivity extends BaseActivity implements LocationListener {
+public class NegocioMapActivity extends BaseActivity implements
+		LocationListener {
 	private GoogleMap googleMap;
 	private LocationManager locationManager;
 	private String provider;
@@ -57,6 +59,8 @@ public class NegocioMapActivity extends BaseActivity implements LocationListener
 		Bundle bundle = getIntent().getExtras();
 		Categoria categoriaSeleccionada = (Categoria) bundle
 				.get(AppConstants.CATEGORIA_SELECCIONADA_KEY);
+		Negocio negocioSeleccionado = (Negocio) bundle
+				.get(AppConstants.NEGOCIO_SELECCIONADO_KEY);
 		if (categoriaSeleccionada != null) {
 			// configure background.
 			View view = findViewById(R.id.menu_bar);
@@ -65,7 +69,7 @@ public class NegocioMapActivity extends BaseActivity implements LocationListener
 			// configure with current selected category
 			configureMenuBar(categoriaSeleccionada, true, null);
 		}
-
+		Log.d(this.getClass().getName(),"Negocio: "+negocioSeleccionado);
 		// location initialization
 		if (isLocationManagerConfigured()) {
 			findLocation();

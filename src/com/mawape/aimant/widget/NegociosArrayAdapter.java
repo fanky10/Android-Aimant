@@ -30,7 +30,8 @@ public class NegociosArrayAdapter extends ArrayAdapter<Negocio> {
 	private Filter filter;
 	private Categoria currentCategoria;
 
-	public NegociosArrayAdapter(Context context, List<Negocio> values,Categoria currentCategoria) {
+	public NegociosArrayAdapter(Context context, List<Negocio> values,
+			Categoria currentCategoria) {
 		super(context, R.layout.negocios_row, values);
 		this.filteredValues = values;
 		this.currentCategoria = currentCategoria;
@@ -45,8 +46,11 @@ public class NegociosArrayAdapter extends ArrayAdapter<Negocio> {
 		View rowView = inflater.inflate(R.layout.negocios_row, parent, false);
 		TextView textView = (TextView) rowView.findViewById(R.id.negRowNombre);
 		textView.setText(negocioSeleccionado.getNombre());
+		TextView txtDir = (TextView) rowView.findViewById(R.id.negRowDir);
+		txtDir.setText(negocioSeleccionado.getDireccion());
 
-		if (negocioSeleccionado.getImgPath() != null) {
+		if (negocioSeleccionado.getImgPath() != null
+				&& negocioSeleccionado.getImgPath().length() > 0) {
 			String imgPath = negocioSeleccionado.getImgPath();
 			String mDrawableName = imgPath.substring(0,
 					imgPath.lastIndexOf("."));// no-extension
@@ -65,7 +69,7 @@ public class NegociosArrayAdapter extends ArrayAdapter<Negocio> {
 
 			@Override
 			public void onClick(View v) {
-				makePhoneCall(negocioSeleccionado.getTelefono());
+				makePhoneCall(negocioSeleccionado.getTelefonoPrimario());
 			}
 		});
 
@@ -74,7 +78,7 @@ public class NegociosArrayAdapter extends ArrayAdapter<Negocio> {
 
 			@Override
 			public void onClick(View v) {
-				showMap();
+				showMap(negocioSeleccionado);
 			}
 		});
 
@@ -92,10 +96,12 @@ public class NegociosArrayAdapter extends ArrayAdapter<Negocio> {
 		getContext().startActivity(intent);
 	}
 
-	private void showMap() {
+	private void showMap(Negocio negocioSeleccionado) {
 		Bundle bundle = new Bundle();
 		bundle.putSerializable(AppConstants.CATEGORIA_SELECCIONADA_KEY,
 				currentCategoria);
+		bundle.putSerializable(AppConstants.NEGOCIO_SELECCIONADO_KEY,
+				negocioSeleccionado);
 		Intent intent = new Intent(getContext(), NegocioMapActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		intent.putExtras(bundle);
