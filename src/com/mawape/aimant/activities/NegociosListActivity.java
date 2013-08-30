@@ -38,10 +38,11 @@ public class NegociosListActivity extends BaseActivity {
 
 		final List<Negocio> opcionV = getInforme(categoriaSeleccionada
 				.getNombre());
-		ArrayAdapter<Negocio> adapter = new NegociosArrayAdapter(
+		NegociosArrayAdapter adapter = new NegociosArrayAdapter(
 				getApplicationContext(), opcionV, categoriaSeleccionada);
 		ListView lstOpciones = (ListView) findViewById(R.id.lstMenu);
 		lstOpciones.setAdapter(adapter);
+		lstOpciones.setOnItemClickListener(adapter);	
 
 		// configure with current selected category
 		configureMenuBar(categoriaSeleccionada, true, adapter);

@@ -11,8 +11,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,7 +24,8 @@ import com.mawape.aimant.constants.AppConstants;
 import com.mawape.aimant.entities.Categoria;
 import com.mawape.aimant.entities.Negocio;
 
-public class NegociosArrayAdapter extends ArrayAdapter<Negocio> {
+public class NegociosArrayAdapter extends ArrayAdapter<Negocio> implements
+		AdapterView.OnItemClickListener, Filterable {
 
 	private final Object mLock = new Object();
 	private List<Negocio> filteredValues;
@@ -160,6 +163,13 @@ public class NegociosArrayAdapter extends ArrayAdapter<Negocio> {
 
 		}
 
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View itemClicked,
+			int position, long id) {
+		final Negocio negocioSeleccionado = getItem(position);
+		showMap(negocioSeleccionado);
 	}
 
 }
