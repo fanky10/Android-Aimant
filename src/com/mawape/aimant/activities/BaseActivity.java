@@ -132,6 +132,7 @@ public abstract class BaseActivity extends Activity {
 	
 	protected void makePhoneCall(String phoneNumber) {
 		Intent intent = new Intent(Intent.ACTION_CALL);
+		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		intent.setData(Uri.parse("tel:" + phoneNumber));
 		getApplicationContext().startActivity(intent);
 	}
