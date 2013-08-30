@@ -5,12 +5,24 @@
     android:background="@color/info_background"
     android:orientation="vertical" >
 
+    <RelativeLayout
+        android:id="@+id/menu_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:focusable="true"
+        android:focusableInTouchMode="true" >
+
+        <include layout="@layout/common_menubar" />
+    </RelativeLayout>
+
     <fragment
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.MapFragment"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_above="@+id/detailTopPhoneLayout"
+        android:layout_below="@+id/menu_bar"
         android:layout_centerInParent="true" />
 
     <RelativeLayout
@@ -18,9 +30,9 @@
         android:layout_width="match_parent"
         android:layout_height="44dp"
         android:layout_above="@+id/detailBotPhoneLayout"
-        android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/informacion_text_rounded"
         android:visibility="gone" >
 
@@ -63,7 +75,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/informacion_text_rounded">
+        android:background="@drawable/informacion_text_rounded" >
 
         <TextView
             android:id="@+id/detailSecondaryPhoneText"

@@ -5,7 +5,6 @@ import java.util.List;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -25,7 +24,7 @@ public class NegociosListActivity extends BaseActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.negocios_list);
-		init();		
+		init();
 	}
 
 	private void init() {
@@ -40,7 +39,7 @@ public class NegociosListActivity extends BaseActivity {
 		final List<Negocio> opcionV = getInforme(categoriaSeleccionada
 				.getNombre());
 		ArrayAdapter<Negocio> adapter = new NegociosArrayAdapter(
-				getApplicationContext(), opcionV);
+				getApplicationContext(), opcionV, categoriaSeleccionada);
 		ListView lstOpciones = (ListView) findViewById(R.id.lstMenu);
 		lstOpciones.setAdapter(adapter);
 

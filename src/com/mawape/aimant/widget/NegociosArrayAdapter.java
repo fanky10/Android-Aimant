@@ -6,18 +6,20 @@ import java.util.List;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mawape.aimant.R;
 import com.mawape.aimant.activities.NegocioMapActivity;
+import com.mawape.aimant.constants.AppConstants;
+import com.mawape.aimant.entities.Categoria;
 import com.mawape.aimant.entities.Negocio;
 
 public class NegociosArrayAdapter extends ArrayAdapter<Negocio> {
@@ -26,10 +28,12 @@ public class NegociosArrayAdapter extends ArrayAdapter<Negocio> {
 	private List<Negocio> filteredValues;
 	private List<Negocio> originalValues;
 	private Filter filter;
+	private Categoria currentCategoria;
 
-	public NegociosArrayAdapter(Context context, List<Negocio> values) {
+	public NegociosArrayAdapter(Context context, List<Negocio> values,Categoria currentCategoria) {
 		super(context, R.layout.negocios_row, values);
 		this.filteredValues = values;
+		this.currentCategoria = currentCategoria;
 	}
 
 	@Override
@@ -89,8 +93,12 @@ public class NegociosArrayAdapter extends ArrayAdapter<Negocio> {
 	}
 
 	private void showMap() {
+		Bundle bundle = new Bundle();
+		bundle.putSerializable(AppConstants.CATEGORIA_SELECCIONADA_KEY,
+				currentCategoria);
 		Intent intent = new Intent(getContext(), NegocioMapActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		intent.putExtras(bundle);
 		getContext().startActivity(intent);
 	}
 

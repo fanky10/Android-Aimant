@@ -2,8 +2,6 @@ package com.mawape.aimant.activities;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 import android.app.Activity;
@@ -11,6 +9,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Criteria;
 import android.location.Geocoder;
@@ -20,19 +19,19 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
-import android.widget.Toast;
+import android.view.View;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.GoogleMap.OnInfoWindowClickListener;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.mawape.aimant.R;
+import com.mawape.aimant.constants.AppConstants;
+import com.mawape.aimant.entities.Categoria;
 
-public class NegocioMapActivity extends Activity implements LocationListener {
+public class NegocioMapActivity extends BaseActivity implements LocationListener {
 	private GoogleMap googleMap;
 	private LocationManager locationManager;
 	private String provider;
@@ -53,6 +52,19 @@ public class NegocioMapActivity extends Activity implements LocationListener {
 			throw new IllegalArgumentException("googleMap not found!");
 		}
 		googleMap.setMyLocationEnabled(true);
+
+		// categoria visual init.
+		Bundle bundle = getIntent().getExtras();
+		Categoria categoriaSeleccionada = (Categoria) bundle
+				.get(AppConstants.CATEGORIA_SELECCIONADA_KEY);
+		if (categoriaSeleccionada != null) {
+			// configure background.
+			View view = findViewById(R.id.menu_bar);
+			view.setBackgroundColor(Color.parseColor("#"
+					+ categoriaSeleccionada.getColor()));
+			// configure with current selected category
+			configureMenuBar(categoriaSeleccionada, true, null);
+		}
 
 		// location initialization
 		if (isLocationManagerConfigured()) {
@@ -117,9 +129,8 @@ public class NegocioMapActivity extends Activity implements LocationListener {
 				location.getLongitude());
 		CameraUpdate center = CameraUpdateFactory.newLatLng(data);
 		CameraUpdate zoom = CameraUpdateFactory.zoomTo(15);
-		googleMap.addMarker(new MarkerOptions()
-        .position(data)
-        .title("Un nombre"));
+		googleMap.addMarker(new MarkerOptions().position(data).title(
+				"Un nombre"));
 		googleMap.moveCamera(center);
 		googleMap.animateCamera(zoom);
 	}

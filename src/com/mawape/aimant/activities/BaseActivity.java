@@ -31,6 +31,7 @@ public abstract class BaseActivity extends Activity {
 
 	protected void configureMenuBar(Categoria categoria, boolean canGoBack,
 			final ArrayAdapter adapter) {
+		// goBack - title - information section 
 		if (categoria != null) {// configure color and title
 			TextView txtTitle = (TextView) findViewById(R.id.commonMenuTitle);
 			txtTitle.setText(categoria.getNombre());
@@ -49,7 +50,7 @@ public abstract class BaseActivity extends Activity {
 				}
 			});
 		}
-		
+
 		// handling menu info click
 		ImageView infoImg = (ImageView) findViewById(R.id.commonMenuInformation);
 		infoImg.setOnClickListener(new OnClickListener() {
@@ -59,55 +60,61 @@ public abstract class BaseActivity extends Activity {
 				showSplashAimant();
 			}
 		});
-
+		
+		// search section
+		// it may not contain a search field
 		final EditText searchField = (EditText) findViewById(R.id.commonMenuSearchField);
-		searchField.setOnFocusChangeListener(new OnFocusChangeListener() {
-			@Override
-			public void onFocusChange(View v, boolean hasFocus) {
-				String currentText = searchField.getText().toString();
-				if (hasFocus) {
-					searchField.setText("");
-				} else if (!hasFocus
-						&& (currentText == null || currentText.length() == 0)) {
-					searchField.setText(R.string.search_msg);
-				}
-			}
-		});
-
-		if(adapter!=null){
-			//configure filtering
-			searchField.addTextChangedListener(new TextWatcher() {
-				
+		if (searchField != null) {
+			searchField.setOnFocusChangeListener(new OnFocusChangeListener() {
 				@Override
-				public void onTextChanged(CharSequence s, int start, int before, int count)
-				{
-				    adapter.getFilter().filter(s); //Filter from my adapter
-				}
-				
-				@Override
-				public void beforeTextChanged(CharSequence s, int start, int count,
-						int after) {
-					// TODO Auto-generated method stub
-					
-				}
-				
-				@Override
-				public void afterTextChanged(Editable s) {
-					// TODO Auto-generated method stub
-					
+				public void onFocusChange(View v, boolean hasFocus) {
+					String currentText = searchField.getText().toString();
+					if (hasFocus) {
+						searchField.setText("");
+					} else if (!hasFocus
+							&& (currentText == null || currentText.length() == 0)) {
+						searchField.setText(R.string.search_msg);
+					}
 				}
 			});
 		}
 
 		// handling menu info click
 		ImageView searchImg = (ImageView) findViewById(R.id.commonMenuSearchIcon);
-		searchImg.setOnClickListener(new OnClickListener() {
+		if (searchImg != null) {
+			searchImg.setOnClickListener(new OnClickListener() {
 
-			@Override
-			public void onClick(View v) {
-				searchField.requestFocus();
-			}
-		});
+				@Override
+				public void onClick(View v) {
+					searchField.requestFocus();
+				}
+			});
+		}
+		// finally it may not be an adapter with search capability
+		if (adapter != null) {
+			// configure filtering
+			searchField.addTextChangedListener(new TextWatcher() {
+
+				@Override
+				public void onTextChanged(CharSequence s, int start,
+						int before, int count) {
+					adapter.getFilter().filter(s); // Filter from my adapter
+				}
+
+				@Override
+				public void beforeTextChanged(CharSequence s, int start,
+						int count, int after) {
+					// TODO Auto-generated method stub
+
+				}
+
+				@Override
+				public void afterTextChanged(Editable s) {
+					// TODO Auto-generated method stub
+
+				}
+			});
+		}
 
 	}
 
