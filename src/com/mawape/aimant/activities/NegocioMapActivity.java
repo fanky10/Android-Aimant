@@ -64,7 +64,7 @@ public class NegocioMapActivity extends BaseActivity implements
 				.get(AppConstants.CATEGORIA_SELECCIONADA_KEY);		
 		if (categoriaSeleccionada != null) {
 			// configure background.
-			View view = findViewById(R.id.menu_bar);
+			View view = findViewById(R.id.top_menu_bar);
 			view.setBackgroundColor(Color.parseColor("#"
 					+ categoriaSeleccionada.getColor()));
 			// configure with current selected category

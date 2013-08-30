@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="160dp"
+    android:layout_height="wrap_content"
     android:orientation="horizontal" >
 
     <RelativeLayout
@@ -11,6 +11,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/negocios_row_top_rounded" >
 
         <ImageView
@@ -26,8 +27,8 @@
         android:id="@+id/fadeFrame"
         android:layout_width="match_parent"
         android:layout_height="44dp"
-        android:layout_alignParentBottom="true"
         android:layout_below="@id/negRowTopLayout"
+        android:layout_marginBottom="5dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:background="@drawable/negocios_row_bot_rounded"
@@ -39,6 +40,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toLeftOf="@+id/negRowBtnCall"
             android:text="Sushi Home"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@android:color/white"
@@ -50,6 +53,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_below="@id/negRowNombre"
+            android:layout_marginLeft="10dp"
+            android:layout_toLeftOf="@+id/negRowBtnCall"
             android:text="Moreno 75 bis"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="12sp" />
@@ -59,7 +64,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:layout_marginBottom="6dp"
             android:layout_marginRight="6dp"
+            android:layout_marginTop="6dp"
             android:layout_toLeftOf="@+id/negRowBtnMap"
             android:src="@drawable/icon_phone_small_rounded" />
 
@@ -69,6 +76,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:layout_marginBottom="6dp"
+            android:layout_marginRight="6dp"
+            android:layout_marginTop="6dp"
             android:src="@drawable/btn_go_rounded" />
     </RelativeLayout>
 

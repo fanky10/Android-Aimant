@@ -5,22 +5,15 @@
     android:background="@color/info_background"
     android:orientation="vertical" >
 
-    <RelativeLayout
-        android:id="@+id/menu_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:focusable="true"
-        android:focusableInTouchMode="true" >
-
-        <include layout="@layout/common_menubar" />
-    </RelativeLayout>
+    <include
+        android:id="@+id/top_menu_bar"
+        layout="@layout/menu_bar" />
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/detailTopPhoneLayout"
-        android:layout_below="@+id/menu_bar"
+        android:layout_below="@+id/top_menu_bar"
         android:layout_centerInParent="true" >
 
         <fragment

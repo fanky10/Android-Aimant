@@ -37,7 +37,7 @@ public abstract class BaseActivity extends Activity {
 			TextView txtTitle = (TextView) findViewById(R.id.commonMenuTitle);
 			txtTitle.setText(categoria.getNombre());
 
-			View view = findViewById(R.id.menu_bar);
+			View view = findViewById(R.id.top_menu_bar);
 			view.setBackgroundColor(Color.parseColor("#" + categoria.getColor()));
 		}
 		if (canGoBack) {
