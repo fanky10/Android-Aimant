@@ -29,9 +29,15 @@ public class NegociosJsonParser extends AbstractJsonParser<Negocio> {
 	protected Negocio createObject(JSONObject jsonItem) throws JSONException {
 		String nombre = getString(jsonItem, "nombre");
 		String direccion = getString(jsonItem, "direccion");
-		String imgPath = getString(jsonItem, "imgPath");
+		String imgPath = getString(jsonItem, "image");
 		String categoria = getString(jsonItem, "categoria");
-		return new Negocio(nombre, direccion, imgPath, categoria);
+		String telOne = getString(jsonItem, "telefono1");
+		String telTwo = getString(jsonItem, "telefono2");
+		String horario = getString(jsonItem, "horario");
+		String web = getString(jsonItem, "web");
+		String facebook = getString(jsonItem, "facebook");
+		String email = getString(jsonItem, "email");
+		return new Negocio(nombre, direccion, imgPath, categoria,telOne,telTwo,horario,web,facebook,email);
 	}
 
 }
