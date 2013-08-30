@@ -13,8 +13,8 @@
 
     <!-- splash configuration -->
     <integer name="default_splash_display_length">5000</integer>
-    <integer name="mawape_display_length">1000</integer>
-    <integer name="aimant_display_length">2000</integer>
+    <integer name="mawape_display_length">500</integer>
+    <integer name="aimant_display_length">1000</integer>
 
     <string name="mawape_msg">www.mawape.com</string>
     <string name="aimant_msg">Keep Calm and Take the Phone</string>
