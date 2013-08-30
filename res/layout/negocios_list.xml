@@ -12,6 +12,7 @@
         android:focusableInTouchMode="true" >
 
         <include layout="@layout/common_menubar" />
+
         <include layout="@layout/common_search" />
     </RelativeLayout>
 
@@ -25,6 +26,7 @@
         android:layout_marginTop="10dp"
         android:divider="@android:color/transparent"
         android:dividerHeight="10dp"
+        android:listSelector="@android:color/transparent"
         android:orientation="vertical" >
     </ListView>
 
