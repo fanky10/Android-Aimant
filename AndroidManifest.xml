@@ -49,7 +49,6 @@
         <!-- activities list -->
         <!-- second splash activity -->
         <activity android:name="com.mawape.aimant.activities.SplashAimantActivity" />
-        <activity android:name="com.mawape.aimant.activities.MenuActivity" />
         <activity android:name="com.mawape.aimant.activities.NegociosListActivity" />
         <activity android:name="com.mawape.aimant.activities.CategoriasAcivity" />
         <activity android:name="com.mawape.aimant.activities.NegocioMapActivity" />

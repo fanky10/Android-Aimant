@@ -7,7 +7,7 @@
 
     <include
         android:id="@+id/top_menu_bar"
-        layout="@layout/menu_bar" />
+        layout="@layout/menu_title_layout" />
 
     <FrameLayout
         android:layout_width="match_parent"
