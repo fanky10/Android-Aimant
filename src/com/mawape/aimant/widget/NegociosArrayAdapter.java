@@ -5,6 +5,9 @@ import java.util.List;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,6 +19,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
+import android.widget.ImageView.ScaleType;
 import android.widget.TextView;
 
 import com.mawape.aimant.R;
@@ -23,6 +27,7 @@ import com.mawape.aimant.activities.NegocioMapActivity;
 import com.mawape.aimant.constants.AppConstants;
 import com.mawape.aimant.entities.Categoria;
 import com.mawape.aimant.entities.Negocio;
+import com.mawape.aimant.utilities.ImageHelper;
 
 public class NegociosArrayAdapter extends ArrayAdapter<Negocio> implements
 		AdapterView.OnItemClickListener, Filterable {
@@ -60,9 +65,14 @@ public class NegociosArrayAdapter extends ArrayAdapter<Negocio> implements
 			Integer imgResourceId = getContext().getResources().getIdentifier(
 					mDrawableName, "drawable", getContext().getPackageName());
 			if (imgResourceId > 0) {
+				Bitmap imgBitmap = BitmapFactory.decodeResource(getContext().getResources(), imgResourceId);
+				float pixelRounded = 30*getContext().getResources().getDisplayMetrics().density;
+				Bitmap imgRounded = ImageHelper.getRoundedTopCornerBitmap(imgBitmap,pixelRounded,Color.parseColor("#"+currentCategoria.getColor()));
 				ImageView imgView = (ImageView) rowView
 						.findViewById(R.id.negRowImg);
-				imgView.setImageResource(imgResourceId);
+				imgView.setImageBitmap(imgRounded);
+				imgView.setScaleType(ScaleType.FIT_XY);
+				
 			}
 		}
 
