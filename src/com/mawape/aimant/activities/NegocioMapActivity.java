@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -20,6 +19,10 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -58,9 +61,7 @@ public class NegocioMapActivity extends BaseActivity implements
 		// categoria visual init.
 		Bundle bundle = getIntent().getExtras();
 		Categoria categoriaSeleccionada = (Categoria) bundle
-				.get(AppConstants.CATEGORIA_SELECCIONADA_KEY);
-		Negocio negocioSeleccionado = (Negocio) bundle
-				.get(AppConstants.NEGOCIO_SELECCIONADO_KEY);
+				.get(AppConstants.CATEGORIA_SELECCIONADA_KEY);		
 		if (categoriaSeleccionada != null) {
 			// configure background.
 			View view = findViewById(R.id.menu_bar);
@@ -69,7 +70,12 @@ public class NegocioMapActivity extends BaseActivity implements
 			// configure with current selected category
 			configureMenuBar(categoriaSeleccionada, true, null);
 		}
-		Log.d(this.getClass().getName(),"Negocio: "+negocioSeleccionado);
+		
+		//negocio
+		Negocio negocioSeleccionado = (Negocio) bundle
+				.get(AppConstants.NEGOCIO_SELECCIONADO_KEY);
+		initNegocio(negocioSeleccionado);
+		
 		// location initialization
 		if (isLocationManagerConfigured()) {
 			findLocation();
@@ -77,6 +83,43 @@ public class NegocioMapActivity extends BaseActivity implements
 		}
 
 	}
+
+	private void initNegocio(Negocio negocioSeleccionado) {
+		
+		final String primPhone = negocioSeleccionado.getTelefonoPrimario();
+		final String secPhone = negocioSeleccionado.getTelefonoSecundario();
+		TextView txtPrimPhone = (TextView) findViewById(R.id.detailSecondaryPhoneText);
+		txtPrimPhone.setText(primPhone);
+		
+		ImageView icPrimPhone = (ImageView) findViewById(R.id.detailSecondaryPhoneIcon);
+		icPrimPhone.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				makePhoneCall(primPhone);
+			}
+		});
+		
+		//if secPhone actually is there
+		if(secPhone!=null && secPhone.length()>0){
+			RelativeLayout layout = (RelativeLayout) findViewById(R.id.detailTopPhoneLayout);
+			layout.setVisibility(View.VISIBLE);
+			TextView txtSecPhone = (TextView) findViewById(R.id.detailPrimaryPhoneText);
+			txtSecPhone.setText(secPhone);
+			
+			ImageView icSecPhone = (ImageView) findViewById(R.id.detailPrimaryPhoneIcon);
+			icSecPhone.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					makePhoneCall(secPhone);
+				}
+			});
+		}
+		
+		
+	}
+	
 
 	private boolean isLocationManagerConfigured() {
 		boolean isGpsEnabled = false, isNetworkEnabled = false;

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -126,6 +127,12 @@ public abstract class BaseActivity extends Activity {
 		Intent intent = new Intent(getApplicationContext(),
 				InformationActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		getApplicationContext().startActivity(intent);
+	}
+	
+	protected void makePhoneCall(String phoneNumber) {
+		Intent intent = new Intent(Intent.ACTION_CALL);
+		intent.setData(Uri.parse("tel:" + phoneNumber));
 		getApplicationContext().startActivity(intent);
 	}
 
