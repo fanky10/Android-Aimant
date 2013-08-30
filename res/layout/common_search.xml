@@ -1,0 +1,34 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/commonMenuBottomLayout"
+    android:layout_width="match_parent"
+    android:layout_height="44dp"
+    android:layout_alignParentBottom="true"
+    android:layout_below="@+id/commonMenuTopLayout"
+    android:layout_marginBottom="14dp"
+    android:background="@color/fade_fifteen" >
+
+    <ImageView
+        android:id="@+id/commonMenuSearchIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/icon_search"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/commonMenuSearchField"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="12dp"
+        android:layout_toRightOf="@id/commonMenuSearchIcon"
+        android:background="@color/fade"
+        android:gravity="left"
+        android:singleLine="true"
+        android:text="@string/search_msg"
+        android:textColor="@color/search_text"
+        android:textSize="13sp" />
+
+</RelativeLayout>
