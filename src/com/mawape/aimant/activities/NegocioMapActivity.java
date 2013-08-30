@@ -74,12 +74,16 @@ public class NegocioMapActivity extends BaseActivity implements
 		//negocio
 		Negocio negocioSeleccionado = (Negocio) bundle
 				.get(AppConstants.NEGOCIO_SELECCIONADO_KEY);
+		StringBuilder direccion = new StringBuilder();
+		direccion.append(negocioSeleccionado.getDireccion());
+		direccion.append(getString(R.string.default_localidad));
+		
 		initNegocio(negocioSeleccionado);
 		
 		// location initialization
 		if (isLocationManagerConfigured()) {
-			findLocation();
-			centerLocation();
+			findLocation(direccion.toString());
+			centerLocation(negocioSeleccionado.getNombre());
 		}
 
 	}
@@ -152,16 +156,14 @@ public class NegocioMapActivity extends BaseActivity implements
 		return true;
 	}
 
-	private void findLocation() {
+	private void findLocation(String direccion) {
 		try {
 			Geocoder geocoder = new Geocoder(getApplicationContext());
 			List<Address> addresses = new ArrayList<Address>();
-			addresses = geocoder.getFromLocationName(
-					"Angelome 2232 Funes Santa Fe Argentina", 1);
+			addresses = geocoder.getFromLocationName(direccion, 1);
 			if (addresses.size() > 0) {
 				double latitude = addresses.get(0).getLatitude();
 				double longitude = addresses.get(0).getLongitude();
-				LatLng latLong = new LatLng(0, 0);
 				location.setLatitude(latitude);
 				location.setLongitude(longitude);
 			}
@@ -171,13 +173,12 @@ public class NegocioMapActivity extends BaseActivity implements
 		}
 	}
 
-	private void centerLocation() {
+	private void centerLocation(String title) {
 		LatLng data = new LatLng(location.getLatitude(),
 				location.getLongitude());
 		CameraUpdate center = CameraUpdateFactory.newLatLng(data);
 		CameraUpdate zoom = CameraUpdateFactory.zoomTo(15);
-		googleMap.addMarker(new MarkerOptions().position(data).title(
-				"Un nombre"));
+		googleMap.addMarker(new MarkerOptions().position(data).title(title));
 		googleMap.moveCamera(center);
 		googleMap.animateCamera(zoom);
 	}

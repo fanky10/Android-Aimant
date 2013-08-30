@@ -8,6 +8,8 @@
     <string name="title_activity_categorias_acivity">CategoriasAcivity</string>
     <string name="aimant_phone">(341) 153-152-126</string>
     <string name="aimant_email">laguiaimant@gmail.com</string>
+    <string name="default_localidad">Rosario Santa Fe Argentina</string>
+    
 
     <!-- splash configuration -->
     <integer name="default_splash_display_length">5000</integer>
