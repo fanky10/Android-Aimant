@@ -32,14 +32,19 @@ public abstract class BaseActivity extends Activity {
 
 	protected void configureMenuBar(Categoria categoria, boolean canGoBack,
 			final ArrayAdapter adapter) {
-		// goBack - title - information section 
-		if (categoria != null) {// configure color and title
-			TextView txtTitle = (TextView) findViewById(R.id.commonMenuTitle);
-			txtTitle.setText(categoria.getNombre());
+		this.configureMenuBar(categoria.getNombre(),
+				Color.parseColor("#" + categoria.getColor()), canGoBack,
+				adapter);
+	}
 
-			View view = findViewById(R.id.top_menu_bar);
-			view.setBackgroundColor(Color.parseColor("#" + categoria.getColor()));
-		}
+	protected void configureMenuBar(String title, int color, boolean canGoBack,
+			final ArrayAdapter adapter) {
+		// goBack - title - information section
+		TextView txtTitle = (TextView) findViewById(R.id.commonMenuTitle);
+		txtTitle.setText(title);
+		View view = findViewById(R.id.top_menu_bar);
+		view.setBackgroundColor(color);
+
 		if (canGoBack) {
 			ImageView imgGoBack = (ImageView) findViewById(R.id.commonMenuBack);
 			imgGoBack.setVisibility(View.VISIBLE);
@@ -62,6 +67,11 @@ public abstract class BaseActivity extends Activity {
 			}
 		});
 		
+		configureMenuBar(adapter);
+
+	}
+
+	protected void configureMenuBar(final ArrayAdapter adapter) {
 		// search section
 		// it may not contain a search field
 		final EditText searchField = (EditText) findViewById(R.id.commonMenuSearchField);
@@ -116,7 +126,6 @@ public abstract class BaseActivity extends Activity {
 				}
 			});
 		}
-
 	}
 
 	protected void configureMenuBar() {
@@ -129,7 +138,7 @@ public abstract class BaseActivity extends Activity {
 		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		getApplicationContext().startActivity(intent);
 	}
-	
+
 	protected void makePhoneCall(String phoneNumber) {
 		Intent intent = new Intent(Intent.ACTION_CALL);
 		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

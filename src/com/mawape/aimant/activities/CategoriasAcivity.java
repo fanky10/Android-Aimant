@@ -26,7 +26,7 @@ public class CategoriasAcivity extends BaseActivity {
 		ListView lstOpciones = (ListView) findViewById(R.id.catListMenu);
 		lstOpciones.setAdapter(adaptador);
 		lstOpciones.setOnItemClickListener(adaptador);	
-		configureMenuBar(null,false,adaptador);
+		configureMenuBar(adaptador);
 	}
 
 	private List<Categoria> getCategorias() {
