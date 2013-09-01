@@ -7,7 +7,6 @@
         <attr name="animationDuration" format="integer" />
         <!-- Defines panel position on the screen. -->
         <attr name="position">
-
             <!-- Panel placed at top of the screen. -->
             <enum name="top" value="0" />
             <!-- Panel placed at bottom of the screen. -->
@@ -29,6 +28,8 @@
         <attr name="openedHandle" format="reference|color" />
         <!-- Defines closed handle (drawable/color). -->
         <attr name="closedHandle" format="reference|color" />
+        <!-- img for the handler -->
+        <attr name="iconHandler" format="reference" />
     </declare-styleable>
 
 </resources>

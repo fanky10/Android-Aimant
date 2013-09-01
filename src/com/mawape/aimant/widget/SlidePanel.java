@@ -18,6 +18,7 @@ import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.TranslateAnimation;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.mawape.aimant.R;
@@ -47,7 +48,9 @@ public class SlidePanel extends LinearLayout {
 	private boolean mLinearFlying;
 	private int mHandleId;
 	private int mContentId;
+	private int mIconHandlerId;
 	private View mHandle;
+	private ImageView mIconHandler;
 	private View mContent;
 	private Drawable mOpenedHandle;
 	private Drawable mClosedHandle;
@@ -80,24 +83,15 @@ public class SlidePanel extends LinearLayout {
 		super(context, attrs);
 		TypedArray a = context.obtainStyledAttributes(attrs,
 				R.styleable.SlidePanel);
-		mDuration = a.getInteger(R.styleable.SlidePanel_animationDuration, 750); // duration
-																					// defaults
-																					// to
-																					// 750
-																					// ms
-		mPosition = a.getInteger(R.styleable.SlidePanel_position, BOTTOM); // position
-																			// defaults
-																			// to
-																			// BOTTOM
+		// duration default: 750ms
+		mDuration = a.getInteger(R.styleable.SlidePanel_animationDuration, 750);
+		// position default bottom
+		mPosition = a.getInteger(R.styleable.SlidePanel_position, BOTTOM);
+		// linearFlying: to false
 		mLinearFlying = a
-				.getBoolean(R.styleable.SlidePanel_linearFlying, false); // linearFlying
-																			// defaults
-																			// to
-																			// false
-		mWeight = a.getFraction(R.styleable.SlidePanel_weight, 0, 1, 0.0f); // weight
-																			// defaults
-																			// to
-																			// 0.0
+				.getBoolean(R.styleable.SlidePanel_linearFlying, false);
+		// weight to 0.0
+		mWeight = a.getFraction(R.styleable.SlidePanel_weight, 0, 1, 0.0f);
 		if (mWeight < 0 || mWeight > 1) {
 			mWeight = 0.0f;
 			Log.w(TAG, a.getPositionDescription()
@@ -119,6 +113,14 @@ public class SlidePanel extends LinearLayout {
 					a.getPositionDescription()
 							+ ": The content attribute is required and must refer to a valid child.");
 		}
+
+		mIconHandlerId = a.getResourceId(R.styleable.SlidePanel_iconHandler, 0);
+		if (mIconHandlerId == 0) {
+			e = new IllegalArgumentException(
+					a.getPositionDescription()
+							+ ": The icon handlerId is required and must refer to a valid child.");
+		}
+
 		a.recycle();
 
 		if (e != null) {
@@ -237,6 +239,14 @@ public class SlidePanel extends LinearLayout {
 							+ name + "'");
 		}
 
+		mIconHandler = (ImageView) findViewById(mIconHandlerId);
+		if (mIconHandler == null) {
+			String name = getResources().getResourceEntryName(mIconHandlerId);
+			throw new RuntimeException(
+					"Your Panel must have a child View whose id attribute is 'R.id."
+							+ name + "'");
+		}
+
 		// reposition children
 		removeView(mHandle);
 		removeView(mContent);
@@ -249,19 +259,19 @@ public class SlidePanel extends LinearLayout {
 		}
 
 		if (mClosedHandle != null) {
-			mHandle.setBackgroundDrawable(mClosedHandle);
+			mIconHandler.setImageDrawable(mClosedHandle);
 		}
 		mContent.setClickable(true);
 		mContent.setVisibility(GONE);
-		if (mWeight > 0) {
-			ViewGroup.LayoutParams params = mContent.getLayoutParams();
-			if (mOrientation == VERTICAL) {
-				params.height = ViewGroup.LayoutParams.FILL_PARENT;
-			} else {
-				params.width = ViewGroup.LayoutParams.FILL_PARENT;
-			}
-			mContent.setLayoutParams(params);
-		}
+//		if (mWeight > 0) {
+//			ViewGroup.LayoutParams params = mContent.getLayoutParams();
+//			if (mOrientation == VERTICAL) {
+//				params.height = ViewGroup.LayoutParams.MATCH_PARENT;
+//			} else {
+//				params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+//			}
+//			mContent.setLayoutParams(params);
+//		}
 	}
 
 	@Override
@@ -301,8 +311,6 @@ public class SlidePanel extends LinearLayout {
 
 	@Override
 	protected void dispatchDraw(Canvas canvas) {
-		// String name = getResources().getResourceEntryName(getId());
-		// Log.d(TAG, name + " ispatchDraw " + mState);
 		// this is why 'mState' was added:
 		// avoid flicker before animation start
 		if (mState == State.ABOUT_TO_ANIMATE && !mIsShrinking) {
@@ -513,10 +521,11 @@ public class SlidePanel extends LinearLayout {
 	};
 
 	private void postProcess() {
+
 		if (mIsShrinking && mClosedHandle != null) {
-			mHandle.setBackgroundDrawable(mClosedHandle);
+			mIconHandler.setImageDrawable(mClosedHandle);
 		} else if (!mIsShrinking && mOpenedHandle != null) {
-			mHandle.setBackgroundDrawable(mOpenedHandle);
+			mIconHandler.setImageDrawable(mOpenedHandle);
 		}
 		// invoke listener if any
 		if (panelListener != null) {

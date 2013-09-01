@@ -122,6 +122,19 @@ public class NegocioMapActivity extends BaseActivity implements
 		setWebValue(negocioSeleccionado.getWeb());
 		setFacebookValue(negocioSeleccionado.getFacebook());
 		setEmailValue(negocioSeleccionado.getEmail());
+		
+//		RelativeLayout relativeCollapse = (RelativeLayout) findViewById(R.id.detailsCollapseExpandContainer);
+//		relativeCollapse.setOnClickListener(new OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View arg0) {
+//				// TODO Auto-generated method stub
+//				View container = findViewById(R.id.panelContent);
+//				if (container != null) {
+//					container.setVisibility(View.GONE);
+//				}
+//			}
+//		});
 
 	}
 

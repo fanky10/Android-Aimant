@@ -14,168 +14,6 @@
         android:layout_alignParentTop="true"
         android:background="@color/fade_fifteen" />
 
-    <LinearLayout
-        android:id="@+id/panelContent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
-
-        <RelativeLayout
-            android:id="@+id/detailHorarioLayout"
-            android:layout_width="match_parent"
-            android:layout_height="36dp" >
-
-            <ImageView
-                android:id="@+id/detailHorarioIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="36dp"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginBottom="12dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="12dp"
-                android:src="@drawable/icon_hours" />
-
-            <TextView
-                android:id="@+id/detailHorarioText"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_alignParentTop="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_toRightOf="@id/detailHorarioIcon"
-                android:gravity="left|center"
-                android:maxLines="2"
-                android:text="Lun - Vie: 8:00 - 12:00, 15:30 - 20:00 Sab: 8:00 - 12:00"
-                android:textSize="12sp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_alignParentBottom="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@color/slide_separator" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/detailWebLayout"
-            android:layout_width="match_parent"
-            android:layout_height="36dp" >
-
-            <ImageView
-                android:id="@+id/detailWebIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="36dp"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginBottom="12dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="12dp"
-                android:src="@drawable/icon_link" />
-
-            <TextView
-                android:id="@+id/detailWebText"
-                android:layout_width="match_parent"
-                android:layout_height="36dp"
-                android:layout_alignParentTop="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_toRightOf="@id/detailWebIcon"
-                android:gravity="left|center"
-                android:text="www.loremipsumdolorsit.com.ar"
-                android:textSize="12sp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_alignParentBottom="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@color/slide_separator" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/detailFacebookLayout"
-            android:layout_width="match_parent"
-            android:layout_height="36dp" >
-
-            <ImageView
-                android:id="@+id/detailFacebookIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="36dp"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginBottom="12dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="12dp"
-                android:src="@drawable/icon_facebook" />
-
-            <TextView
-                android:id="@+id/detailFacebookText"
-                android:layout_width="match_parent"
-                android:layout_height="36dp"
-                android:layout_alignParentTop="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_toRightOf="@id/detailFacebookIcon"
-                android:gravity="left|center"
-                android:text="www.facebook.com/lorem.ipsum"
-                android:textSize="12sp" />
-
-            <View
-                android:id="@+id/detailFacebookSeparator"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_alignParentBottom="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@color/slide_separator" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/detailEmailLayout"
-            android:layout_width="match_parent"
-            android:layout_height="36dp" >
-
-            <ImageView
-                android:id="@+id/detailEmailIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="36dp"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginBottom="12dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="12dp"
-                android:src="@drawable/icon_mail_small" />
-
-            <TextView
-                android:id="@+id/detailEmailText"
-                android:layout_width="match_parent"
-                android:layout_height="36dp"
-                android:layout_alignParentTop="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_toRightOf="@id/detailEmailIcon"
-                android:gravity="left|center"
-                android:text="lorem@ipsum.com"
-                android:textSize="12sp" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/detailsCollapseExpandContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/fade_fifteen" >
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="24dp"
-                android:layout_centerInParent="true"
-                android:src="@drawable/icon_collapse" />
-        </RelativeLayout>
-    </LinearLayout>
-    <!--
     <com.mawape.aimant.widget.SlidePanel
         android:id="@+id/topPanel"
         android:layout_width="match_parent"
@@ -184,15 +22,11 @@
         panel:animationDuration="1000"
         panel:closedHandle="@drawable/icon_collapse"
         panel:content="@+id/panelContent"
-        panel:handle="@+id/panelHandle"
+        panel:handle="@+id/detailsCollapseExpandContainer"
         panel:linearFlying="true"
         panel:openedHandle="@drawable/icon_expand"
+        panel:iconHandler="@+id/detailsCollapseExpandIcon"
         panel:position="top" >
-
-        <Button
-            android:id="@+id/panelHandle"
-            android:layout_width="match_parent"
-            android:layout_height="24dip" />
 
         <LinearLayout
             android:id="@+id/panelContent"
@@ -200,31 +34,163 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
-            <TextView
+            <RelativeLayout
+                android:id="@+id/detailHorarioLayout"
                 android:layout_width="match_parent"
-                android:layout_height="36dp"
-                android:gravity="center"
-                android:text="Horario"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:layout_height="36dp" >
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="36dp"
-                android:gravity="center"
-                android:text="www.loremipsumdolorsit.com.ar"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                <ImageView
+                    android:id="@+id/detailHorarioIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="12dp"
+                    android:src="@drawable/icon_hours" />
 
-            <TextView
+                <TextView
+                    android:id="@+id/detailHorarioText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_toRightOf="@id/detailHorarioIcon"
+                    android:gravity="left|center"
+                    android:maxLines="2"
+                    android:text="Lun - Vie: 8:00 - 12:00, 15:30 - 20:00 Sab: 8:00 - 12:00"
+                    android:textSize="12sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@color/slide_separator" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/detailWebLayout"
                 android:layout_width="match_parent"
-                android:layout_height="36dp"
-                android:gravity="center"
-                android:text="www.facebook.com/lorem.ipsum"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:layout_height="36dp" >
+
+                <ImageView
+                    android:id="@+id/detailWebIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="12dp"
+                    android:src="@drawable/icon_link" />
+
+                <TextView
+                    android:id="@+id/detailWebText"
+                    android:layout_width="match_parent"
+                    android:layout_height="36dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_toRightOf="@id/detailWebIcon"
+                    android:gravity="left|center"
+                    android:text="www.loremipsumdolorsit.com.ar"
+                    android:textSize="12sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@color/slide_separator" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/detailFacebookLayout"
+                android:layout_width="match_parent"
+                android:layout_height="36dp" >
+
+                <ImageView
+                    android:id="@+id/detailFacebookIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="12dp"
+                    android:src="@drawable/icon_facebook" />
+
+                <TextView
+                    android:id="@+id/detailFacebookText"
+                    android:layout_width="match_parent"
+                    android:layout_height="36dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_toRightOf="@id/detailFacebookIcon"
+                    android:gravity="left|center"
+                    android:text="www.facebook.com/lorem.ipsum"
+                    android:textSize="12sp" />
+
+                <View
+                    android:id="@+id/detailFacebookSeparator"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@color/slide_separator" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/detailEmailLayout"
+                android:layout_width="match_parent"
+                android:layout_height="36dp" >
+
+                <ImageView
+                    android:id="@+id/detailEmailIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="12dp"
+                    android:src="@drawable/icon_mail_small" />
+
+                <TextView
+                    android:id="@+id/detailEmailText"
+                    android:layout_width="match_parent"
+                    android:layout_height="36dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_toRightOf="@id/detailEmailIcon"
+                    android:gravity="left|center"
+                    android:text="lorem@ipsum.com"
+                    android:textSize="12sp" />
+            </RelativeLayout>
         </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/detailsCollapseExpandContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/panelContent"
+            android:background="@color/fade_fifteen" >
+
+            <ImageView
+                android:id="@+id/detailsCollapseExpandIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/icon_collapse" />
+        </RelativeLayout>
     </com.mawape.aimant.widget.SlidePanel>
-    -->
 
 </RelativeLayout>
