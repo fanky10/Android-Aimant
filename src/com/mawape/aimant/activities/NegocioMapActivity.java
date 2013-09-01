@@ -56,7 +56,6 @@ public class NegocioMapActivity extends BaseActivity implements
 		if (googleMap == null) {
 			throw new IllegalArgumentException("googleMap not found!");
 		}
-		googleMap.setMyLocationEnabled(true);
 
 		// categoria visual init.
 		Bundle bundle = getIntent().getExtras();
@@ -66,11 +65,6 @@ public class NegocioMapActivity extends BaseActivity implements
 				.get(AppConstants.NEGOCIO_SELECCIONADO_KEY);
 
 		if (categoriaSeleccionada != null) {
-			// configure background.
-			// View view = findViewById(R.id.top_menu_bar);
-			// view.setBackgroundColor(Color.parseColor("#"
-			// + categoriaSeleccionada.getColor()));
-			// configure with current selected category
 			configureMenuBar(negocioSeleccionado.getNombre(),
 					Color.parseColor("#" + categoriaSeleccionada.getColor()),
 					true, null);
