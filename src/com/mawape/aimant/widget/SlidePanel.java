@@ -128,9 +128,12 @@ public class SlidePanel extends LinearLayout {
 				: HORIZONTAL;
 		setOrientation(mOrientation);
 		mState = State.READY;
-		mGestureListener = new PanelOnGestureListener();
-		mGestureDetector = new GestureDetector(mGestureListener);
-		mGestureDetector.setIsLongpressEnabled(false);
+		if (!this.isInEditMode()) {
+			mGestureListener = new PanelOnGestureListener();
+			mGestureDetector = new GestureDetector(getContext(),mGestureListener);
+			mGestureDetector.setIsLongpressEnabled(false);
+	    }
+		
 
 		// i DON'T really know why i need this...
 		setBaselineAligned(false);
