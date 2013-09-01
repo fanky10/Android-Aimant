@@ -131,7 +131,7 @@ public class SlidePanel extends LinearLayout {
 		setOrientation(mOrientation);
 		mState = State.READY;
 		mGestureListener = new PanelOnGestureListener();
-		mGestureDetector = new GestureDetector(mGestureListener);
+		mGestureDetector = new GestureDetector(getContext(),mGestureListener);
 		mGestureDetector.setIsLongpressEnabled(false);
 
 		// i DON'T really know why i need this...
@@ -263,15 +263,15 @@ public class SlidePanel extends LinearLayout {
 		}
 		mContent.setClickable(true);
 		mContent.setVisibility(GONE);
-//		if (mWeight > 0) {
-//			ViewGroup.LayoutParams params = mContent.getLayoutParams();
-//			if (mOrientation == VERTICAL) {
-//				params.height = ViewGroup.LayoutParams.MATCH_PARENT;
-//			} else {
-//				params.width = ViewGroup.LayoutParams.MATCH_PARENT;
-//			}
-//			mContent.setLayoutParams(params);
-//		}
+		if (mWeight > 0) {
+			ViewGroup.LayoutParams params = mContent.getLayoutParams();
+			if (mOrientation == VERTICAL) {
+				params.height = ViewGroup.LayoutParams.MATCH_PARENT;
+			} else {
+				params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+			}
+			mContent.setLayoutParams(params);
+		}
 	}
 
 	@Override
@@ -313,6 +313,8 @@ public class SlidePanel extends LinearLayout {
 	protected void dispatchDraw(Canvas canvas) {
 		// this is why 'mState' was added:
 		// avoid flicker before animation start
+		
+		// que onda con este drawer?? :P
 		if (mState == State.ABOUT_TO_ANIMATE && !mIsShrinking) {
 			int delta = mOrientation == VERTICAL ? mContentHeight
 					: mContentWidth;
