@@ -118,6 +118,53 @@ public class NegocioMapActivity extends BaseActivity implements
 			});
 		}
 
+		setHorarioValue(negocioSeleccionado.getHorario());
+		setWebValue(negocioSeleccionado.getWeb());
+		setFacebookValue(negocioSeleccionado.getFacebook());
+		setEmailValue(negocioSeleccionado.getEmail());
+
+	}
+
+	private void setHorarioValue(String text) {
+		setTxtValue(text, R.id.detailHorarioLayout, R.id.detailHorarioText);
+	}
+
+	private void setWebValue(String text) {
+		setTxtValue(text, R.id.detailWebLayout, R.id.detailWebText);
+	}
+
+	private void setFacebookValue(String text) {
+		setTxtValue(text, R.id.detailFacebookLayout, R.id.detailFacebookText);
+	}
+
+	private void setEmailValue(String text) {
+		setTxtValue(text, R.id.detailEmailLayout, R.id.detailEmailText);
+		if (text.isEmpty()) {
+			View upperLineSeparator = findViewById(R.id.detailFacebookSeparator);
+			// just in case it's already gone
+			if (upperLineSeparator.getVisibility() != View.GONE) {
+				upperLineSeparator.setVisibility(View.GONE);
+			}
+		}
+	}
+
+	private void setTxtValue(String textValue, int containerId, int txtId) {
+		TextView textView = (TextView) findViewById(txtId);
+		if (textView == null) {
+			String name = getResources().getResourceEntryName(txtId);
+			throw new RuntimeException("View whose id attribute is 'R.id."
+					+ name + "' could not be found");
+		}
+		if (textValue.isEmpty()) {
+			RelativeLayout container = (RelativeLayout) findViewById(containerId);
+			if (container != null) {
+				container.setVisibility(View.GONE);
+			}
+
+		} else {
+			textView.setText(textValue);
+		}
+
 	}
 
 	private boolean isLocationManagerConfigured() {
