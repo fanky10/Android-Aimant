@@ -50,7 +50,9 @@
     <color name="map_slider">#90313131</color>
     <color name="home_background">#313131</color>
     <color name="info_background">@color/home_background</color>
-    <color name="info_separator">#3F3F3F</color>
+    <color name="separator">#3F3F3F</color>
+    <color name="info_separator">@color/separator</color>
+    <color name="slide_separator">@color/separator</color>
     <color name="menu_title">#FFF</color>
     <color name="search_text">#50FFFFFF</color>
     <color name="negocio_default_img">#F0F0F0</color>
