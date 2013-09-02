@@ -260,8 +260,8 @@ public class SlidePanel extends LinearLayout {
 			addView(mContent);
 		}
 
-		if (mClosedHandle != null) {
-			mIconHandler.setImageDrawable(mClosedHandle);
+		if (mOpenedHandle != null) {
+			mIconHandler.setImageDrawable(mOpenedHandle);
 		}
 		mContent.setClickable(true);
 		mContent.setVisibility(GONE);
@@ -526,10 +526,10 @@ public class SlidePanel extends LinearLayout {
 
 	private void postProcess() {
 
-		if (mIsShrinking && mClosedHandle != null) {
-			mIconHandler.setImageDrawable(mClosedHandle);
-		} else if (!mIsShrinking && mOpenedHandle != null) {
+		if (mIsShrinking && mOpenedHandle != null) {
 			mIconHandler.setImageDrawable(mOpenedHandle);
+		} else if (!mIsShrinking && mClosedHandle != null) {
+			mIconHandler.setImageDrawable(mClosedHandle);
 		}
 		// invoke listener if any
 		if (panelListener != null) {
