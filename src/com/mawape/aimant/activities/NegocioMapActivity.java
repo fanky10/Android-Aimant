@@ -17,6 +17,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -28,12 +29,14 @@ import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.mawape.aimant.R;
 import com.mawape.aimant.constants.AppConstants;
 import com.mawape.aimant.entities.Categoria;
 import com.mawape.aimant.entities.Negocio;
+import com.mawape.aimant.utilities.ApacheStringUtils;
 
 public class NegocioMapActivity extends BaseActivity implements
 		LocationListener {
@@ -51,7 +54,7 @@ public class NegocioMapActivity extends BaseActivity implements
 
 	private void init() {
 		// googleMap initialization
-		googleMap = ((MapFragment) getFragmentManager().findFragmentById(
+		googleMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(
 				R.id.map)).getMap();
 		if (googleMap == null) {
 			throw new IllegalArgumentException("googleMap not found!");
@@ -138,13 +141,6 @@ public class NegocioMapActivity extends BaseActivity implements
 
 	private void setEmailValue(String text) {
 		setTxtValue(text, R.id.detailEmailLayout, R.id.detailEmailText);
-		if (text.isEmpty()) {
-			View upperLineSeparator = findViewById(R.id.detailFacebookSeparator);
-			// just in case it's already gone
-			if (upperLineSeparator.getVisibility() != View.GONE) {
-				upperLineSeparator.setVisibility(View.GONE);
-			}
-		}
 	}
 
 	private void setTxtValue(String textValue, int containerId, int txtId) {
@@ -154,7 +150,7 @@ public class NegocioMapActivity extends BaseActivity implements
 			throw new RuntimeException("View whose id attribute is 'R.id."
 					+ name + "' could not be found");
 		}
-		if (textValue.isEmpty()) {
+		if (ApacheStringUtils.isEmpty(textValue)) {
 			RelativeLayout container = (RelativeLayout) findViewById(containerId);
 			if (container != null) {
 				container.setVisibility(View.GONE);
