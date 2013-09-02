@@ -22,9 +22,9 @@
         panel:closedHandle="@drawable/icon_collapse"
         panel:content="@+id/panelContent"
         panel:handle="@+id/detailsCollapseExpandContainer"
+        panel:iconHandler="@+id/detailsCollapseExpandIcon"
         panel:linearFlying="true"
         panel:openedHandle="@drawable/icon_expand"
-        panel:iconHandler="@+id/detailsCollapseExpandIcon"
         panel:position="top" >
 
         <LinearLayout
@@ -61,20 +61,21 @@
                     android:maxLines="2"
                     android:text="Lun - Vie: 8:00 - 12:00, 15:30 - 20:00 Sab: 8:00 - 12:00"
                     android:textSize="12sp" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@color/slide_separator" />
             </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/detailWebLayout"
                 android:layout_width="match_parent"
                 android:layout_height="36dp" >
+
+                <View
+                    android:id="@+id/detailWebSeparator"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@color/slide_separator" />
 
                 <ImageView
                     android:id="@+id/detailWebIcon"
@@ -98,20 +99,21 @@
                     android:gravity="left|center"
                     android:text="www.loremipsumdolorsit.com.ar"
                     android:textSize="12sp" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@color/slide_separator" />
             </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/detailFacebookLayout"
                 android:layout_width="match_parent"
                 android:layout_height="36dp" >
+
+                <View
+                    android:id="@+id/detailFacebookSeparator"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@color/slide_separator" />
 
                 <ImageView
                     android:id="@+id/detailFacebookIcon"
@@ -135,21 +137,21 @@
                     android:gravity="left|center"
                     android:text="www.facebook.com/lorem.ipsum"
                     android:textSize="12sp" />
-
-                <View
-                    android:id="@+id/detailFacebookSeparator"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="@color/slide_separator" />
             </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/detailEmailLayout"
                 android:layout_width="match_parent"
                 android:layout_height="36dp" >
+
+                <View
+                    android:id="@+id/detailEmailSeparator"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@color/slide_separator" />
 
                 <ImageView
                     android:id="@+id/detailEmailIcon"
