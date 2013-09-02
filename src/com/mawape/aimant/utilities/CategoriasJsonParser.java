@@ -28,8 +28,8 @@ public class CategoriasJsonParser extends AbstractJsonParser<Categoria> {
 	@Override
 	protected Categoria createObject(JSONObject jsonItem) throws JSONException {
 		String nombre = getString(jsonItem,"nombre");
-		String color = getString(jsonItem,"color");
-		String imgPath = getString(jsonItem,"imgPath");
+		String color = getString(jsonItem,"colorExa");
+		String imgPath = getString(jsonItem,"icon");
 		return new Categoria(nombre, color, imgPath);
 	}
 	
