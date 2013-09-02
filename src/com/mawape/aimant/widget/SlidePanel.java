@@ -130,10 +130,12 @@ public class SlidePanel extends LinearLayout {
 				: HORIZONTAL;
 		setOrientation(mOrientation);
 		mState = State.READY;
-		mGestureListener = new PanelOnGestureListener();
-		mGestureDetector = new GestureDetector(getContext(),mGestureListener);
-		mGestureDetector.setIsLongpressEnabled(false);
-
+		if (!this.isInEditMode()) {
+			mGestureListener = new PanelOnGestureListener();
+			mGestureDetector = new GestureDetector(getContext(),
+					mGestureListener);
+			mGestureDetector.setIsLongpressEnabled(false);
+		}
 		// i DON'T really know why i need this...
 		setBaselineAligned(false);
 	}
@@ -313,7 +315,7 @@ public class SlidePanel extends LinearLayout {
 	protected void dispatchDraw(Canvas canvas) {
 		// this is why 'mState' was added:
 		// avoid flicker before animation start
-		
+
 		// que onda con este drawer?? :P
 		if (mState == State.ABOUT_TO_ANIMATE && !mIsShrinking) {
 			int delta = mOrientation == VERTICAL ? mContentHeight

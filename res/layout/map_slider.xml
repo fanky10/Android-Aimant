@@ -18,7 +18,6 @@
         android:id="@+id/topPanel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="20dip"
         panel:animationDuration="1000"
         panel:closedHandle="@drawable/icon_collapse"
         panel:content="@+id/panelContent"
