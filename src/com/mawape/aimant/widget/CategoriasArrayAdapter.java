@@ -32,28 +32,48 @@ public class CategoriasArrayAdapter extends ArrayAdapter<Categoria> implements
 	// copy of initialized filtered values
 	private List<Categoria> originalValues;
 
+	static class CategoriasViewHolder {
+		TextView txtNombre;
+		TextView txtDescripcion;
+		ImageView imgIcon;
+		RelativeLayout layoutWrapper;
+	}
+
 	public CategoriasArrayAdapter(Context context, List<Categoria> values) {
 		super(context, R.layout.categorias_row, R.id.catRowName, values);
 		this.filteredValues = values;
 	}
 
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
-		LayoutInflater inflater = (LayoutInflater) getContext()
-				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View rowView = inflater.inflate(R.layout.categorias_row, parent, false);
-		Categoria categoriaSeleccionada = getItem(position);
+	public View getView(int position, View rowView, ViewGroup parent) {
+
+		final Categoria categoriaSeleccionada = getItem(position);
+		// Keeps reference to avoid future findViewById()
+		CategoriasViewHolder viewHolder;
+		if (rowView == null) {
+			LayoutInflater inflater = (LayoutInflater) getContext()
+					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			rowView = inflater.inflate(R.layout.categorias_row, parent, false);
+			viewHolder = new CategoriasViewHolder();
+			viewHolder.imgIcon = (ImageView) rowView
+					.findViewById(R.id.catRowIcon);
+			viewHolder.layoutWrapper = (RelativeLayout) rowView.findViewById(R.id.catRowWrapper);
+			viewHolder.txtDescripcion = (TextView) rowView
+					.findViewById(R.id.catRowDescription);
+			viewHolder.txtNombre = (TextView) rowView
+					.findViewById(R.id.catRowName);
+
+			rowView.setTag(viewHolder);
+		} else {
+			viewHolder = (CategoriasViewHolder) rowView.getTag();
+		}
+
 		if (categoriaSeleccionada != null) {
+			viewHolder.txtNombre.setText(categoriaSeleccionada.getNombre());
+			viewHolder.txtDescripcion.setText(categoriaSeleccionada
+					.getDescripcion());
 
-			TextView txtName = (TextView) rowView.findViewById(R.id.catRowName);
-			txtName.setText(categoriaSeleccionada.getNombre());
-			
-			TextView txtDescript = (TextView) rowView.findViewById(R.id.catRowDescription);
-			txtDescript.setText(categoriaSeleccionada.getDescripcion());
-
-			RelativeLayout layoutWrapper = (RelativeLayout) rowView
-					.findViewById(R.id.catRowWrapper);
-			GradientDrawable bgShape = (GradientDrawable) layoutWrapper
+			GradientDrawable bgShape = (GradientDrawable) viewHolder.layoutWrapper
 					.getBackground();
 			bgShape.setColor(Color.parseColor("#"
 					+ categoriaSeleccionada.getColor()));
@@ -64,9 +84,7 @@ public class CategoriasArrayAdapter extends ArrayAdapter<Categoria> implements
 			Integer imgResourceId = getContext().getResources().getIdentifier(
 					mDrawableName, "drawable", getContext().getPackageName());
 			if (imgResourceId > 0) {
-				ImageView imgView = (ImageView) rowView
-						.findViewById(R.id.catRowIcon);
-				imgView.setImageResource(imgResourceId);
+				viewHolder.imgIcon.setImageResource(imgResourceId);
 			}
 		}
 		return rowView;
