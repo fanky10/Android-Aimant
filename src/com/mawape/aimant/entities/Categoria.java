@@ -1,6 +1,8 @@
 package com.mawape.aimant.entities;
 
 import java.io.Serializable;
+import java.util.Arrays;
+import java.util.List;
 
 public class Categoria implements Serializable {
 	/**
@@ -13,6 +15,7 @@ public class Categoria implements Serializable {
 	private String color;
 	private String imgPath;
 	private String descripcion;
+	private String[] tags;
 
 	public Categoria(String nombre, String color, String imgPath) {
 		this(nombre, color, imgPath, "");
@@ -25,6 +28,16 @@ public class Categoria implements Serializable {
 		this.color = color;
 		this.imgPath = imgPath;
 		this.descripcion = descripcion;
+		this.tags = descripcion.split(",");
+	}
+	
+	public boolean containsInTags(String text){
+		for(String tag: tags){
+			if(tag.toLowerCase().trim().startsWith(text.toLowerCase())){
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public String toString() {

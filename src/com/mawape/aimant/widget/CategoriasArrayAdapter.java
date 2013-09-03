@@ -156,7 +156,7 @@ public class CategoriasArrayAdapter extends ArrayAdapter<Categoria> implements
 			}
 			if (prefix != null && prefix.length() > 0) {
 				for (Categoria categoria : originalValues) {
-					if (categoria.getNombre().toLowerCase().startsWith(prefix)) {
+					if (categoria.getNombre().toLowerCase().contains(prefix) || categoria.containsInTags(prefix)) {
 						resultValues.add(categoria);
 					}
 				}

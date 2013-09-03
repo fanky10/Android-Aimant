@@ -160,7 +160,7 @@ public class NegociosArrayAdapter extends ArrayAdapter<Negocio> implements
 			}
 			if (prefix != null && prefix.length() > 0) {
 				for (Negocio negocio : originalValues) {
-					if (negocio.getNombre().toLowerCase().startsWith(prefix)) {
+					if (negocio.getNombre().toLowerCase().contains(prefix)) {
 						resultValues.add(negocio);
 					}
 				}
