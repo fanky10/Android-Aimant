@@ -5,23 +5,30 @@
     android:background="@color/info_background"
     android:orientation="vertical" >
 
-    <ImageView
-        android:id="@+id/infoAimantLogo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:src="@drawable/logo_aimant" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/infoEmailLayout" >
 
-    <ImageView
-        android:id="@+id/infoClose"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/icon_close" />
+        <ImageView
+            android:id="@+id/infoClose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/icon_close" />
+
+        <ImageView
+            android:id="@+id/infoAimantLogo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/logo_aimant" />
+    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/infoEmailLayout"
@@ -39,11 +46,12 @@
             android:layout_height="match_parent"
             android:layout_alignParentTop="true"
             android:layout_toLeftOf="@+id/infoEmailIcon"
-            android:gravity="center"
+            android:gravity="left|center"
             android:text="@string/info_email"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/menu_title"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/infoEmailIcon"
@@ -79,11 +87,12 @@
             android:layout_height="match_parent"
             android:layout_alignParentTop="true"
             android:layout_toLeftOf="@+id/infoPhoneIcon"
-            android:gravity="center"
+            android:gravity="left|center"
             android:text="@string/info_telefono"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/menu_title"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/infoPhoneIcon"
