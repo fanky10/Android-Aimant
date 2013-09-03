@@ -5,16 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.location.Address;
-import android.location.Criteria;
 import android.location.Geocoder;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
@@ -39,72 +35,64 @@ import com.mawape.aimant.entities.Categoria;
 import com.mawape.aimant.entities.Negocio;
 import com.mawape.aimant.utilities.ApacheStringUtils;
 
-public class NegocioMapActivity extends BaseActivity implements
-		LocationListener {
+public class NegocioMapActivity extends BaseActivity {
+	private long activityInit = System.currentTimeMillis();
 	private GoogleMap googleMap;
-	private LocationManager locationManager;
-	private String provider;
-	private Location location;
+	private Negocio negocioSeleccionado;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.map_layout);
-		init();
+		initBusiness();
+		new AsyncTask<Void, Void, Boolean>() {
+
+			@Override
+			protected Boolean doInBackground(Void... params) {
+				Log.d("fast-map-async", "initializing...");
+				long init = System.currentTimeMillis();
+				boolean initialized = isMapInitialized();
+				long end = System.currentTimeMillis();
+				Log.d("fast-map-async", "background took: " + (end - init) + "ms");
+				return initialized;
+			}
+			protected void onPostExecute(Boolean result) {
+				long init = System.currentTimeMillis();
+				if (result) {
+					postMapConfig();
+				}
+				Long end = System.currentTimeMillis();
+				Log.d("fast-map-async", "post exe took: " + (end - init) + "ms");
+				Log.d("fast-map-async", "whole thing took: " + (end - activityInit)
+						+ "ms");
+			}
+			
+		}.execute();
+
 	}
 
-	private void init() {
+	protected boolean isMapInitialized() {
+		Boolean result = true;
 		// googleMap initialization
 		// Getting Google Play availability status
-	    int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getBaseContext());
+		int status = GooglePlayServicesUtil
+				.isGooglePlayServicesAvailable(getBaseContext());
 
-	    if(status!=ConnectionResult.SUCCESS){ // Google Play Services are not available
-	    	showGMapNotFoundDialog(R.string.google_play_services_outdated);
-	    	return;
-	    }
-	    
-	    googleMap = ((SupportMapFragment) getSupportFragmentManager()
+		// Google Play Services are not available
+		if (status != ConnectionResult.SUCCESS) {
+			showGMapNotFoundDialog(R.string.google_play_services_outdated);
+			result = false;
+		}
+
+		googleMap = ((SupportMapFragment) getSupportFragmentManager()
 				.findFragmentById(R.id.map)).getMap();
 		if (googleMap == null) {
 			showGMapNotFoundDialog(R.string.google_map_not_found);
-			return;
-		}
-		
-		mapSettings();
-
-		// categoria visual init.
-		Bundle bundle = getIntent().getExtras();
-		Categoria categoriaSeleccionada = (Categoria) bundle
-				.get(AppConstants.CATEGORIA_SELECCIONADA_KEY);
-		Negocio negocioSeleccionado = (Negocio) bundle
-				.get(AppConstants.NEGOCIO_SELECCIONADO_KEY);
-
-		if (categoriaSeleccionada != null) {
-			configureMenuBar(negocioSeleccionado.getNombre(),
-					Color.parseColor("#" + categoriaSeleccionada.getColor()),
-					true, null);
+			result = false;
 		}
 
-		// negocio
-		StringBuilder direccion = new StringBuilder();
-		direccion.append(negocioSeleccionado.getDireccion());
-		direccion.append(getString(R.string.default_localidad));
+		return result;
 
-		initNegocio(negocioSeleccionado);
-
-		// location initialization
-		if (isLocationManagerConfigured()) {
-			findLocation(direccion.toString());
-			centerLocation(negocioSeleccionado.getNombre());
-		}
-
-	}
-	
-	private void mapSettings(){
-		UiSettings gmapSettings = googleMap.getUiSettings();
-		gmapSettings.setMyLocationButtonEnabled(false);
-		gmapSettings.setZoomControlsEnabled(false);
-		gmapSettings.setCompassEnabled(false);
 	}
 
 	private void showGMapNotFoundDialog(int messageId) {
@@ -122,7 +110,63 @@ public class NegocioMapActivity extends BaseActivity implements
 		dialog.show();
 	}
 
-	private void initNegocio(Negocio negocioSeleccionado) {
+	private void openSecuritySettings() {
+		Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		getApplicationContext().startActivity(intent);
+	}
+
+	private void postMapConfig() {
+		mapSettings();
+		StringBuilder direccion = new StringBuilder();
+		direccion.append(negocioSeleccionado.getDireccion());
+		direccion.append(getString(R.string.default_localidad));
+		markLocation(negocioSeleccionado.getNombre(), direccion.toString());
+	}
+
+	private void mapSettings() {
+		UiSettings gmapSettings = googleMap.getUiSettings();
+		gmapSettings.setMyLocationButtonEnabled(false);
+		gmapSettings.setZoomControlsEnabled(false);
+		gmapSettings.setCompassEnabled(false);
+	}
+
+	private void markLocation(String title, String direccion) {
+		try {
+			Geocoder geocoder = new Geocoder(getApplicationContext());
+			List<Address> addresses = new ArrayList<Address>();
+			addresses = geocoder.getFromLocationName(direccion, 1);
+			if (addresses.size() > 0) {
+				double latitude = addresses.get(0).getLatitude();
+				double longitude = addresses.get(0).getLongitude();
+				LatLng data = new LatLng(latitude, longitude);
+				CameraUpdate center = CameraUpdateFactory.newLatLng(data);
+				CameraUpdate zoom = CameraUpdateFactory.zoomTo(15);
+				googleMap.addMarker(new MarkerOptions().position(data).title(
+						title));
+				googleMap.moveCamera(center);
+				googleMap.animateCamera(zoom);
+			}
+		} catch (IOException ex) {
+			Log.d(getClass().getName(),
+					"ioexception geocoder:" + ex.getMessage());
+		}
+
+	}
+
+	private void initBusiness() {
+		// categoria visual init.
+		Bundle bundle = getIntent().getExtras();
+		Categoria categoriaSeleccionada = (Categoria) bundle
+				.get(AppConstants.CATEGORIA_SELECCIONADA_KEY);
+		negocioSeleccionado = (Negocio) bundle
+				.get(AppConstants.NEGOCIO_SELECCIONADO_KEY);
+
+		if (categoriaSeleccionada != null) {
+			configureMenuBar(negocioSeleccionado.getNombre(),
+					Color.parseColor("#" + categoriaSeleccionada.getColor()),
+					true, null);
+		}
 
 		final String primPhone = negocioSeleccionado.getTelefonoPrimario();
 		final String secPhone = negocioSeleccionado.getTelefonoSecundario();
@@ -194,169 +238,5 @@ public class NegocioMapActivity extends BaseActivity implements
 			textView.setText(textValue);
 		}
 
-	}
-
-	private boolean isLocationManagerConfigured() {
-		boolean isGpsEnabled = false, isNetworkEnabled = false;
-		// Get the location manager
-		locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-
-		try {
-			isGpsEnabled = locationManager
-					.isProviderEnabled(LocationManager.GPS_PROVIDER);
-		} catch (Exception ex) {
-			Log.d(NegocioMapActivity.class.getName(),
-					"gps provider exception: " + ex.getMessage());
-		}
-		try {
-			isNetworkEnabled = locationManager
-					.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-		} catch (Exception ex) {
-			Log.d(NegocioMapActivity.class.getName(),
-					"network provider exception: " + ex.getMessage());
-		}
-		if (!isGpsEnabled && !isNetworkEnabled) {
-			showLocationSettingsDialog();
-			return false;
-		}
-		Criteria criteria = new Criteria();
-		provider = locationManager.getBestProvider(criteria, true);
-		location = locationManager
-				.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER);
-		locationManager.requestLocationUpdates(provider, 0, 0, this);
-		return true;
-	}
-
-	private void findLocation(String direccion) {
-		try {
-			Geocoder geocoder = new Geocoder(getApplicationContext());
-			List<Address> addresses = new ArrayList<Address>();
-			addresses = geocoder.getFromLocationName(direccion, 1);
-			if (addresses.size() > 0) {
-				double latitude = addresses.get(0).getLatitude();
-				double longitude = addresses.get(0).getLongitude();
-				location.setLatitude(latitude);
-				location.setLongitude(longitude);
-			}
-		} catch (IOException ex) {
-			Log.d(getClass().getName(),
-					"ioexception geocoder:" + ex.getMessage());
-		}
-	}
-
-	private void centerLocation(String title) {
-		LatLng data = new LatLng(location.getLatitude(),
-				location.getLongitude());
-		CameraUpdate center = CameraUpdateFactory.newLatLng(data);
-		CameraUpdate zoom = CameraUpdateFactory.zoomTo(15);
-		googleMap.addMarker(new MarkerOptions().position(data).title(title));
-		googleMap.moveCamera(center);
-		googleMap.animateCamera(zoom);
-	}
-
-	private void showLocationSettingsDialog() {
-		final Context context = getApplicationContext();
-		AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-		dialog.setMessage(context.getResources().getString(
-				R.string.gps_network_not_enabled));
-		dialog.setPositiveButton(R.string.open_location_settings,
-				new DialogInterface.OnClickListener() {
-
-					@Override
-					public void onClick(DialogInterface paramDialogInterface,
-							int paramInt) {
-						openSecuritySettings();
-					}
-				});
-		dialog.setNegativeButton(R.string.cancel,
-				new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface paramDialogInterface,
-							int paramInt) {
-						// nothing done
-					}
-				});
-		dialog.show();
-	}
-
-	private void openSecuritySettings() {
-		Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		getApplicationContext().startActivity(intent);
-	}
-
-	/* Request updates at startup */
-	@Override
-	protected void onResume() {
-		super.onResume();
-		if (locationManager == null || provider == null) {
-			init();// try to init.
-		}
-		// everything is good now
-		if (locationManager != null && provider != null) {
-			locationManager.requestLocationUpdates(provider, 0, 0, this);
-		}
-	}
-
-	/* Remove the locationlistener updates when Activity is paused */
-	@Override
-	protected void onPause() {
-		super.onPause();
-		if (locationManager != null) {
-			locationManager.removeUpdates(this);
-		}
-	}
-
-	@Override
-	public void onLocationChanged(Location location) {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void onProviderDisabled(String provider) {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void onProviderEnabled(String provider) {
-		this.provider = provider; // update provider?
-	}
-
-	@Override
-	public void onStatusChanged(String provider, int status, Bundle extras) {
-		// TODO Auto-generated method stub
-
-	}
-
-	public LocationManager getLocationManager() {
-		return locationManager;
-	}
-
-	public void setLocationManager(LocationManager locationManager) {
-		this.locationManager = locationManager;
-	}
-
-	public String getProvider() {
-		return provider;
-	}
-
-	public void setProvider(String provider) {
-		this.provider = provider;
-	}
-
-	public GoogleMap getGoogleMap() {
-		return googleMap;
-	}
-
-	public void setGoogleMap(GoogleMap googleMap) {
-		this.googleMap = googleMap;
-	}
-
-	public Location getLocation() {
-		return location;
-	}
-
-	public void setLocation(Location location) {
-		this.location = location;
 	}
 }
