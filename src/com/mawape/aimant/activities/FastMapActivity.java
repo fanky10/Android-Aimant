@@ -7,11 +7,18 @@ import java.util.List;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -23,7 +30,10 @@ import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.mawape.aimant.R;
+import com.mawape.aimant.constants.AppConstants;
+import com.mawape.aimant.entities.Categoria;
 import com.mawape.aimant.entities.Negocio;
+import com.mawape.aimant.utilities.ApacheStringUtils;
 
 public class FastMapActivity extends BaseActivity {
 	private long activityInit = System.currentTimeMillis();
@@ -34,13 +44,30 @@ public class FastMapActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.map_layout);
+		initBusiness();
+		new AsyncTask<Void, Void, Boolean>() {
 
-		negocioSeleccionado = new Negocio("Test", "Santa Fe 1300");
-		if (isMapInitialized()) {
-			postMapConfig();
-		}
-		Log.d("fast-map", "it took"
-				+ (System.currentTimeMillis() - activityInit) + "ms");
+			@Override
+			protected Boolean doInBackground(Void... params) {
+				Log.d("fast-map-async", "initializing...");
+				long init = System.currentTimeMillis();
+				boolean initialized = isMapInitialized();
+				long end = System.currentTimeMillis();
+				Log.d("fast-map-async", "background took: " + (end - init) + "ms");
+				return initialized;
+			}
+			protected void onPostExecute(Boolean result) {
+				long init = System.currentTimeMillis();
+				if (result) {
+					postMapConfig();
+				}
+				Long end = System.currentTimeMillis();
+				Log.d("fast-map-async", "post exe took: " + (end - init) + "ms");
+				Log.d("fast-map-async", "whole thing took: " + (end - activityInit)
+						+ "ms");
+			}
+			
+		}.execute();
 
 	}
 
@@ -127,4 +154,93 @@ public class FastMapActivity extends BaseActivity {
 
 	}
 
+	private void initBusiness() {
+		// categoria visual init.
+		Bundle bundle = getIntent().getExtras();
+		Categoria categoriaSeleccionada = (Categoria) bundle
+				.get(AppConstants.CATEGORIA_SELECCIONADA_KEY);
+		negocioSeleccionado = (Negocio) bundle
+				.get(AppConstants.NEGOCIO_SELECCIONADO_KEY);
+
+		if (categoriaSeleccionada != null) {
+			configureMenuBar(negocioSeleccionado.getNombre(),
+					Color.parseColor("#" + categoriaSeleccionada.getColor()),
+					true, null);
+		}
+
+		final String primPhone = negocioSeleccionado.getTelefonoPrimario();
+		final String secPhone = negocioSeleccionado.getTelefonoSecundario();
+		TextView txtPrimPhone = (TextView) findViewById(R.id.detailSecondaryPhoneText);
+		txtPrimPhone.setText(primPhone);
+
+		ImageView icPrimPhone = (ImageView) findViewById(R.id.detailSecondaryPhoneIcon);
+		icPrimPhone.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				makePhoneCall(primPhone);
+			}
+		});
+
+		// if secPhone actually is there
+		if (secPhone != null && secPhone.length() > 0) {
+			RelativeLayout layout = (RelativeLayout) findViewById(R.id.detailTopPhoneLayout);
+			layout.setVisibility(View.VISIBLE);
+			TextView txtSecPhone = (TextView) findViewById(R.id.detailPrimaryPhoneText);
+			txtSecPhone.setText(secPhone);
+
+			ImageView icSecPhone = (ImageView) findViewById(R.id.detailPrimaryPhoneIcon);
+			icSecPhone.setOnClickListener(new OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					makePhoneCall(secPhone);
+				}
+			});
+		}
+
+		setHorarioValue(negocioSeleccionado.getHorario());
+		setWebValue(negocioSeleccionado.getWeb());
+		setFacebookValue(negocioSeleccionado.getFacebook());
+		setEmailValue(negocioSeleccionado.getEmail());
+	}
+
+	private void setHorarioValue(String text) {
+		setTxtValue(text, R.id.detailHorarioLayout, R.id.detailHorarioText);
+	}
+
+	private void setWebValue(String text) {
+		setTxtValue(text, R.id.detailWebLayout, R.id.detailWebText);
+	}
+
+	private void setFacebookValue(String text) {
+		setTxtValue(text, R.id.detailFacebookLayout, R.id.detailFacebookText);
+	}
+
+	private void setEmailValue(String text) {
+		setTxtValue(text, R.id.detailEmailLayout, R.id.detailEmailText);
+	}
+
+	private void setTxtValue(String textValue, int containerId, int txtId) {
+		TextView textView = (TextView) findViewById(txtId);
+		if (textView == null) {
+			String name = getResources().getResourceEntryName(txtId);
+			throw new RuntimeException("View whose id attribute is 'R.id."
+					+ name + "' could not be found");
+		}
+		if (ApacheStringUtils.isEmpty(textValue)) {
+			RelativeLayout container = (RelativeLayout) findViewById(containerId);
+			if (container != null) {
+				container.setVisibility(View.GONE);
+			}
+
+		} else {
+			textView.setText(textValue);
+		}
+
+	}
+
+	public static void main(String[] args) {
+		
+	}
 }
