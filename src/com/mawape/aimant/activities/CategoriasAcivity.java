@@ -25,8 +25,10 @@ public class CategoriasAcivity extends BaseActivity {
 				getApplicationContext(), opcionV);
 		ListView lstOpciones = (ListView) findViewById(R.id.catListMenu);
 		lstOpciones.setAdapter(adaptador);
-		lstOpciones.setOnItemClickListener(adaptador);	
-		configureMenuBar(adaptador);
+		lstOpciones.setOnItemClickListener(adaptador);
+		String homeTitle = getString(R.string.app_name);
+		int homeColor = getResources().getColor(R.color.home_background);
+		configureMenuBar(homeTitle, homeColor, false, adaptador);
 	}
 
 	private List<Categoria> getCategorias() {

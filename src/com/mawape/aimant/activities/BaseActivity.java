@@ -57,6 +57,12 @@ public abstract class BaseActivity extends FragmentActivity {
 			});
 		}
 
+		configureInformationIcon();
+		configureFilterAdapter(adapter);
+
+	}
+
+	protected void configureInformationIcon() {
 		// handling menu info click
 		ImageView infoImg = (ImageView) findViewById(R.id.commonMenuInformation);
 		infoImg.setOnClickListener(new OnClickListener() {
@@ -66,43 +72,44 @@ public abstract class BaseActivity extends FragmentActivity {
 				showSplashAimant();
 			}
 		});
-		
-		configureMenuBar(adapter);
-
 	}
 
-	protected void configureMenuBar(final ArrayAdapter adapter) {
+	protected void configureFilterAdapter(final ArrayAdapter adapter) {
 		// search section
 		// it may not contain a search field
-		final EditText searchField = (EditText) findViewById(R.id.commonMenuSearchField);
-		if (searchField != null) {
-			searchField.setOnFocusChangeListener(new OnFocusChangeListener() {
-				@Override
-				public void onFocusChange(View v, boolean hasFocus) {
-					String currentText = searchField.getText().toString();
-					if (hasFocus) {
-						searchField.setText("");
-					} else if (!hasFocus
-							&& (currentText == null || currentText.length() == 0)) {
-						searchField.setText(R.string.search_msg);
-					}
-				}
-			});
-		}
-
-		// handling menu info click
-		ImageView searchImg = (ImageView) findViewById(R.id.commonMenuSearchIcon);
-		if (searchImg != null) {
-			searchImg.setOnClickListener(new OnClickListener() {
-
-				@Override
-				public void onClick(View v) {
-					searchField.requestFocus();
-				}
-			});
-		}
 		// finally it may not be an adapter with search capability
 		if (adapter != null) {
+			final EditText searchField = (EditText) findViewById(R.id.commonMenuSearchField);
+			if (searchField != null) {
+				searchField
+						.setOnFocusChangeListener(new OnFocusChangeListener() {
+							@Override
+							public void onFocusChange(View v, boolean hasFocus) {
+								String currentText = searchField.getText()
+										.toString();
+								if (hasFocus) {
+									searchField.setText("");
+								} else if (!hasFocus
+										&& (currentText == null || currentText
+												.length() == 0)) {
+									searchField.setText(R.string.search_msg);
+								}
+							}
+						});
+			}
+
+			// handling menu info click
+			ImageView searchImg = (ImageView) findViewById(R.id.commonMenuSearchIcon);
+			if (searchImg != null) {
+				searchImg.setOnClickListener(new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						searchField.requestFocus();
+					}
+				});
+			}
+
 			// configure filtering
 			searchField.addTextChangedListener(new TextWatcher() {
 
