@@ -24,6 +24,7 @@ import com.mawape.aimant.activities.NegocioMapActivity;
 import com.mawape.aimant.constants.AppConstants;
 import com.mawape.aimant.entities.Categoria;
 import com.mawape.aimant.entities.Negocio;
+import com.mawape.aimant.utilities.ApacheStringUtils;
 
 public class NegociosArrayAdapter extends ArrayAdapter<Negocio> implements
 		AdapterView.OnItemClickListener, Filterable {
@@ -77,18 +78,19 @@ public class NegociosArrayAdapter extends ArrayAdapter<Negocio> implements
 		}
 		viewHolder.txtNombre.setText(negocioSeleccionado.getNombre());
 		viewHolder.txtDireccion.setText(negocioSeleccionado.getDireccion());
-
-		if (negocioSeleccionado.getImgPath() != null
-				&& negocioSeleccionado.getImgPath().length() > 0) {
-			String imgPath = negocioSeleccionado.getImgPath();
+		String imgPath = negocioSeleccionado.getImgPath();
+		if (!ApacheStringUtils.isEmpty(imgPath)) {
 			String mDrawableName = imgPath.substring(0,
 					imgPath.lastIndexOf("."));// no-extension
-			Integer imgResourceId = getContext().getResources().getIdentifier(
-					mDrawableName, "drawable", getContext().getPackageName());
+			Integer imgResourceId = getContext().getResources()
+					.getIdentifier(mDrawableName, "drawable",
+							getContext().getPackageName());
 			if (imgResourceId > 0) {
 				viewHolder.imgIcon.setImageResource(imgResourceId);
 				viewHolder.imgIcon.setScaleType(ScaleType.FIT_XY);
 			}
+		} else {
+			viewHolder.imgIcon.setImageResource(R.drawable.image_default);
 		}
 
 		viewHolder.imgCall.setOnClickListener(new OnClickListener() {
