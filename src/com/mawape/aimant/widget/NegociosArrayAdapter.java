@@ -17,7 +17,6 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mawape.aimant.R;
@@ -35,6 +34,14 @@ public class NegociosArrayAdapter extends ArrayAdapter<Negocio> implements
 	private Filter filter;
 	private Categoria currentCategoria;
 
+	static class NegociosViewHolder {
+		TextView txtNombre;
+		TextView txtDireccion;
+		ImageView imgIcon;
+		ImageView imgCall;
+		ImageView imgGo;
+	}
+
 	public NegociosArrayAdapter(Context context, List<Negocio> values,
 			Categoria currentCategoria) {
 		super(context, R.layout.negocios_row, values);
@@ -43,16 +50,33 @@ public class NegociosArrayAdapter extends ArrayAdapter<Negocio> implements
 	}
 
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
-		LayoutInflater inflater = (LayoutInflater) getContext()
-				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		final Negocio negocioSeleccionado = getItem(position);
+	public View getView(int position, View rowView, ViewGroup parent) {
 
-		View rowView = inflater.inflate(R.layout.negocios_row, parent, false);
-		TextView textView = (TextView) rowView.findViewById(R.id.negRowNombre);
-		textView.setText(negocioSeleccionado.getNombre());
-		TextView txtDir = (TextView) rowView.findViewById(R.id.negRowDir);
-		txtDir.setText(negocioSeleccionado.getDireccion());
+		final Negocio negocioSeleccionado = getItem(position);
+		// Keeps reference to avoid future findViewById()
+		NegociosViewHolder viewHolder;
+		if (rowView == null) {
+			LayoutInflater inflater = (LayoutInflater) getContext()
+					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			rowView = inflater.inflate(R.layout.negocios_row, parent, false);
+			viewHolder = new NegociosViewHolder();
+			viewHolder.imgCall = (ImageView) rowView
+					.findViewById(R.id.negRowBtnCall);
+			viewHolder.imgGo = (ImageView) rowView
+					.findViewById(R.id.negRowBtnMap);
+			viewHolder.imgIcon = (ImageView) rowView
+					.findViewById(R.id.negRowImg);
+			viewHolder.txtDireccion = (TextView) rowView
+					.findViewById(R.id.negRowDir);
+			viewHolder.txtNombre = (TextView) rowView
+					.findViewById(R.id.negRowNombre);
+
+			rowView.setTag(viewHolder);
+		} else {
+			viewHolder = (NegociosViewHolder) rowView.getTag();
+		}
+		viewHolder.txtNombre.setText(negocioSeleccionado.getNombre());
+		viewHolder.txtDireccion.setText(negocioSeleccionado.getDireccion());
 
 		if (negocioSeleccionado.getImgPath() != null
 				&& negocioSeleccionado.getImgPath().length() > 0) {
@@ -62,23 +86,12 @@ public class NegociosArrayAdapter extends ArrayAdapter<Negocio> implements
 			Integer imgResourceId = getContext().getResources().getIdentifier(
 					mDrawableName, "drawable", getContext().getPackageName());
 			if (imgResourceId > 0) {
-				ImageView imgView = (ImageView) rowView
-						.findViewById(R.id.negRowImg);
-				imgView.setImageResource(imgResourceId);
-				imgView.setScaleType(ScaleType.FIT_XY);
-
-				// and transparent background
-				RelativeLayout container = (RelativeLayout) rowView
-						.findViewById(R.id.negRowTopLayout);
-				container.setBackgroundColor(getContext().getResources()
-						.getColor(android.R.color.transparent));
-
+				viewHolder.imgIcon.setImageResource(imgResourceId);
+				viewHolder.imgIcon.setScaleType(ScaleType.FIT_XY);
 			}
 		}
 
-		ImageView btnCall = (ImageView) rowView
-				.findViewById(R.id.negRowBtnCall);
-		btnCall.setOnClickListener(new OnClickListener() {
+		viewHolder.imgCall.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
@@ -86,8 +99,7 @@ public class NegociosArrayAdapter extends ArrayAdapter<Negocio> implements
 			}
 		});
 
-		ImageView btnMap = (ImageView) rowView.findViewById(R.id.negRowBtnMap);
-		btnMap.setOnClickListener(new OnClickListener() {
+		viewHolder.imgGo.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
