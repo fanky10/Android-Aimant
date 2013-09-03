@@ -54,10 +54,11 @@ public class NegocioMapActivity extends BaseActivity implements
 
 	private void init() {
 		// googleMap initialization
-		googleMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(
-				R.id.map)).getMap();
+		googleMap = ((SupportMapFragment) getSupportFragmentManager()
+				.findFragmentById(R.id.map)).getMap();
 		if (googleMap == null) {
-			throw new IllegalArgumentException("googleMap not found!");
+			showGMapNotFoundDialog();
+			return;
 		}
 
 		// categoria visual init.
@@ -86,6 +87,21 @@ public class NegocioMapActivity extends BaseActivity implements
 			centerLocation(negocioSeleccionado.getNombre());
 		}
 
+	}
+
+	private void showGMapNotFoundDialog() {
+		AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+		dialog.setMessage(R.string.google_map_not_found);
+		dialog.setPositiveButton(R.string.open_location_settings,
+				new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface paramDialogInterface,
+							int paramInt) {
+						openSecuritySettings();
+					}
+				});
+		dialog.show();
 	}
 
 	private void initNegocio(Negocio negocioSeleccionado) {

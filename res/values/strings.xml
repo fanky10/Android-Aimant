@@ -33,6 +33,7 @@
     <string name="info_telefono">@string/aimant_phone</string>
 
     <!-- dialogo de location provider available -->
+    <string name="google_map_not_found">Google Map no fue encontrado, actualice google-play-services</string>
     <string name="gps_network_not_enabled">Acceso a la ubicacion esta desactivado</string>
     <string name="open_location_settings">Abrir configuracion</string>
     <!-- search field del common menu-bar -->
