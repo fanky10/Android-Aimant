@@ -17,7 +17,6 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -25,11 +24,13 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.mawape.aimant.R;
@@ -54,12 +55,22 @@ public class NegocioMapActivity extends BaseActivity implements
 
 	private void init() {
 		// googleMap initialization
-		googleMap = ((SupportMapFragment) getSupportFragmentManager()
+		// Getting Google Play availability status
+	    int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(getBaseContext());
+
+	    if(status!=ConnectionResult.SUCCESS){ // Google Play Services are not available
+	    	showGMapNotFoundDialog(R.string.google_play_services_outdated);
+	    	return;
+	    }
+	    
+	    googleMap = ((SupportMapFragment) getSupportFragmentManager()
 				.findFragmentById(R.id.map)).getMap();
 		if (googleMap == null) {
-			showGMapNotFoundDialog();
+			showGMapNotFoundDialog(R.string.google_map_not_found);
 			return;
 		}
+		
+		mapSettings();
 
 		// categoria visual init.
 		Bundle bundle = getIntent().getExtras();
@@ -88,10 +99,17 @@ public class NegocioMapActivity extends BaseActivity implements
 		}
 
 	}
+	
+	private void mapSettings(){
+		UiSettings gmapSettings = googleMap.getUiSettings();
+		gmapSettings.setMyLocationButtonEnabled(false);
+		gmapSettings.setZoomControlsEnabled(false);
+		gmapSettings.setCompassEnabled(false);
+	}
 
-	private void showGMapNotFoundDialog() {
+	private void showGMapNotFoundDialog(int messageId) {
 		AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-		dialog.setMessage(R.string.google_map_not_found);
+		dialog.setMessage(messageId);
 		dialog.setPositiveButton(R.string.open_location_settings,
 				new DialogInterface.OnClickListener() {
 
