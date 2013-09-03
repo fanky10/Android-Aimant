@@ -5,12 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
@@ -30,7 +28,6 @@ import com.mawape.aimant.entities.Negocio;
 public class FastMapActivity extends BaseActivity {
 	private long activityInit = System.currentTimeMillis();
 	private GoogleMap googleMap;
-	private LocationManager locationManager;
 	private Negocio negocioSeleccionado;
 
 	@Override
@@ -66,10 +63,7 @@ public class FastMapActivity extends BaseActivity {
 			showGMapNotFoundDialog(R.string.google_map_not_found);
 			result = false;
 		}
-		// no more location initialization
-		if (!isLocationManagerConfigured()) {
-			result = false;
-		}
+
 		return result;
 
 	}
@@ -84,59 +78,6 @@ public class FastMapActivity extends BaseActivity {
 					public void onClick(DialogInterface paramDialogInterface,
 							int paramInt) {
 						openSecuritySettings();
-					}
-				});
-		dialog.show();
-	}
-
-	private boolean isLocationManagerConfigured() {
-		boolean isGpsEnabled = false, isNetworkEnabled = false;
-		// Get the location manager
-		locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-
-		try {
-			isGpsEnabled = locationManager
-					.isProviderEnabled(LocationManager.GPS_PROVIDER);
-		} catch (Exception ex) {
-			Log.d(NegocioMapActivity.class.getName(),
-					"gps provider exception: " + ex.getMessage());
-		}
-		try {
-			isNetworkEnabled = locationManager
-					.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-		} catch (Exception ex) {
-			Log.d(NegocioMapActivity.class.getName(),
-					"network provider exception: " + ex.getMessage());
-		}
-		if (!isGpsEnabled && !isNetworkEnabled) {
-			showLocationSettingsDialog();
-			return false;
-		}
-		return true;
-	}
-
-	
-
-	private void showLocationSettingsDialog() {
-		final Context context = getApplicationContext();
-		AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-		dialog.setMessage(context.getResources().getString(
-				R.string.gps_network_not_enabled));
-		dialog.setPositiveButton(R.string.open_location_settings,
-				new DialogInterface.OnClickListener() {
-
-					@Override
-					public void onClick(DialogInterface paramDialogInterface,
-							int paramInt) {
-						openSecuritySettings();
-					}
-				});
-		dialog.setNegativeButton(R.string.cancel,
-				new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface paramDialogInterface,
-							int paramInt) {
-						// nothing done
 					}
 				});
 		dialog.show();
