@@ -47,6 +47,9 @@ public class CategoriasArrayAdapter extends ArrayAdapter<Categoria> implements
 
 			TextView txtName = (TextView) rowView.findViewById(R.id.catRowName);
 			txtName.setText(categoriaSeleccionada.getNombre());
+			
+			TextView txtDescript = (TextView) rowView.findViewById(R.id.catRowDescription);
+			txtDescript.setText(categoriaSeleccionada.getDescripcion());
 
 			RelativeLayout layoutWrapper = (RelativeLayout) rowView
 					.findViewById(R.id.catRowWrapper);

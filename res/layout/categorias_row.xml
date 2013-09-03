@@ -17,14 +17,18 @@
         <TextView
             android:id="@+id/catRowName"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:layout_marginLeft="60dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="2dp"
+            android:layout_toLeftOf="@+id/catRowGoIcon"
             android:gravity="left|center"
-            android:text="Un Texto"
+            android:maxLines="1"
+            android:text="Gastronomia"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textSize="13sp" />
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/catRowGoIcon"
@@ -34,6 +38,22 @@
             android:layout_centerVertical="true"
             android:src="@drawable/btn_go"
             android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/catRowDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/catRowGoIcon"
+            android:layout_alignLeft="@+id/catRowName"
+            android:layout_toLeftOf="@+id/catRowGoIcon"
+            android:ellipsize="end"
+            android:gravity="left|center"
+            android:maxLines="1"
+            android:text="Restaurantes, Bar, Helados, Pizzas, Carlitos, Asado, etc"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/tag_line"
+            android:textSize="13sp" />
+
     </RelativeLayout>
 
     <ImageView

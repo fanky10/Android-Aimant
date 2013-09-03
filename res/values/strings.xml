@@ -55,6 +55,7 @@
     <color name="slide_separator">@color/separator</color>
     <color name="menu_title">#FFF</color>
     <color name="search_text">#50FFFFFF</color>
+    <color name="tag_line">#50FFFFFF</color>
     <color name="negocio_default_img">#F0F0F0</color>
     
     <integer name="rounded_corner_dp">3</integer>
