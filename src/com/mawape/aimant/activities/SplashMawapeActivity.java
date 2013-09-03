@@ -2,6 +2,7 @@ package com.mawape.aimant.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.mawape.aimant.R;
 
@@ -22,6 +23,11 @@ public class SplashMawapeActivity extends SplashActivity {
 	@Override
 	protected Intent createIntent() {
 		return new Intent(SplashMawapeActivity.this, SplashAimantActivity.class);
+	}
+
+	@Override
+	protected View getContainer() {
+		return findViewById(R.id.splashIntroContainer);
 	}
 
 }

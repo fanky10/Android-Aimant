@@ -3,6 +3,7 @@ package com.mawape.aimant.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.mawape.aimant.R;
 
@@ -34,6 +35,11 @@ public class SplashAimantActivity extends SplashActivity {
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 		Log.d(this.getClass().getName(), "saved instance!");
+	}
+
+	@Override
+	protected View getContainer() {
+		return findViewById(R.id.splashAboutContainer);
 	}
 
 }
