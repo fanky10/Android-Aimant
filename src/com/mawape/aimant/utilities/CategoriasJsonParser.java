@@ -30,7 +30,8 @@ public class CategoriasJsonParser extends AbstractJsonParser<Categoria> {
 		String nombre = getString(jsonItem,"nombre");
 		String color = getString(jsonItem,"colorExa");
 		String imgPath = getString(jsonItem,"icon");
-		return new Categoria(nombre, color, imgPath);
+		String descripcion = getString(jsonItem,"descripcion");
+		return new Categoria(nombre, color, imgPath,descripcion);
 	}
 	
 }
