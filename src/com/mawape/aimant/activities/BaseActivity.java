@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.mawape.aimant.R;
 import com.mawape.aimant.entities.Categoria;
+import com.mawape.aimant.utilities.AndroidServicesUtil;
 import com.mawape.aimant.utilities.ApacheStringUtils;
 
 public abstract class BaseActivity extends FragmentActivity {
@@ -155,10 +156,7 @@ public abstract class BaseActivity extends FragmentActivity {
 	}
 
 	protected void makePhoneCall(String phoneNumber) {
-		Intent intent = new Intent(Intent.ACTION_CALL);
-		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		intent.setData(Uri.parse("tel:" + phoneNumber));
-		getApplicationContext().startActivity(intent);
+		AndroidServicesUtil.makePhoneCall(getApplicationContext(), phoneNumber);
 	}
 
 	@Override

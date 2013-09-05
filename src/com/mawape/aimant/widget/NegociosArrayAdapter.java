@@ -24,6 +24,7 @@ import com.mawape.aimant.activities.NegocioMapActivity;
 import com.mawape.aimant.constants.AppConstants;
 import com.mawape.aimant.entities.Categoria;
 import com.mawape.aimant.entities.Negocio;
+import com.mawape.aimant.utilities.AndroidServicesUtil;
 import com.mawape.aimant.utilities.ApacheStringUtils;
 
 public class NegociosArrayAdapter extends ArrayAdapter<Negocio> implements
@@ -117,10 +118,7 @@ public class NegociosArrayAdapter extends ArrayAdapter<Negocio> implements
 	}
 
 	private void makePhoneCall(String phoneNumber) {
-		Intent intent = new Intent(Intent.ACTION_CALL);
-		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		intent.setData(Uri.parse("tel:" + phoneNumber));
-		getContext().startActivity(intent);
+		AndroidServicesUtil.makePhoneCall(getContext(), phoneNumber);
 	}
 
 	private void showMap(Negocio negocioSeleccionado) {
