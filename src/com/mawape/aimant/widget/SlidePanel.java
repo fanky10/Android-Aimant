@@ -5,12 +5,10 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
@@ -74,8 +72,6 @@ public class SlidePanel extends LinearLayout {
 	private GestureDetector mGestureDetector;
 	private int mContentHeight;
 	private int mContentWidth;
-	private int mOrientation;
-	private float mWeight;
 	private PanelOnGestureListener mGestureListener;
 	private boolean mBringToFront;
 
@@ -85,18 +81,10 @@ public class SlidePanel extends LinearLayout {
 				R.styleable.SlidePanel);
 		// duration default: 750ms
 		mDuration = a.getInteger(R.styleable.SlidePanel_animationDuration, 750);
-		// position default bottom
-		mPosition = a.getInteger(R.styleable.SlidePanel_position, BOTTOM);
 		// linearFlying: to false
 		mLinearFlying = a
 				.getBoolean(R.styleable.SlidePanel_linearFlying, false);
-		// weight to 0.0
-		mWeight = a.getFraction(R.styleable.SlidePanel_weight, 0, 1, 0.0f);
-		if (mWeight < 0 || mWeight > 1) {
-			mWeight = 0.0f;
-			Log.w(TAG, a.getPositionDescription()
-					+ ": weight must be > 0 and <= 1");
-		}
+
 		mOpenedHandle = a.getDrawable(R.styleable.SlidePanel_openedHandle);
 		mClosedHandle = a.getDrawable(R.styleable.SlidePanel_closedHandle);
 
@@ -126,9 +114,7 @@ public class SlidePanel extends LinearLayout {
 		if (e != null) {
 			throw e;
 		}
-		mOrientation = (mPosition == TOP || mPosition == BOTTOM) ? VERTICAL
-				: HORIZONTAL;
-		setOrientation(mOrientation);
+		setOrientation(VERTICAL);
 		mState = State.READY;
 		if (!this.isInEditMode()) {
 			mGestureListener = new PanelOnGestureListener();
@@ -265,15 +251,6 @@ public class SlidePanel extends LinearLayout {
 		}
 		mContent.setClickable(true);
 		mContent.setVisibility(GONE);
-		if (mWeight > 0) {
-			ViewGroup.LayoutParams params = mContent.getLayoutParams();
-			if (mOrientation == VERTICAL) {
-				params.height = ViewGroup.LayoutParams.MATCH_PARENT;
-			} else {
-				params.width = ViewGroup.LayoutParams.MATCH_PARENT;
-			}
-			mContent.setLayoutParams(params);
-		}
 	}
 
 	@Override
@@ -287,20 +264,6 @@ public class SlidePanel extends LinearLayout {
 
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-		if (mWeight > 0 && mContent.getVisibility() == VISIBLE) {
-			View parent = (View) getParent();
-			if (parent != null) {
-				if (mOrientation == VERTICAL) {
-					heightMeasureSpec = MeasureSpec.makeMeasureSpec(
-							(int) (parent.getHeight() * mWeight),
-							MeasureSpec.EXACTLY);
-				} else {
-					widthMeasureSpec = MeasureSpec.makeMeasureSpec(
-							(int) (parent.getWidth() * mWeight),
-							MeasureSpec.EXACTLY);
-				}
-			}
-		}
 		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 	}
 
@@ -318,16 +281,11 @@ public class SlidePanel extends LinearLayout {
 
 		// que onda con este drawer?? :P
 		if (mState == State.ABOUT_TO_ANIMATE && !mIsShrinking) {
-			int delta = mOrientation == VERTICAL ? mContentHeight
-					: mContentWidth;
+			int delta = mContentHeight;
 			if (mPosition == LEFT || mPosition == TOP) {
 				delta = -delta;
 			}
-			if (mOrientation == VERTICAL) {
-				canvas.translate(0, delta);
-			} else {
-				canvas.translate(delta, 0);
-			}
+			canvas.translate(0, delta);
 		}
 		if (mState == State.TRACKING || mState == State.FLYING) {
 			canvas.translate(mTrackX, mTrackY);
@@ -359,11 +317,7 @@ public class SlidePanel extends LinearLayout {
 				if (mContent.getVisibility() == GONE) {
 					// since we may not know content dimensions we use factors
 					// here
-					if (mOrientation == VERTICAL) {
-						initY = mPosition == TOP ? -1 : 1;
-					} else {
-						initX = mPosition == LEFT ? -1 : 1;
-					}
+					initY = mPosition == TOP ? -1 : 1;
 				}
 				setInitialPosition = true;
 			} else {
@@ -426,62 +380,32 @@ public class SlidePanel extends LinearLayout {
 						^ (mVelocity > 0);
 			}
 			int calculatedDuration;
-			if (mOrientation == VERTICAL) {
-				int height = mContentHeight;
-				if (!mIsShrinking) {
-					fromYDelta = mPosition == TOP ? -height : height;
-				} else {
-					toYDelta = mPosition == TOP ? -height : height;
-				}
-				if (mState == State.TRACKING) {
-					if (Math.abs(mTrackY - fromYDelta) < Math.abs(mTrackY
-							- toYDelta)) {
-						mIsShrinking = !mIsShrinking;
-						toYDelta = fromYDelta;
-					}
-					fromYDelta = (int) mTrackY;
-				} else if (mState == State.FLYING) {
-					fromYDelta = (int) mTrackY;
-				}
-				// for FLYING events we calculate animation duration based on
-				// flying velocity
-				// also for very high velocity make sure duration >= 20 ms
-				if (mState == State.FLYING && mLinearFlying) {
-					calculatedDuration = (int) (1000 * Math
-							.abs((toYDelta - fromYDelta) / mVelocity));
-					calculatedDuration = Math.max(calculatedDuration, 20);
-				} else {
-					calculatedDuration = mDuration
-							* Math.abs(toYDelta - fromYDelta) / mContentHeight;
-				}
+			int height = mContentHeight;
+			if (!mIsShrinking) {
+				fromYDelta = mPosition == TOP ? -height : height;
 			} else {
-				int width = mContentWidth;
-				if (!mIsShrinking) {
-					fromXDelta = mPosition == LEFT ? -width : width;
-				} else {
-					toXDelta = mPosition == LEFT ? -width : width;
+				toYDelta = mPosition == TOP ? -height : height;
+			}
+			if (mState == State.TRACKING) {
+				if (Math.abs(mTrackY - fromYDelta) < Math.abs(mTrackY
+						- toYDelta)) {
+					mIsShrinking = !mIsShrinking;
+					toYDelta = fromYDelta;
 				}
-				if (mState == State.TRACKING) {
-					if (Math.abs(mTrackX - fromXDelta) < Math.abs(mTrackX
-							- toXDelta)) {
-						mIsShrinking = !mIsShrinking;
-						toXDelta = fromXDelta;
-					}
-					fromXDelta = (int) mTrackX;
-				} else if (mState == State.FLYING) {
-					fromXDelta = (int) mTrackX;
-				}
-				// for FLYING events we calculate animation duration based on
-				// flying velocity
-				// also for very high velocity make sure duration >= 20 ms
-				if (mState == State.FLYING && mLinearFlying) {
-					calculatedDuration = (int) (1000 * Math
-							.abs((toXDelta - fromXDelta) / mVelocity));
-					calculatedDuration = Math.max(calculatedDuration, 20);
-				} else {
-					calculatedDuration = mDuration
-							* Math.abs(toXDelta - fromXDelta) / mContentWidth;
-				}
+				fromYDelta = (int) mTrackY;
+			} else if (mState == State.FLYING) {
+				fromYDelta = (int) mTrackY;
+			}
+			// for FLYING events we calculate animation duration based on
+			// flying velocity
+			// also for very high velocity make sure duration >= 20 ms
+			if (mState == State.FLYING && mLinearFlying) {
+				calculatedDuration = (int) (1000 * Math
+						.abs((toYDelta - fromYDelta) / mVelocity));
+				calculatedDuration = Math.max(calculatedDuration, 20);
+			} else {
+				calculatedDuration = mDuration
+						* Math.abs(toYDelta - fromYDelta) / mContentHeight;
 			}
 
 			mTrackX = mTrackY = 0;
@@ -559,7 +483,7 @@ public class SlidePanel extends LinearLayout {
 		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX,
 				float velocityY) {
 			mState = State.FLYING;
-			mVelocity = mOrientation == VERTICAL ? velocityY : velocityX;
+			mVelocity = velocityY;
 			post(startAnimation);
 			return true;
 		}
@@ -572,20 +496,11 @@ public class SlidePanel extends LinearLayout {
 				float distanceX, float distanceY) {
 			mState = State.TRACKING;
 			float tmpY = 0, tmpX = 0;
-			if (mOrientation == VERTICAL) {
-				scrollY -= distanceY;
-				if (mPosition == TOP) {
-					tmpY = ensureRange(scrollY, -mContentHeight, 0);
-				} else {
-					tmpY = ensureRange(scrollY, 0, mContentHeight);
-				}
+			scrollY -= distanceY;
+			if (mPosition == TOP) {
+				tmpY = ensureRange(scrollY, -mContentHeight, 0);
 			} else {
-				scrollX -= distanceX;
-				if (mPosition == LEFT) {
-					tmpX = ensureRange(scrollX, -mContentWidth, 0);
-				} else {
-					tmpX = ensureRange(scrollX, 0, mContentWidth);
-				}
+				tmpY = ensureRange(scrollY, 0, mContentHeight);
 			}
 			if (tmpX != mTrackX || tmpY != mTrackY) {
 				mTrackX = tmpX;
