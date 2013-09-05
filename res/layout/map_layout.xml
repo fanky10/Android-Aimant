@@ -18,11 +18,12 @@
 
         <fragment
             android:id="@+id/map"
-            class="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            class="com.google.android.gms.maps.SupportMapFragment"
             android:scaleType="matrix" />
-        <include layout="@layout/map_slider"/>
+
+        <include layout="@layout/map_slider" />
     </FrameLayout>
 
     <RelativeLayout
@@ -46,7 +47,8 @@
             android:text="@string/info_telefono"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/menu_title"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/detailPrimaryPhoneIcon"
@@ -87,7 +89,8 @@
             android:text="@string/info_telefono"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/menu_title"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/detailSecondaryPhoneIcon"
