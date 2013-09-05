@@ -45,20 +45,24 @@
 		Use an hexadecimal background color code, 
 		wich consists of two digits for alpha and six for the color itself 
     -->
-    <color name="white">#FFFFFF</color>
-    <color name="fade">#00000000</color>
-    <color name="fade_fifteen">#15000000</color>
-    <color name="fade_fifty">#50000000</color>
+    <!-- 15% of 255 = 38 to exa = 26 -->
+    <color name="fade_fifteen">#26000000</color>
+    <!-- 50% of 255 = 127 to exa = 7F -->
+    <color name="fade_fifty">#7F000000</color>
     <!-- 90% of 255 = 229.5 to exa = E5 -->
     <color name="map_slider">#E5313131</color>
+    <!-- 50% of 255 = 127 to exa = 7F -->
+    <color name="search_text">#7FFFFFFF</color>
     <color name="home_background">#313131</color>
     <color name="info_background">@color/home_background</color>
     <color name="separator">#3F3F3F</color>
     <color name="info_separator">@color/separator</color>
     <color name="slide_separator">@color/separator</color>
     <color name="menu_title">#FFF</color>
-    <color name="search_text">#50FFFFFF</color>
-    <color name="tag_line">#50FFFFFF</color>
+    <color name="white">#FFFFFF</color>
+    <color name="fade">#00000000</color>
+    
+    <color name="tag_line">#7FFFFFFF</color>
     <color name="negocio_default_img">#F0F0F0</color>
     
     <integer name="rounded_corner_dp">3</integer>
