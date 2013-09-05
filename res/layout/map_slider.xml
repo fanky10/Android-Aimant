@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_below="@+id/menu_bar"
-    android:background="@color/map_slider"
+    android:background="@android:color/transparent"
     android:orientation="vertical" >
 
     <View
@@ -31,6 +31,7 @@
             android:id="@+id/panelContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/map_slider"
             android:orientation="vertical" >
 
             <RelativeLayout
@@ -183,13 +184,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/panelContent"
-            android:background="@color/fade_fifteen" >
+            android:background="@color/info_background" >
 
             <ImageView
                 android:id="@+id/detailsCollapseExpandIcon"
                 android:layout_width="wrap_content"
                 android:layout_height="24dp"
                 android:layout_centerInParent="true"
+                android:background="@color/info_background"
                 android:src="@drawable/icon_collapse" />
         </RelativeLayout>
     </com.mawape.aimant.widget.SlidePanel>

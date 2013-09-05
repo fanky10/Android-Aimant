@@ -49,7 +49,8 @@
     <color name="fade">#00000000</color>
     <color name="fade_fifteen">#15000000</color>
     <color name="fade_fifty">#50000000</color>
-    <color name="map_slider">#90313131</color>
+    <!-- 90% of 255 = 229.5 to exa = E5 -->
+    <color name="map_slider">#E5313131</color>
     <color name="home_background">#313131</color>
     <color name="info_background">@color/home_background</color>
     <color name="separator">#3F3F3F</color>
