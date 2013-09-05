@@ -18,17 +18,17 @@ public class Categoria implements Serializable {
 	private String[] tags;
 
 	public Categoria(String nombre, String color, String imgPath) {
-		this(nombre, color, imgPath, "");
+		this(nombre, color, imgPath, "","");
 	}
 
 	public Categoria(String nombre, String color, String imgPath,
-			String descripcion) {
+			String descripcion,String tags) {
 		super();
 		this.nombre = nombre;
 		this.color = color;
 		this.imgPath = imgPath;
 		this.descripcion = descripcion;
-		this.tags = descripcion.split(",");
+		this.tags = tags.split(",");
 	}
 	
 	public boolean containsInTags(String text){

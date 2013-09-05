@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.mawape.aimant.R;
 import com.mawape.aimant.entities.Categoria;
+import com.mawape.aimant.utilities.ApacheStringUtils;
 
 public abstract class BaseActivity extends FragmentActivity {
 	@Override
@@ -132,6 +133,13 @@ public abstract class BaseActivity extends FragmentActivity {
 
 				}
 			});
+		}
+	}
+
+	protected void filterList(String text) {
+		if (!ApacheStringUtils.isEmpty(text)) {
+			final EditText searchField = (EditText) findViewById(R.id.commonMenuSearchField);
+			searchField.setText(text);
 		}
 	}
 

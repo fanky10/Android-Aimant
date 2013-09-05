@@ -37,7 +37,9 @@ public class NegociosJsonParser extends AbstractJsonParser<Negocio> {
 		String web = getString(jsonItem, "web");
 		String facebook = getString(jsonItem, "facebook");
 		String email = getString(jsonItem, "email");
-		return new Negocio(nombre, direccion, imgPath, categoria,telOne,telTwo,horario,web,facebook,email);
+		String tags = getString(jsonItem, "tags");
+		return new Negocio(nombre, direccion, imgPath, categoria, telOne,
+				telTwo, horario, web, facebook, email, tags);
 	}
 
 }

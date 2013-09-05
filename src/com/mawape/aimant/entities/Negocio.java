@@ -18,6 +18,7 @@ public class Negocio implements Serializable {
 	private String web;
 	private String facebook;
 	private String email;
+	private String[] tags;
 
 	public Negocio(String nombre, String direccion, String imgPath) {
 		this(nombre, direccion, imgPath, "");
@@ -35,18 +36,25 @@ public class Negocio implements Serializable {
 			String categoria) {
 		this(nombre, direccion, imgPath, categoria, "");
 	}
-	
+
 	public Negocio(String nombre, String direccion, String imgPath,
 			String categoria, String telefono) {
-		this(nombre,direccion,imgPath,categoria,telefono,null,null,null,null,null);
+		this(nombre, direccion, imgPath, categoria, telefono, null, null, null,
+				null, null);
 	}
-	
-	
 
 	public Negocio(String nombre, String direccion, String imgPath,
 			String categoria, String telefonoPrimario,
 			String telefonoSecundario, String horario, String web,
 			String facebook, String email) {
+		this(nombre, direccion, imgPath, categoria, telefonoPrimario,
+				telefonoSecundario, horario, web, facebook, email, "");
+	}
+
+	public Negocio(String nombre, String direccion, String imgPath,
+			String categoria, String telefonoPrimario,
+			String telefonoSecundario, String horario, String web,
+			String facebook, String email, String tags) {
 		super();
 		this.nombre = nombre;
 		this.direccion = direccion;
@@ -58,8 +66,9 @@ public class Negocio implements Serializable {
 		this.web = web;
 		this.facebook = facebook;
 		this.email = email;
+		this.tags = tags.split(",");
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Negocio [nombre=" + nombre + ", direccion=" + direccion
@@ -148,5 +157,22 @@ public class Negocio implements Serializable {
 
 	public void setTelefonoSecundario(String telefonoSecundario) {
 		this.telefonoSecundario = telefonoSecundario;
+	}
+
+	public String[] getTags() {
+		return tags;
+	}
+
+	public void setTags(String[] tags) {
+		this.tags = tags;
+	}
+
+	public boolean containsInTags(String prefix) {
+		for(String tag: tags){
+			if(tag.toLowerCase().trim().startsWith(prefix.toLowerCase())){
+				return true;
+			}
+		}
+		return false;
 	}
 }

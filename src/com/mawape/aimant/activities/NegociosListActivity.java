@@ -30,6 +30,7 @@ public class NegociosListActivity extends BaseActivity {
 		Bundle bundle = getIntent().getExtras();
 		Categoria categoriaSeleccionada = (Categoria) bundle
 				.get(AppConstants.CATEGORIA_SELECCIONADA_KEY);
+		String currentFilter = bundle.getString(AppConstants.CATEGORIA_FILTER_KEY);
 		// configure background.
 		View view = findViewById(R.id.negociosListLayout);
 		view.setBackgroundColor(Color.parseColor("#"
@@ -45,6 +46,7 @@ public class NegociosListActivity extends BaseActivity {
 
 		// configure with current selected category
 		configureMenuBar(categoriaSeleccionada, true, adapter);
+		filterList(currentFilter);
 	}
 
 	/**

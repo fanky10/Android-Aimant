@@ -23,6 +23,7 @@ import com.mawape.aimant.R;
 import com.mawape.aimant.activities.NegociosListActivity;
 import com.mawape.aimant.constants.AppConstants;
 import com.mawape.aimant.entities.Categoria;
+import com.mawape.aimant.utilities.ApacheStringUtils;
 
 public class CategoriasArrayAdapter extends ArrayAdapter<Categoria> implements
 		AdapterView.OnItemClickListener, Filterable {
@@ -31,6 +32,7 @@ public class CategoriasArrayAdapter extends ArrayAdapter<Categoria> implements
 	private List<Categoria> filteredValues = new ArrayList<Categoria>();
 	// copy of initialized filtered values
 	private List<Categoria> originalValues;
+	private String currentFilter = null;
 
 	static class CategoriasViewHolder {
 		TextView txtNombre;
@@ -106,6 +108,7 @@ public class CategoriasArrayAdapter extends ArrayAdapter<Categoria> implements
 		Bundle bundle = new Bundle();
 		bundle.putSerializable(AppConstants.CATEGORIA_SELECCIONADA_KEY,
 				currentCategoria);
+		bundle.putString(AppConstants.CATEGORIA_FILTER_KEY, currentFilter);
 
 		Intent intent = new Intent(getContext(), NegociosListActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -145,7 +148,7 @@ public class CategoriasArrayAdapter extends ArrayAdapter<Categoria> implements
 		@Override
 		protected FilterResults performFiltering(CharSequence constraint) {
 			FilterResults results = new FilterResults();
-			String prefix = constraint.toString().toLowerCase();
+			currentFilter = constraint.toString().toLowerCase();
 			List<Categoria> resultValues = new ArrayList<Categoria>();
 
 			if (originalValues == null) {
@@ -154,9 +157,9 @@ public class CategoriasArrayAdapter extends ArrayAdapter<Categoria> implements
 					originalValues = new ArrayList<Categoria>(filteredValues);
 				}
 			}
-			if (prefix != null && prefix.length() > 0) {
+			if (!ApacheStringUtils.isEmpty(currentFilter)) {
 				for (Categoria categoria : originalValues) {
-					if (categoria.getNombre().toLowerCase().contains(prefix) || categoria.containsInTags(prefix)) {
+					if (categoria.getNombre().toLowerCase().contains(currentFilter) || categoria.containsInTags(currentFilter)) {
 						resultValues.add(categoria);
 					}
 				}
