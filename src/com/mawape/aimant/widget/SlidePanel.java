@@ -417,63 +417,64 @@ public class SlidePanel extends LinearLayout {
 						^ (mVelocity > 0);
 			}
 			int calculatedDuration;
-			if (mOrientation == VERTICAL) {
-				int height = mContentHeight;
-				if (!mIsShrinking) {
-					fromYDelta = mPosition == TOP ? -height : height;
-				} else {
-					toYDelta = mPosition == TOP ? -height : height;
-				}
-				if (mState == State.TRACKING) {
-					if (Math.abs(mTrackY - fromYDelta) < Math.abs(mTrackY
-							- toYDelta)) {
-						mIsShrinking = !mIsShrinking;
-						toYDelta = fromYDelta;
-					}
-					fromYDelta = (int) mTrackY;
-				} else if (mState == State.FLYING) {
-					fromYDelta = (int) mTrackY;
-				}
-				// for FLYING events we calculate animation duration based on
-				// flying velocity
-				// also for very high velocity make sure duration >= 20 ms
-				if (mState == State.FLYING && mLinearFlying) {
-					calculatedDuration = (int) (1000 * Math
-							.abs((toYDelta - fromYDelta) / mVelocity));
-					calculatedDuration = Math.max(calculatedDuration, 20);
-				} else {
-					calculatedDuration = mDuration
-							* Math.abs(toYDelta - fromYDelta) / mContentHeight;
-				}
+			int height = mContentHeight;
+			if (!mIsShrinking) {
+				fromYDelta = mPosition == TOP ? -height : height;
 			} else {
-				int width = mContentWidth;
-				if (!mIsShrinking) {
-					fromXDelta = mPosition == LEFT ? -width : width;
-				} else {
-					toXDelta = mPosition == LEFT ? -width : width;
-				}
-				if (mState == State.TRACKING) {
-					if (Math.abs(mTrackX - fromXDelta) < Math.abs(mTrackX
-							- toXDelta)) {
-						mIsShrinking = !mIsShrinking;
-						toXDelta = fromXDelta;
-					}
-					fromXDelta = (int) mTrackX;
-				} else if (mState == State.FLYING) {
-					fromXDelta = (int) mTrackX;
-				}
-				// for FLYING events we calculate animation duration based on
-				// flying velocity
-				// also for very high velocity make sure duration >= 20 ms
-				if (mState == State.FLYING && mLinearFlying) {
-					calculatedDuration = (int) (1000 * Math
-							.abs((toXDelta - fromXDelta) / mVelocity));
-					calculatedDuration = Math.max(calculatedDuration, 20);
-				} else {
-					calculatedDuration = mDuration
-							* Math.abs(toXDelta - fromXDelta) / mContentWidth;
-				}
+				toYDelta = mPosition == TOP ? -height : height;
 			}
+			if (mState == State.TRACKING) {
+				if (Math.abs(mTrackY - fromYDelta) < Math.abs(mTrackY
+						- toYDelta)) {
+					mIsShrinking = !mIsShrinking;
+					toYDelta = fromYDelta;
+				}
+				fromYDelta = (int) mTrackY;
+			} else if (mState == State.FLYING) {
+				fromYDelta = (int) mTrackY;
+			}
+			// for FLYING events we calculate animation duration based on
+			// flying velocity
+			// also for very high velocity make sure duration >= 20 ms
+			if (mState == State.FLYING && mLinearFlying) {
+				calculatedDuration = (int) (1000 * Math
+						.abs((toYDelta - fromYDelta) / mVelocity));
+				calculatedDuration = Math.max(calculatedDuration, 20);
+			} else {
+				calculatedDuration = mDuration
+						* Math.abs(toYDelta - fromYDelta) / mContentHeight;
+			}
+//			if (mOrientation == VERTICAL) {
+//				
+//			} else {
+////				int width = mContentWidth;
+////				if (!mIsShrinking) {
+////					fromXDelta = mPosition == LEFT ? -width : width;
+////				} else {
+////					toXDelta = mPosition == LEFT ? -width : width;
+////				}
+////				if (mState == State.TRACKING) {
+////					if (Math.abs(mTrackX - fromXDelta) < Math.abs(mTrackX
+////							- toXDelta)) {
+////						mIsShrinking = !mIsShrinking;
+////						toXDelta = fromXDelta;
+////					}
+////					fromXDelta = (int) mTrackX;
+////				} else if (mState == State.FLYING) {
+////					fromXDelta = (int) mTrackX;
+////				}
+////				// for FLYING events we calculate animation duration based on
+////				// flying velocity
+////				// also for very high velocity make sure duration >= 20 ms
+////				if (mState == State.FLYING && mLinearFlying) {
+////					calculatedDuration = (int) (1000 * Math
+////							.abs((toXDelta - fromXDelta) / mVelocity));
+////					calculatedDuration = Math.max(calculatedDuration, 20);
+////				} else {
+////					calculatedDuration = mDuration
+////							* Math.abs(toXDelta - fromXDelta) / mContentWidth;
+////				}
+//			}
 
 			mTrackX = mTrackY = 0;
 			if (calculatedDuration == 0) {

@@ -1,33 +1,37 @@
 package com.mawape.aimant.activities;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
+import android.view.animation.LinearInterpolator;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.mawape.aimant.R;
 
 public class FadeinActivity extends Activity implements AnimationListener {
-	private Animation animFedIn;
+	private enum Movement {
+		UP, DOWN
+	};
+
+	private static final int ANIMATION_DURATION = 1000;
+
 	private boolean isMenuOpen = false;
-	private View topMenu;
-	
+	private View topMenuLayout;
+
 	private Display display;
+
 	// Values for after the animation
-	private int oldLeft;
 	private int oldTop;
-	private int newleft;
-	private int newTop;
-	private int screenWidth;
+	private int newTop = -1;
 	private int animToPostion;
 
 	@Override
@@ -37,21 +41,17 @@ public class FadeinActivity extends Activity implements AnimationListener {
 		init();
 	}
 
-	@SuppressWarnings("deprecation")
 	private void init() {
 		display = getWindowManager().getDefaultDisplay();
-		topMenu = findViewById(R.id.fadeinLayoutContainer);
+		topMenuLayout = findViewById(R.id.fadeinLayoutContainer);
 		Button btnAction = (Button) findViewById(R.id.fadeinButton);
-		
-		screenWidth = display.getWidth();
-				
-//		int calcAnimationPosition = (screenWidth / 2);
-		// Value where the onTop Layer has to animate
-		// also the max width of the layout underneath
-		// Set Layout params for subLayout according to calculation
-		animToPostion = topMenu.getHeight();
-		Log.d("fanky-animation","aim to position: "+animToPostion);
-		
+
+		animToPostion = topMenuLayout.getHeight();
+		// RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+		// RelativeLayout.LayoutParams.MATCH_PARENT, animToPostion);
+		// topMenuLayout.setLayoutParams(params);
+		Log.d("fanky-animation", "aim to position: " + animToPostion);
+
 		btnAction.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -68,25 +68,34 @@ public class FadeinActivity extends Activity implements AnimationListener {
 	}
 
 	private void animSlideDown() {
-		topMenu.setVisibility(View.VISIBLE);
-		newTop = topMenu.getTop() + animToPostion;
+		topMenuLayout.setVisibility(View.VISIBLE);
+		animate(Movement.DOWN);
 
-		TranslateAnimation slideDown = new TranslateAnimation(0, 0, 0, newTop);
-		slideDown.setDuration(500);
-		slideDown.setFillEnabled(true);
-		slideDown.setAnimationListener(this);
-		topMenu.startAnimation(slideDown);
 	}
 
 	private void animSlideUp() {
-		topMenu.setVisibility(View.GONE);
-		oldTop = topMenu.getTop() - animToPostion;
+		animate(Movement.UP);
+	}
 
-		TranslateAnimation slideUp = new TranslateAnimation(0, 0, newTop, oldTop);
-		slideUp.setDuration(500);
-		slideUp.setFillEnabled(true);
-		slideUp.setAnimationListener(this);
-		topMenu.startAnimation(slideUp);
+	private void animate(Movement movement) {
+	    DisplayMetrics dm = new DisplayMetrics();
+	    this.getWindowManager().getDefaultDisplay().getMetrics( dm );
+	    int statusBarOffset = dm.heightPixels - topMenuLayout.getMeasuredHeight();
+	    
+	    TranslateAnimation animation;
+		if (movement == Movement.DOWN) {
+			animation = new TranslateAnimation(0, 0, - topMenuLayout.getMeasuredHeight(),
+					statusBarOffset);
+		} else if (movement == Movement.UP) {
+			animation = new TranslateAnimation(0, 0, newTop, 0);
+		}else{
+			throw new IllegalArgumentException("unkown movement: "+movement);
+		}
+		animation.setDuration(ANIMATION_DURATION);
+		animation.setFillEnabled(true);
+		animation.setAnimationListener(this);
+		animation.setInterpolator(new LinearInterpolator());
+		topMenuLayout.startAnimation(animation);
 	}
 
 	@Override
@@ -96,6 +105,7 @@ public class FadeinActivity extends Activity implements AnimationListener {
 			Toast.makeText(getApplicationContext(), "Menu is closed now",
 					Toast.LENGTH_SHORT).show();
 			isMenuOpen = false;
+			topMenuLayout.setVisibility(View.GONE);
 		} else {
 			Toast.makeText(getApplicationContext(), "Menu is open",
 					Toast.LENGTH_SHORT).show();
