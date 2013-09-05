@@ -6,11 +6,8 @@ import android.os.Handler;
 import android.view.View;
 import android.view.View.OnClickListener;
 
-import com.mawape.aimant.R;
-
 public abstract class SplashActivity extends BaseActivity implements Runnable {
 
-	protected int displayLength = 1;
 	protected Handler delayHandler;
 
 	/** Called when the activity is first created. */
@@ -18,8 +15,6 @@ public abstract class SplashActivity extends BaseActivity implements Runnable {
 	public void onCreate(Bundle bundle) {
 		super.onCreate(bundle);
 		this.delayHandler = new Handler();
-		displayLength = getResources().getInteger(
-				R.integer.default_splash_display_length);
 		setContentView();
 		postDelayed();
 		addClickeableContainer();
@@ -52,9 +47,7 @@ public abstract class SplashActivity extends BaseActivity implements Runnable {
 		this.run();
 	}
 
-	protected int getDisplayLength() {
-		return displayLength;
-	}
+	protected abstract int getDisplayLength();
 
 	protected abstract void setContentView();
 

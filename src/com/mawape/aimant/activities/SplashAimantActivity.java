@@ -12,8 +12,6 @@ public class SplashAimantActivity extends SplashActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		displayLength = this.getResources().getInteger(
-				R.integer.aimant_display_length);
 	}
 
 	@Override
@@ -40,6 +38,11 @@ public class SplashAimantActivity extends SplashActivity {
 	@Override
 	protected View getContainer() {
 		return findViewById(R.id.splashAboutContainer);
+	}
+
+	@Override
+	protected int getDisplayLength() {
+		return getResources().getInteger(R.integer.aimant_display_length);
 	}
 
 }
