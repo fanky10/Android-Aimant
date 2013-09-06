@@ -59,6 +59,7 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:src="@drawable/icon_search"
+            android:layout_marginLeft="6dp"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <EditText
