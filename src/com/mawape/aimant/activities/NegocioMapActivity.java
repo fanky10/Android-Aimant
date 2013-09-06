@@ -41,42 +41,24 @@ public class NegocioMapActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.map_layout);
-		new Runnable() {
-			
+		initBusiness();
+		new AsyncTask<Void, Void, String>() {
+
 			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				new AsyncTask<Void, Void, String>() {
-
-					@Override
-					protected String doInBackground(Void... params) {
-						return isMapInitialized();
-					}
-
-					protected void onPostExecute(String resultMessage) {
-						if (!ApacheStringUtils.isEmpty(resultMessage)) {
-							showGMapNotFoundDialog(resultMessage);
-						} else {
-							initBusiness();
-							postMapConfig();
-						}
-					}
-
-				}.execute();
+			protected String doInBackground(Void... params) {
+				return isMapInitialized();
 			}
-		}.run();
-		
 
-	}
+			protected void onPostExecute(String resultMessage) {
+				if (!ApacheStringUtils.isEmpty(resultMessage)) {
+					showGMapNotFoundDialog(resultMessage);
+				} else {
+					postMapConfig();
+				}
+			}
 
-	// Simulating something timeconsuming
-	private void doFakeWork() {
-		Log.d("fake-work..","fakeWorking");
-		try {
-			Thread.sleep(500);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		}.execute();
+
 	}
 
 	protected String isMapInitialized() {
