@@ -39,7 +39,7 @@
     <string name="open_location_settings">Abrir configuracion</string>
     <string name="loading_map">Cargando Mapa...</string>
     <!-- search field del common menu-bar -->
-    <string name="search_msg">Buscá el delivery o servicio...</string>
+    <string name="search_msg">Buscá el delivery o servicio que necesitás...</string>
 
     <!-- custom colors -->
     <!--
