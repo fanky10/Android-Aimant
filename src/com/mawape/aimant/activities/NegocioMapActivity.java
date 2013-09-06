@@ -19,6 +19,7 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -36,7 +37,6 @@ import com.mawape.aimant.entities.Negocio;
 import com.mawape.aimant.utilities.ApacheStringUtils;
 
 public class NegocioMapActivity extends BaseActivity {
-	private long activityInit = System.currentTimeMillis();
 	private GoogleMap googleMap;
 	private Negocio negocioSeleccionado;
 
@@ -44,35 +44,49 @@ public class NegocioMapActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.map_layout);
-		initBusiness();
-		new AsyncTask<Void, Void, Boolean>() {
-
-			@Override
-			protected Boolean doInBackground(Void... params) {
-				Log.d("fast-map-async", "initializing...");
-				long init = System.currentTimeMillis();
-				boolean initialized = isMapInitialized();
-				long end = System.currentTimeMillis();
-				Log.d("fast-map-async", "background took: " + (end - init) + "ms");
-				return initialized;
-			}
-			protected void onPostExecute(Boolean result) {
-				long init = System.currentTimeMillis();
-				if (result) {
-					postMapConfig();
-				}
-				Long end = System.currentTimeMillis();
-				Log.d("fast-map-async", "post exe took: " + (end - init) + "ms");
-				Log.d("fast-map-async", "whole thing took: " + (end - activityInit)
-						+ "ms");
-			}
+		Toast.makeText(getApplicationContext(), "Cargando Mapa...",
+				Toast.LENGTH_SHORT).show();
+		
+		new Runnable() {
 			
-		}.execute();
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				new AsyncTask<Void, Void, String>() {
+
+					@Override
+					protected String doInBackground(Void... params) {
+						return isMapInitialized();
+					}
+
+					protected void onPostExecute(String resultMessage) {
+						if (!ApacheStringUtils.isEmpty(resultMessage)) {
+							showGMapNotFoundDialog(resultMessage);
+						} else {
+							initBusiness();
+							postMapConfig();
+						}
+					}
+
+				}.execute();
+			}
+		}.run();
+		
 
 	}
 
-	protected boolean isMapInitialized() {
-		Boolean result = true;
+	// Simulating something timeconsuming
+	private void doFakeWork() {
+		Log.d("fake-work..","fakeWorking");
+		try {
+			Thread.sleep(500);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
+	protected String isMapInitialized() {
+		String resultMessage = null;
 		// googleMap initialization
 		// Getting Google Play availability status
 		int status = GooglePlayServicesUtil
@@ -80,24 +94,24 @@ public class NegocioMapActivity extends BaseActivity {
 
 		// Google Play Services are not available
 		if (status != ConnectionResult.SUCCESS) {
-			showGMapNotFoundDialog(R.string.google_play_services_outdated);
-			result = false;
+			resultMessage = getResources().getString(
+					R.string.google_play_services_outdated);
 		}
 
 		googleMap = ((SupportMapFragment) getSupportFragmentManager()
 				.findFragmentById(R.id.map)).getMap();
 		if (googleMap == null) {
-			showGMapNotFoundDialog(R.string.google_map_not_found);
-			result = false;
+			resultMessage = getResources().getString(
+					R.string.google_map_not_found);
 		}
 
-		return result;
+		return resultMessage;
 
 	}
 
-	private void showGMapNotFoundDialog(int messageId) {
+	private void showGMapNotFoundDialog(String message) {
 		AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-		dialog.setMessage(messageId);
+		dialog.setMessage(message);
 		dialog.setPositiveButton(R.string.open_location_settings,
 				new DialogInterface.OnClickListener() {
 
@@ -161,7 +175,6 @@ public class NegocioMapActivity extends BaseActivity {
 				.get(AppConstants.CATEGORIA_SELECCIONADA_KEY);
 		negocioSeleccionado = (Negocio) bundle
 				.get(AppConstants.NEGOCIO_SELECCIONADO_KEY);
-
 		if (categoriaSeleccionada != null) {
 			configureMenuBar(negocioSeleccionado.getNombre(),
 					Color.parseColor("#" + categoriaSeleccionada.getColor()),
