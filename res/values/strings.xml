@@ -6,7 +6,7 @@
     <string name="app_loading">Cargando aplicacion..</string>
     <string name="title_activity_splash">MainActivity</string>
     <string name="title_activity_categorias_acivity">CategoriasAcivity</string>
-    <string name="aimant_phone">(341) 153-152-126</string>
+    <string name="aimant_phone">3413-152126</string>
     <string name="aimant_email">laguiaimant@gmail.com</string>
     <string name="default_localidad">Rosario Santa Fe Argentina</string>
     <string name="default_prefijo_telefono">341</string>
@@ -37,6 +37,7 @@
     <string name="google_map_not_found">Google Map no fue encontrado, actualice google-play-services</string>
     <string name="gps_network_not_enabled">Acceso a la ubicacion esta desactivado</string>
     <string name="open_location_settings">Abrir configuracion</string>
+    <string name="loading_map">Cargando Mapa...</string>
     <!-- search field del common menu-bar -->
     <string name="search_msg">Buscá el delivery o servicio...</string>
 
