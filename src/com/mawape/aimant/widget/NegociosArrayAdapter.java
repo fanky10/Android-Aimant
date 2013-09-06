@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
+import android.widget.Toast;
 import android.widget.ImageView.ScaleType;
 import android.widget.TextView;
 
@@ -122,6 +123,8 @@ public class NegociosArrayAdapter extends ArrayAdapter<Negocio> implements
 	}
 
 	private void showMap(Negocio negocioSeleccionado) {
+		Toast.makeText(getContext(), getContext().getResources().getString(R.string.loading_map),
+				Toast.LENGTH_SHORT).show();
 		Bundle bundle = new Bundle();
 		bundle.putSerializable(AppConstants.CATEGORIA_SELECCIONADA_KEY,
 				currentCategoria);
