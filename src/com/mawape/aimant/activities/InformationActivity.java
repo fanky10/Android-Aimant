@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.mawape.aimant.R;
@@ -20,6 +21,7 @@ public class InformationActivity extends BaseActivity {
 	}
 
 	private void init() {
+		
 		ImageView imgClose = (ImageView) findViewById(R.id.infoClose);
 		imgClose.setOnClickListener(new OnClickListener() {
 			@Override
@@ -27,15 +29,15 @@ public class InformationActivity extends BaseActivity {
 				onBackPressed();
 			}
 		});
-		ImageView imgEmail = (ImageView) findViewById(R.id.infoEmailIcon);
-		imgEmail.setOnClickListener(new OnClickListener() {
+		RelativeLayout infoEmailLayout = (RelativeLayout) findViewById(R.id.infoEmailLayout);
+		infoEmailLayout.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				sendEmail();
 			}
 		});
-		ImageView imgPhone = (ImageView) findViewById(R.id.infoPhoneIcon);
-		imgPhone.setOnClickListener(new OnClickListener() {
+		RelativeLayout infoTelefonoLayout = (RelativeLayout) findViewById(R.id.infoTelefonoLayout);
+		infoTelefonoLayout.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				callAimant();
