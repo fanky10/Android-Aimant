@@ -112,22 +112,16 @@ public class NegocioMapActivity extends BaseActivity {
 	private void showGMapNotFoundDialog(String message) {
 		AlertDialog.Builder dialog = new AlertDialog.Builder(this);
 		dialog.setMessage(message);
-		dialog.setPositiveButton(R.string.open_location_settings,
+		dialog.setPositiveButton(R.string.accept,
 				new DialogInterface.OnClickListener() {
 
 					@Override
 					public void onClick(DialogInterface paramDialogInterface,
 							int paramInt) {
-						openSecuritySettings();
+						// do nothing
 					}
 				});
 		dialog.show();
-	}
-
-	private void openSecuritySettings() {
-		Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		getApplicationContext().startActivity(intent);
 	}
 
 	private void postMapConfig() {
