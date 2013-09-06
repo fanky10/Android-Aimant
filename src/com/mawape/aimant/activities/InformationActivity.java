@@ -21,9 +21,8 @@ public class InformationActivity extends BaseActivity {
 	}
 
 	private void init() {
-		
-		ImageView imgClose = (ImageView) findViewById(R.id.infoClose);
-		imgClose.setOnClickListener(new OnClickListener() {
+		RelativeLayout infoCloseLayout = (RelativeLayout) findViewById(R.id.infoCloseLayout);
+		infoCloseLayout.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				onBackPressed();
