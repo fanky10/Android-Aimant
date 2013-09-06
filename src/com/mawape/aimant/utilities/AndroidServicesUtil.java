@@ -10,7 +10,7 @@ public class AndroidServicesUtil {
 	public static void makePhoneCall(Context context, String phoneNumber) {
 		String defaultPhonePrefix = context.getResources().getString(
 				R.string.default_prefijo_telefono);
-		if (phoneNumber.startsWith(defaultPhonePrefix)) {
+		if (phoneNumber.startsWith("4") || phoneNumber.startsWith("5") || phoneNumber.startsWith("6")) {
 			defaultPhonePrefix = "";
 		}
 		makePhoneCall(context, defaultPhonePrefix, phoneNumber);
