@@ -182,44 +182,50 @@ public class NegocioMapActivity extends BaseActivity {
 			});
 		}
 
-		setHorarioValue(negocioSeleccionado.getHorario());
-		setWebValue(negocioSeleccionado.getWeb());
-		setFacebookValue(negocioSeleccionado.getFacebook());
-		setEmailValue(negocioSeleccionado.getEmail());
+		boolean valueSet = false;
+		valueSet = setHorarioValue(negocioSeleccionado.getHorario());
+		valueSet = setWebValue(negocioSeleccionado.getWeb());
+		valueSet = setFacebookValue(negocioSeleccionado.getFacebook());
+		valueSet = setEmailValue(negocioSeleccionado.getEmail());
+		// not at least one value then no slide-down
+		if (!valueSet) {
+			ImageView detailsCollapseExpandIcon = (ImageView) findViewById(R.id.detailsCollapseExpandIcon);
+			detailsCollapseExpandIcon.setVisibility(View.GONE);
+		}
 	}
 
-	private void setHorarioValue(String text) {
-		setTxtValue(text, R.id.detailHorarioLayout, R.id.detailHorarioText);
+	private boolean setHorarioValue(String text) {
+		return setTxtValue(text, R.id.detailHorarioLayout, R.id.detailHorarioText);
 	}
 
-	private void setWebValue(String text) {
-		setTxtValue(text, R.id.detailWebLayout, R.id.detailWebText);
+	private boolean setWebValue(String text) {
+		return setTxtValue(text, R.id.detailWebLayout, R.id.detailWebText);
 	}
 
-	private void setFacebookValue(String text) {
-		setTxtValue(text, R.id.detailFacebookLayout, R.id.detailFacebookText);
+	private boolean setFacebookValue(String text) {
+		return setTxtValue(text, R.id.detailFacebookLayout, R.id.detailFacebookText);
 	}
 
-	private void setEmailValue(String text) {
-		setTxtValue(text, R.id.detailEmailLayout, R.id.detailEmailText);
+	private boolean setEmailValue(String text) {
+		return setTxtValue(text, R.id.detailEmailLayout, R.id.detailEmailText);
 	}
 
-	private void setTxtValue(String textValue, int containerId, int txtId) {
+	private boolean setTxtValue(String textValue, int containerId, int txtId) {
 		TextView textView = (TextView) findViewById(txtId);
 		if (textView == null) {
 			String name = getResources().getResourceEntryName(txtId);
 			throw new RuntimeException("View whose id attribute is 'R.id."
 					+ name + "' could not be found");
 		}
-		if (ApacheStringUtils.isEmpty(textValue)) {
-			RelativeLayout container = (RelativeLayout) findViewById(containerId);
-			if (container != null) {
-				container.setVisibility(View.GONE);
-			}
-
-		} else {
+		if (!ApacheStringUtils.isEmpty(textValue)) {
 			textView.setText(textValue);
+			return true;
 		}
+		RelativeLayout container = (RelativeLayout) findViewById(containerId);
+		if (container != null) {
+			container.setVisibility(View.GONE);
+		}
+		return false;
 
 	}
 }
