@@ -8,9 +8,7 @@
     <string name="title_activity_categorias_acivity">CategoriasAcivity</string>
     <string name="aimant_phone">3413-152126</string>
     <string name="aimant_email">laguiaimant@gmail.com</string>
-    <string name="default_localidad">Rosario Santa Fe Argentina</string>
     <string name="default_prefijo_telefono">341</string>
-    
 
     <!-- splash configuration -->
     <integer name="mawape_display_length">1000</integer>
@@ -38,6 +36,14 @@
     <string name="gps_network_not_enabled">Acceso a la ubicacion esta desactivado</string>
     <string name="open_location_settings">Abrir configuracion</string>
     <string name="loading_map">Cargando Mapa...</string>
+    <string name="default_localidad">Rosario Santa Fe Argentina</string>
+    <string name="address_default_title">Rosario</string>
+    <string name="address_not_found">No se pudo localizar la dirección</string>
+    <string name="address_not_provided">Ubicación no disponible</string>
+
+    <integer name="map_zoom_street">15</integer>
+    <integer name="map_zoom_city">8</integer>
+
     <!-- search field del common menu-bar -->
     <string name="search_msg">Buscá el delivery o servicio que necesitás...</string>
 
@@ -62,10 +68,9 @@
     <color name="menu_title">#FFF</color>
     <color name="white">#FFFFFF</color>
     <color name="fade">#00000000</color>
-    
     <color name="tag_line">#7FFFFFFF</color>
     <color name="negocio_default_img">#F0F0F0</color>
-    
+
     <integer name="rounded_corner_dp">3</integer>
 
 </resources>

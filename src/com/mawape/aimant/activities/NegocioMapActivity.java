@@ -17,6 +17,7 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -102,10 +103,69 @@ public class NegocioMapActivity extends BaseActivity {
 
 	private void postMapConfig() {
 		mapSettings();
-		StringBuilder direccion = new StringBuilder();
-		direccion.append(negocioSeleccionado.getDireccion());
-		direccion.append(getString(R.string.default_localidad));
-		markLocation(negocioSeleccionado.getNombre(), direccion.toString());
+		Address validAddress = null;
+		// by default everything is pretty wrong.
+		String title = getString(R.string.address_default_title);
+		int zoomLevel = getResources().getInteger(R.integer.map_zoom_city);
+
+		String direccionNegocio = negocioSeleccionado.getDireccion();
+		if (ApacheStringUtils.isEmpty(direccionNegocio)) {
+			Toast.makeText(getApplicationContext(),
+					getString(R.string.address_not_provided),
+					Toast.LENGTH_SHORT).show();
+			validAddress = findAddressFromLocationName(getString(R.string.default_localidad));
+
+		} else {// if we have a not empty address at least
+			final StringBuilder direccion = new StringBuilder();
+			direccion.append(negocioSeleccionado.getDireccion());
+			direccion.append(", ");
+			direccion.append(getString(R.string.default_localidad));
+			validAddress = findAddressFromLocationName(direccion.toString());
+			if (validAddress == null) {// not valid actually then current city
+				Toast.makeText(getApplicationContext(),
+						getString(R.string.address_not_found),
+						Toast.LENGTH_SHORT).show();
+				validAddress = findAddressFromLocationName(getString(R.string.default_localidad));
+			} else {// finally we have a valid one!!
+					// set zoomLevel - title
+				title = negocioSeleccionado.getNombre();
+				zoomLevel = getResources()
+						.getInteger(R.integer.map_zoom_street);
+			}
+
+		}
+
+		markAddress(validAddress, title, zoomLevel);
+
+	}
+
+	private Address findAddressFromLocationName(String direccion) {
+		try {
+			Geocoder geocoder = new Geocoder(getApplicationContext());
+			List<Address> addresses = new ArrayList<Address>();
+			addresses = geocoder.getFromLocationName(direccion, 1);
+			if (!addresses.isEmpty()) {
+				return addresses.get(0);
+			}
+		} catch (IOException ex) {
+			Log.d(getClass().getName(),
+					"ioexception geocoder:" + ex.getMessage());
+		}
+		return null;
+	}
+
+	private void markAddress(Address validAddress, String title, int zoomLevel) {
+		if (validAddress == null) {
+			return; // nothing to mark actually
+		}
+		double latitude = validAddress.getLatitude();
+		double longitude = validAddress.getLongitude();
+		LatLng data = new LatLng(latitude, longitude);
+		CameraUpdate center = CameraUpdateFactory.newLatLng(data);
+		CameraUpdate zoom = CameraUpdateFactory.zoomTo(zoomLevel);
+		googleMap.addMarker(new MarkerOptions().position(data).title(title));
+		googleMap.moveCamera(center);
+		googleMap.animateCamera(zoom);
 	}
 
 	private void mapSettings() {
@@ -113,29 +173,6 @@ public class NegocioMapActivity extends BaseActivity {
 		gmapSettings.setMyLocationButtonEnabled(false);
 		gmapSettings.setZoomControlsEnabled(false);
 		gmapSettings.setCompassEnabled(false);
-	}
-
-	private void markLocation(String title, String direccion) {
-		try {
-			Geocoder geocoder = new Geocoder(getApplicationContext());
-			List<Address> addresses = new ArrayList<Address>();
-			addresses = geocoder.getFromLocationName(direccion, 1);
-			if (addresses.size() > 0) {
-				double latitude = addresses.get(0).getLatitude();
-				double longitude = addresses.get(0).getLongitude();
-				LatLng data = new LatLng(latitude, longitude);
-				CameraUpdate center = CameraUpdateFactory.newLatLng(data);
-				CameraUpdate zoom = CameraUpdateFactory.zoomTo(15);
-				googleMap.addMarker(new MarkerOptions().position(data).title(
-						title));
-				googleMap.moveCamera(center);
-				googleMap.animateCamera(zoom);
-			}
-		} catch (IOException ex) {
-			Log.d(getClass().getName(),
-					"ioexception geocoder:" + ex.getMessage());
-		}
-
 	}
 
 	private void initBusiness() {
@@ -182,20 +219,22 @@ public class NegocioMapActivity extends BaseActivity {
 			});
 		}
 
-		boolean valueSet = false;
-		valueSet = setHorarioValue(negocioSeleccionado.getHorario());
-		valueSet = setWebValue(negocioSeleccionado.getWeb());
-		valueSet = setFacebookValue(negocioSeleccionado.getFacebook());
-		valueSet = setEmailValue(negocioSeleccionado.getEmail());
+		boolean hasHorario = setHorarioValue(negocioSeleccionado.getHorario());
+		boolean hasWeb = setWebValue(negocioSeleccionado.getWeb());
+		boolean hasFacebook = setFacebookValue(negocioSeleccionado
+				.getFacebook());
+		boolean hasEmail = setEmailValue(negocioSeleccionado.getEmail());
+		boolean atLeastOneValue = (hasHorario || hasWeb || hasFacebook || hasEmail);
 		// not at least one value then no slide-down
-		if (!valueSet) {
+		if (!atLeastOneValue) {
 			ImageView detailsCollapseExpandIcon = (ImageView) findViewById(R.id.detailsCollapseExpandIcon);
 			detailsCollapseExpandIcon.setVisibility(View.GONE);
 		}
 	}
 
 	private boolean setHorarioValue(String text) {
-		return setTxtValue(text, R.id.detailHorarioLayout, R.id.detailHorarioText);
+		return setTxtValue(text, R.id.detailHorarioLayout,
+				R.id.detailHorarioText);
 	}
 
 	private boolean setWebValue(String text) {
@@ -203,7 +242,8 @@ public class NegocioMapActivity extends BaseActivity {
 	}
 
 	private boolean setFacebookValue(String text) {
-		return setTxtValue(text, R.id.detailFacebookLayout, R.id.detailFacebookText);
+		return setTxtValue(text, R.id.detailFacebookLayout,
+				R.id.detailFacebookText);
 	}
 
 	private boolean setEmailValue(String text) {
